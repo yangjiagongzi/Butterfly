@@ -1,0 +1,78 @@
+{
+  "name": "butterfly",
+  "version": "0.1.1",
+  "description": "hack tool",
+  "keywords": [
+    "react",
+    "electorn",
+    "typescript",
+    "eslint",
+    "webpack",
+    "css modules",
+    "emotion"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "author": "Near",
+  "license": "MIT",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "lint": "eslint --fix src/ --ext .ts,.tsx,.js,jsx",
+    "tsc": "tsc -p tsconfig.json"
+  },
+  "engines": {
+    "node": "16.x.x",
+    "npm": "8.x.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.65",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.65",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/parser": "^5.34.0",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "electron": "20.0.3",
+    "emotion": "^10.0.23",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-webpack-plugin": "^3.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "husky": "^4.3.0",
+    "lint-staged": "^13.0.3",
+    "mini-css-extract-plugin": "^2.6.1",
+    "prettier": "^2.7.1",
+    "react-router-dom": "^6.3.0",
+    "style-loader": "^3.3.1",
+    "svg-sprite-loader": "^6.0.11",
+    "svgo-loader": "^3.0.1",
+    "thread-loader": "^3.0.4",
+    "ts-loader": "^9.3.1",
+    "typescript": "~4.5.4"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "config": {
+    "forge": "./forge.config.js"
+  }
+}

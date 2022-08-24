@@ -32,7 +32,8 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="items">
           {CommonHex.map(item => (
             <Radio
-              key={`${item}`}
+              key={item}
+              hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === from}
               appTheme={appTheme}
@@ -60,7 +61,8 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="items">
           {CommonHex.map(item => (
             <Radio
-              key={`${item}`}
+              key={item}
+              hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === to}
               appTheme={appTheme}

@@ -1,6 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import Root from '~/renderer/router'
-import '~/styles/index.css'
+import '~/renderer/styles/index.css'
 
-ReactDOM.render(<Root />, document.getElementById('root'))
+const container = document.getElementById('root')
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!)
+root.render(<Root />)

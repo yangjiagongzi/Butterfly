@@ -17,6 +17,8 @@ const createWindow = (): void => {
     fullscreen: true,
     backgroundColor: '#171717',
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
     }
   })

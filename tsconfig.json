@@ -15,7 +15,7 @@
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "preserveConstEnums": true,
     "removeComments": true,
     "allowJs": true,
@@ -26,9 +26,7 @@
     "rootDir": "./",
     "jsx": "react",
     "target": "ES6",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,

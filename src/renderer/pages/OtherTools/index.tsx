@@ -1,11 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ToolList from '~/renderer/component/ToolList'
+import { RoutePath } from '~/constant/route'
+import SubRouteList from '~/renderer/component/SubRouteList'
 import ColorConvert from '~/renderer/pages/ColorConvert'
 import HexConvert from '~/renderer/pages/HexConvert'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 import { container } from './styles'
-import { RoutePath } from '~/constant/route'
 
 type Props = {
   appTheme: AppTheme
@@ -14,7 +14,7 @@ type Props = {
 const OtherTools: React.FC<Props> = ({ appTheme }: Props) => {
   return (
     <div className={container(appTheme)}>
-      <ToolList appTheme={appTheme} />
+      <SubRouteList appTheme={appTheme} routerTemplate={RoutePath.OTHERTOOLS} />
       <Routes>
         <Route path="*" />
         <Route

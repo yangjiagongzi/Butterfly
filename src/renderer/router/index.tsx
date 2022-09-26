@@ -23,7 +23,7 @@ const Root: React.FC = () => {
         <div className={content(appTheme)}>
           <Routes>
             <Route path={RoutePath.HOME.path} element={<HomePage />} />
-            <Route path={RoutePath.INTRUDER.path} element={<Intruder />} />
+            <Route path={RoutePath.INTRUDER.path} element={<Intruder appTheme={appTheme} />} />
             <Route path={RoutePath.DECODER.path} element={<Decoder />} />
             <Route path={RoutePath.COMPARER.path} element={<Comparer />} />
             <Route path={RoutePath.OTHERTOOLS.path} element={<OtherTools appTheme={appTheme} />} />

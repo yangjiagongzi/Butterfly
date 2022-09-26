@@ -4,10 +4,11 @@ import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   appTheme: AppTheme
+  error?: boolean
 }
 
-const Input: React.FC<Props> = ({ appTheme, ...otherProps }: Props) => {
-  return <input {...otherProps} className={input(appTheme)} />
+const Input: React.FC<Props> = ({ appTheme, error, ...otherProps }: Props) => {
+  return <input {...otherProps} className={input(appTheme, error)} />
 }
 
 export default Input

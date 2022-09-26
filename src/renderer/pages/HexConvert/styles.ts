@@ -5,6 +5,7 @@ export const container = (appTheme: AppTheme) => css`
   width: 100%;
   height: 100%;
   flex: 1;
+  box-sizing: border-box;
   padding: ${appTheme.spacing.medium}px;
 `
 

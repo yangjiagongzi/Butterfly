@@ -47,13 +47,3 @@ export const resultListContainer = (appTheme: AppTheme) => css`
     padding: 0;
   }
 `
-
-export const resultItem = (appTheme: AppTheme) => css`
-  width: 100%;
-  box-sizing: border-box;
-  flex: 1;
-  padding: ${appTheme.spacing.xsmall}px;
-  margin: 2px;
-  background: ${appTheme.colors.primaryBackground};
-  list-style: none;
-`

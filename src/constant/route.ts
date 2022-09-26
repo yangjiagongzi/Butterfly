@@ -8,8 +8,8 @@ export const RoutePath = {
         path: 'directoryTraversal'
       },
       {
-        title: '爆破',
-        path: 'bruteForce'
+        title: '用户名爆破',
+        path: 'userNameBruteForce'
       }
     ]
   },

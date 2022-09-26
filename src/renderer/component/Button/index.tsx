@@ -7,7 +7,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   title: string
 }
 
-const Input: React.FC<Props> = ({ appTheme, title, ...otherProps }: Props) => {
+const Button: React.FC<Props> = ({ appTheme, title, ...otherProps }: Props) => {
   return (
     <button className={button(appTheme)} {...otherProps}>
       {title}
@@ -15,4 +15,4 @@ const Input: React.FC<Props> = ({ appTheme, title, ...otherProps }: Props) => {
   )
 }
 
-export default Input
+export default Button

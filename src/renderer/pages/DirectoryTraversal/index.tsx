@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import Input from '~/renderer/component/Input'
 import Button from '~/renderer/component/Button'
+import Input from '~/renderer/component/Input'
+import List from '~/renderer/component/List'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
-import { container, paramGroup, resultListContainer, resultItem } from './styles'
 import { generateDirectoryTraversalKeys } from '~/utils/DirectoryTraversal'
+import { container, paramGroup, resultListContainer } from './styles'
 
 type Props = {
   appTheme: AppTheme
@@ -68,17 +69,11 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
         </div>
       </div>
       <div className={paramGroup(appTheme)}>
-        <Button appTheme={appTheme} onClick={start} title="开始" />
+        <Button appTheme={appTheme} onClick={start} title="枚举" />
       </div>
       {resultList.length ? (
         <div className={resultListContainer(appTheme)}>
-          <ul>
-            {resultList.map(key => (
-              <li className={resultItem(appTheme)} key={key}>
-                {key}
-              </li>
-            ))}
-          </ul>
+          <List appTheme={appTheme} data={resultList} />
         </div>
       ) : null}
     </div>

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
 import SubRouteList from '~/renderer/component/SubRouteList'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
-import ColorConvert from '../ColorConvert'
+import BruteForce from '../BruteForce'
 import DirectoryTraversal from '../DirectoryTraversal'
 import { container } from './styles'
 
@@ -23,7 +23,7 @@ const Intruder: React.FC<Props> = ({ appTheme }: Props) => {
         />
         <Route
           path={RoutePath.INTRUDER.childs[1].path}
-          element={<ColorConvert appTheme={appTheme} />}
+          element={<BruteForce appTheme={appTheme} />}
         />
       </Routes>
     </div>

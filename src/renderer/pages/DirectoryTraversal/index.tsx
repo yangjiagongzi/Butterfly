@@ -10,7 +10,7 @@ type Props = {
   appTheme: AppTheme
 }
 
-const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
+const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
   const [fileName, setFileName] = useState('')
   const [extName, setExtName] = useState('')
   const [maxLevel, setMaxLevel] = useState(3)
@@ -80,4 +80,4 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
   )
 }
 
-export default HexConvert
+export default DirectoryTraversal

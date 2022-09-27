@@ -14,7 +14,16 @@ const Radio: React.FC<Props> = ({ hexKey, checked, title, onChange, appTheme }: 
   return (
     <div className={radio(appTheme)}>
       <label>
-        <input type="radio" checked={checked} onChange={() => onChange(hexKey)} />
+        <input
+          type="radio"
+          checked={checked}
+          onClick={() => {
+            onChange(hexKey)
+          }}
+          onChange={() => {
+            // pass
+          }}
+        />
         {title}
       </label>
     </div>

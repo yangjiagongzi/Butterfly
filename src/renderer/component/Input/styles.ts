@@ -1,7 +1,7 @@
 import { css } from 'emotion'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 
-export const input = (appTheme: AppTheme, error?: boolean) => css`
+export const input = (appTheme: AppTheme, error: boolean, translateX: number) => css`
   display: inline-block;
   line-height: ${appTheme.fontSizes.extraSmall};
   font-size: ${appTheme.fontSizes.extraSmall};
@@ -10,5 +10,6 @@ export const input = (appTheme: AppTheme, error?: boolean) => css`
   background: ${appTheme.colors.secondaryBackground};
   border-radius: 5px;
   border: none;
-  ${error ? 'outline: 2px solid red' : ''}
+  ${error ? 'outline: 2px solid red' : ''};
+  transform: translateX(${translateX}px);
 `

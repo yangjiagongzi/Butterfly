@@ -10,6 +10,7 @@ import OtherTools from '~/renderer/pages/OtherTools'
 import Settings from '~/renderer/pages/Settings'
 import { router, content } from '~/renderer/styles/router'
 import { AppTheme } from '~/renderer/styles/theme'
+import Global from '../component/Global'
 import NavBar from './NavBar'
 
 const Root: React.FC = () => {
@@ -30,6 +31,7 @@ const Root: React.FC = () => {
             <Route path={RoutePath.SETTINGS.path} element={<Settings />} />
           </Routes>
         </div>
+        <Global appTheme={appTheme} />
       </div>
     </HashRouter>
   )

@@ -5,6 +5,7 @@ export const router = (appTheme: AppTheme) => css`
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
 `
 
 export const navBar = ({ colors }: AppTheme) => css`

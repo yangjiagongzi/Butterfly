@@ -3,7 +3,7 @@ import { resultContainer, resultItem } from './styles'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 import Button from '../Button'
 import { clipboard } from 'electron'
-import { showMessageBox } from '../../IPC'
+import Notification from '../Notification'
 
 type Props = HTMLAttributes<HTMLUListElement> & {
   appTheme: AppTheme
@@ -14,7 +14,7 @@ const List: React.FC<Props> = ({ appTheme, data, ...otherProps }: Props) => {
   const copy = () => {
     const str = data.join('\n')
     clipboard.writeText(str)
-    showMessageBox('复制成功!')
+    Notification.show('复制成功!')
   }
 
   const start = () => {

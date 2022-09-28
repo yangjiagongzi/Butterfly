@@ -1,8 +1,8 @@
-import { BrowserWindow, dialog, ipcMain, nativeTheme } from 'electron'
+import { dialog, ipcMain, nativeTheme } from 'electron'
 import { EventName, EventParams, EventResponse } from '~/constant/event'
 import { onDarkModeUpdate } from './send'
 
-export function registListener(windows: BrowserWindow[]) {
+export function registListener() {
   ipcMain.on(
     EventName.ShowMessageBox,
     (event, params: EventParams[typeof EventName.ShowMessageBox]) => {
@@ -29,7 +29,7 @@ export function registListener(windows: BrowserWindow[]) {
   })
 
   nativeTheme.addListener('updated', () => {
-    onDarkModeUpdate(windows)
+    onDarkModeUpdate()
   })
 }
 

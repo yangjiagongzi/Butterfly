@@ -16,8 +16,10 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
   const [maxLevel, setMaxLevel] = useState(3)
   const [fileNameError, setFileNameError] = useState(false)
   const [resultList, setResultList] = useState<string[]>([])
+  const [submitKey, setSubmitKey] = useState(Date.now())
 
   const start = () => {
+    setSubmitKey(Date.now())
     if (!fileName) {
       setFileNameError(true)
       setResultList([])
@@ -33,6 +35,7 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">文件名:</div>
         <div className="items">
           <Input
+            key={submitKey}
             error={fileNameError}
             appTheme={appTheme}
             value={fileName}

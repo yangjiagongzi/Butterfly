@@ -13,6 +13,7 @@ type State = {
 const notificationRef = React.createRef<Notification>()
 
 class Notification extends React.Component<Props, State> {
+  private timer: NodeJS.Timeout | null = null
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -21,14 +22,24 @@ class Notification extends React.Component<Props, State> {
   }
 
   show = (message: string, duration = 2000) => {
+    if (this.timer) {
+      clearTimeout(this.timer)
+    }
     this.setState(
       {
-        text: message
+        text: ''
       },
       () => {
-        setTimeout(() => {
-          this.setState({ text: '' })
-        }, duration)
+        this.setState(
+          {
+            text: message
+          },
+          () => {
+            this.timer = setTimeout(() => {
+              this.setState({ text: '' })
+            }, duration)
+          }
+        )
       }
     )
   }

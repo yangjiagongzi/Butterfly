@@ -3,15 +3,12 @@ import { Dics } from '~/constant/dictionary'
 import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import Select from '~/renderer/component/Select'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import { useTheme } from '~/renderer/component/UseTheme'
 import { container, paramGroup, resultListContainer } from './styles'
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
+const BruteForce: React.FC = () => {
   const characterName = '字符'
+  const appTheme = useTheme()
   const [choose, setChoose] = useState(characterName)
   const [resultList, setResultList] = useState<string[]>([])
   const [characterOption, setCharacterOption] = useState<{
@@ -45,7 +42,6 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">字典选择:</div>
         <div className="items">
           <Select
-            appTheme={appTheme}
             data={[characterName, ...Dics.map(item => item.name)]}
             value={characterName}
             onChange={(value: string) => setChoose(value)}
@@ -60,7 +56,6 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
               hexKey={'数字'}
               title={'数字'}
               checked={characterOption.number}
-              appTheme={appTheme}
               onChange={() => {
                 setCharacterOption({ ...characterOption, number: !characterOption.number })
               }}
@@ -69,7 +64,6 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
               hexKey={'字母'}
               title={'字母'}
               checked={characterOption.letter}
-              appTheme={appTheme}
               onChange={() => {
                 setCharacterOption({ ...characterOption, letter: !characterOption.letter })
               }}
@@ -78,7 +72,6 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
               hexKey={'大小写敏感'}
               title={'大小写敏感'}
               checked={characterOption.caseSensitive}
-              appTheme={appTheme}
               onChange={() => {
                 setCharacterOption({
                   ...characterOption,
@@ -91,7 +84,7 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
       ) : null}
       {resultList.length ? (
         <div className={resultListContainer(appTheme)}>
-          <List appTheme={appTheme} data={resultList} />
+          <List data={resultList} />
         </div>
       ) : null}
     </div>

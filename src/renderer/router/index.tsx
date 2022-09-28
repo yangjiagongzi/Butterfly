@@ -18,18 +18,18 @@ const Root: React.FC = () => {
   return (
     <HashRouter>
       <div className={router(appTheme)}>
-        <NavBar appTheme={appTheme} />
+        <NavBar />
         <div className={content(appTheme)}>
           <Routes>
             <Route path={RoutePath.HOME.path} element={<HomePage />} />
-            <Route path={RoutePath.INTRUDER.path} element={<Intruder appTheme={appTheme} />} />
+            <Route path={RoutePath.INTRUDER.path} element={<Intruder />} />
             <Route path={RoutePath.DECODER.path} element={<Decoder />} />
             <Route path={RoutePath.COMPARER.path} element={<Comparer />} />
-            <Route path={RoutePath.OTHERTOOLS.path} element={<OtherTools appTheme={appTheme} />} />
-            <Route path={RoutePath.SETTINGS.path} element={<Settings appTheme={appTheme} />} />
+            <Route path={RoutePath.OTHERTOOLS.path} element={<OtherTools />} />
+            <Route path={RoutePath.SETTINGS.path} element={<Settings />} />
           </Routes>
         </div>
-        <Global appTheme={appTheme} />
+        <Global />
       </div>
     </HashRouter>
   )

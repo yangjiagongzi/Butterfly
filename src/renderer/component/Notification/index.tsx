@@ -1,6 +1,7 @@
 import React from 'react'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 import { notification } from './styles'
+import { withTheme } from '../UseTheme'
 
 type Props = {
   appTheme: AppTheme
@@ -54,7 +55,9 @@ class Notification extends React.Component<Props, State> {
   }
 }
 
-export { Notification, notificationRef }
+const WithThemeNotification = withTheme(Notification)
+
+export { WithThemeNotification, notificationRef }
 
 export default {
   show: (message: string, duration?: number) => {

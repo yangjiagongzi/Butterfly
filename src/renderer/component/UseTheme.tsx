@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { AppTheme } from '~/renderer/styles/theme'
 import { Theme } from '~/constant/app'
 import { getDarkMode } from '../IPC'
@@ -32,4 +32,13 @@ export function useTheme() {
   }, [])
 
   return useMemo(() => AppTheme(theme), [theme])
+}
+
+export function withTheme<P>(Component: React.ComponentType<P>) {
+  type TodoPreview = Omit<P, 'appTheme'>
+
+  return React.forwardRef((props: TodoPreview, ref) => {
+    const theme = useTheme()
+    return <Component ref={ref} {...(props as P)} appTheme={theme} />
+  })
 }

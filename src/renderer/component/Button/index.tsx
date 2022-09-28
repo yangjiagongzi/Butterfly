@@ -1,13 +1,13 @@
 import React, { ButtonHTMLAttributes } from 'react'
+import { useTheme } from '../UseTheme'
 import { button } from './styles'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  appTheme: AppTheme
   title: string
 }
 
-const Button: React.FC<Props> = ({ appTheme, title, ...otherProps }: Props) => {
+const Button: React.FC<Props> = ({ title, ...otherProps }: Props) => {
+  const appTheme = useTheme()
   return (
     <button className={button(appTheme)} {...otherProps}>
       {title}

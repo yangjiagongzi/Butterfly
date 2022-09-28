@@ -1,16 +1,17 @@
 import React from 'react'
+import { useTheme } from '../UseTheme'
 import { radio } from './styles'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 type Props = {
   hexKey: string
   checked: boolean
   title: string
   onChange: (key: string) => void
-  appTheme: AppTheme
 }
 
-const Radio: React.FC<Props> = ({ hexKey, checked, title, onChange, appTheme }: Props) => {
+const Radio: React.FC<Props> = ({ hexKey, checked, title, onChange }: Props) => {
+  const appTheme = useTheme()
+
   return (
     <div className={radio(appTheme)}>
       <label>

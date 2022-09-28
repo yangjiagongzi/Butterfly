@@ -1,18 +1,15 @@
 import React from 'react'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
-import { globalTop, globalBottom } from './styles'
-import { Notification, notificationRef } from '../Notification'
+import { WithThemeNotification, notificationRef } from '../Notification'
+import { useTheme } from '../UseTheme'
+import { globalBottom, globalTop } from './styles'
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const Global: React.FC<Props> = ({ appTheme }: Props) => {
+const Global: React.FC = () => {
+  const appTheme = useTheme()
   return (
     <>
       <div className={globalTop(appTheme)}></div>
       <div className={globalBottom(appTheme)}>
-        <Notification appTheme={appTheme} ref={notificationRef} />
+        <WithThemeNotification ref={notificationRef} />
       </div>
     </>
   )

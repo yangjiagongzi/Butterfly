@@ -1,17 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ThemeMode, ThemeOptionsName } from '~/constant/app'
 import Select from '~/renderer/component/Select'
+import { useTheme } from '~/renderer/component/UseTheme'
 import { getThemeMode, setThemeMode } from '~/renderer/IPC'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
 import { container, paramGroup } from './styles'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const SettingsGeneral: React.FC<Props> = ({ appTheme }: Props) => {
+const SettingsGeneral: React.FC = () => {
+  const appTheme = useTheme()
   const [choose, setChoose] = useState<string>('')
 
   useEffect(() => {
@@ -36,7 +33,6 @@ const SettingsGeneral: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">外观:</div>
         <div className="items">
           <Select
-            appTheme={appTheme}
             data={ThemeOptionList.map(item => item)}
             value={choose}
             onChange={value => update(value)}

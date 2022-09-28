@@ -1,23 +1,18 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
-import { navBar, navBarItem } from '~/renderer/styles/router'
 import Icon, { IconName } from '~/renderer/component/Icon'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import { navBar, navBarItem } from '~/renderer/styles/router'
+import { useTheme } from '../component/UseTheme'
 
 type NavBarItemProps = {
-  appTheme: AppTheme
   routePath: Values<typeof RoutePath>['path']
   icon: IconName
   title: string
 }
 
-const NavBarItem: React.FC<NavBarItemProps> = ({
-  appTheme,
-  routePath,
-  icon,
-  title
-}: NavBarItemProps) => {
+const NavBarItem: React.FC<NavBarItemProps> = ({ routePath, icon, title }: NavBarItemProps) => {
+  const appTheme = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
   const active = location.pathname.startsWith(routePath.replace(/\*$/g, ''))
@@ -32,43 +27,16 @@ const NavBarItem: React.FC<NavBarItemProps> = ({
   )
 }
 
-type NavBarProps = {
-  appTheme: AppTheme
-}
-const NavBar: React.FC<NavBarProps> = ({ appTheme }: NavBarProps) => {
+const NavBar: React.FC = () => {
+  const appTheme = useTheme()
   return (
     <div className={navBar(appTheme)}>
-      <NavBarItem
-        appTheme={appTheme}
-        routePath={RoutePath.INTRUDER.path}
-        icon="Intruder"
-        title="入侵"
-      />
-      <NavBarItem
-        appTheme={appTheme}
-        routePath={RoutePath.DECODER.path}
-        icon="Decoder"
-        title="编码"
-      />
-      <NavBarItem
-        appTheme={appTheme}
-        routePath={RoutePath.COMPARER.path}
-        icon="Comparer"
-        title="比较"
-      />
-      <NavBarItem
-        appTheme={appTheme}
-        routePath={RoutePath.OTHERTOOLS.path}
-        icon="OtherTools"
-        title="其他工具"
-      />
+      <NavBarItem routePath={RoutePath.INTRUDER.path} icon="Intruder" title="入侵" />
+      <NavBarItem routePath={RoutePath.DECODER.path} icon="Decoder" title="编码" />
+      <NavBarItem routePath={RoutePath.COMPARER.path} icon="Comparer" title="比较" />
+      <NavBarItem routePath={RoutePath.OTHERTOOLS.path} icon="OtherTools" title="其他工具" />
       <div style={{ width: '100%', height: '100%', flex: 1 }}></div>
-      <NavBarItem
-        appTheme={appTheme}
-        routePath={RoutePath.SETTINGS.path}
-        icon="Settings"
-        title="设置"
-      />
+      <NavBarItem routePath={RoutePath.SETTINGS.path} icon="Settings" title="设置" />
     </div>
   )
 }

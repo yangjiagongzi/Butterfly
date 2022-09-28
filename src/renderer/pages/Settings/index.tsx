@@ -2,24 +2,18 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
 import SubRouteList from '~/renderer/component/SubRouteList'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import { useTheme } from '~/renderer/component/UseTheme'
 import SettingsGeneral from '../SettingsGeneral'
 import { container } from './styles'
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const Settings: React.FC<Props> = ({ appTheme }: Props) => {
+const Settings: React.FC = () => {
+  const appTheme = useTheme()
   return (
     <div className={container(appTheme)}>
-      <SubRouteList appTheme={appTheme} routerTemplate={RoutePath.SETTINGS} />
+      <SubRouteList routerTemplate={RoutePath.SETTINGS} />
       <Routes>
         <Route path="*" />
-        <Route
-          path={RoutePath.SETTINGS.childs[0].path}
-          element={<SettingsGeneral appTheme={appTheme} />}
-        />
+        <Route path={RoutePath.SETTINGS.childs[0].path} element={<SettingsGeneral />} />
       </Routes>
     </div>
   )

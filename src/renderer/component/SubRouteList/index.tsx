@@ -1,10 +1,9 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import { useTheme } from '../UseTheme'
 import { toolItem, toolList } from './styles'
 
 type Props = {
-  appTheme: AppTheme
   routerTemplate: {
     path: string
     childs: readonly {
@@ -14,9 +13,10 @@ type Props = {
   }
 }
 
-const ToolList: React.FC<Props> = ({ appTheme, routerTemplate }: Props) => {
+const ToolList: React.FC<Props> = ({ routerTemplate }: Props) => {
   const location = useLocation()
   const navigate = useNavigate()
+  const appTheme = useTheme()
 
   return (
     <div className={toolList(appTheme)}>

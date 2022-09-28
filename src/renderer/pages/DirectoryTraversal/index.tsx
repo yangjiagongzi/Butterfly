@@ -2,15 +2,12 @@ import React, { useState } from 'react'
 import Button from '~/renderer/component/Button'
 import Input from '~/renderer/component/Input'
 import List from '~/renderer/component/List'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import { useTheme } from '~/renderer/component/UseTheme'
 import { generateDirectoryTraversalKeys } from '~/utils/DirectoryTraversal'
 import { container, paramGroup, resultListContainer } from './styles'
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
+const DirectoryTraversal: React.FC = () => {
+  const appTheme = useTheme()
   const [fileName, setFileName] = useState('')
   const [extName, setExtName] = useState('')
   const [maxLevel, setMaxLevel] = useState(3)
@@ -37,7 +34,6 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
           <Input
             key={submitKey}
             error={fileNameError}
-            appTheme={appTheme}
             value={fileName}
             onChange={e => {
               setFileNameError(false)
@@ -50,7 +46,6 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">文件扩展名:</div>
         <div className="items">
           <Input
-            appTheme={appTheme}
             value={extName}
             onChange={e => {
               setExtName(e.target.value)
@@ -62,7 +57,6 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">文件最大深度:</div>
         <div className="items">
           <Input
-            appTheme={appTheme}
             type={'number'}
             min={1}
             max={10}
@@ -72,11 +66,11 @@ const DirectoryTraversal: React.FC<Props> = ({ appTheme }: Props) => {
         </div>
       </div>
       <div className={paramGroup(appTheme)}>
-        <Button appTheme={appTheme} onClick={start} title="枚举" />
+        <Button onClick={start} title="枚举" />
       </div>
       {resultList.length ? (
         <div className={resultListContainer(appTheme)}>
-          <List appTheme={appTheme} data={resultList} />
+          <List data={resultList} />
         </div>
       ) : null}
     </div>

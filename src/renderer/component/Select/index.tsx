@@ -1,15 +1,15 @@
 import React, { SelectHTMLAttributes, useEffect, useState } from 'react'
+import { useTheme } from '../UseTheme'
 import { select } from './styles'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 type Props = Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> & {
-  appTheme: AppTheme
   data: string[]
   value: string
   onChange: (value: string) => void
 }
 
-const Select: React.FC<Props> = ({ appTheme, data, value, onChange, ...otherProps }: Props) => {
+const Select: React.FC<Props> = ({ data, value, onChange, ...otherProps }: Props) => {
+  const appTheme = useTheme()
   const [choose, setChoose] = useState(value)
 
   useEffect(() => {

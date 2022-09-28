@@ -1,16 +1,17 @@
-import React, { HTMLAttributes } from 'react'
-import { resultContainer, resultItem } from './styles'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
-import Button from '../Button'
 import { clipboard } from 'electron'
+import React, { HTMLAttributes } from 'react'
+import Button from '../Button'
 import Notification from '../Notification'
+import { useTheme } from '../UseTheme'
+import { resultContainer, resultItem } from './styles'
 
 type Props = HTMLAttributes<HTMLUListElement> & {
-  appTheme: AppTheme
   data: string[]
 }
 
-const List: React.FC<Props> = ({ appTheme, data, ...otherProps }: Props) => {
+const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
+  const appTheme = useTheme()
+
   const copy = () => {
     const str = data.join('\n')
     clipboard.writeText(str)
@@ -31,8 +32,8 @@ const List: React.FC<Props> = ({ appTheme, data, ...otherProps }: Props) => {
         ))}
       </ul>
       <div className="button-container">
-        <Button appTheme={appTheme} onClick={copy} title="复制" />
-        <Button appTheme={appTheme} onClick={start} title="开始爆破" />
+        <Button onClick={copy} title="复制" />
+        <Button onClick={start} title="开始爆破" />
       </div>
     </div>
   )

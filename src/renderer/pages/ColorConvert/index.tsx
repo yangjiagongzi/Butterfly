@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
-import { container, hexGroup } from './styles'
 import Input from '~/renderer/component/Input'
+import { useTheme } from '~/renderer/component/UseTheme'
+import { container, hexGroup } from './styles'
 
 const HexStr = '0123456789abcdef'
 
@@ -10,11 +10,8 @@ function to16(str: string) {
   return str16.substring(str16.length - 2)
 }
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
+const ColorConvert: React.FC = () => {
+  const appTheme = useTheme()
   const [r, setR] = useState('')
   const [g, setG] = useState('')
   const [b, setB] = useState('')
@@ -59,7 +56,6 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">输入:</div>
         <div className="items">
           <Input
-            appTheme={appTheme}
             style={{ width: '50px' }}
             value={r}
             onChange={e => {
@@ -75,7 +71,6 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
           />
           ,
           <Input
-            appTheme={appTheme}
             style={{ width: '50px' }}
             value={g}
             onChange={e => {
@@ -91,7 +86,6 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
           />
           ,
           <Input
-            appTheme={appTheme}
             style={{ width: '50px' }}
             value={b}
             onChange={e => {
@@ -110,7 +104,7 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
       <div className={hexGroup(appTheme)}>
         <div className="title">输出:</div>
         <div className="items">
-          <Input appTheme={appTheme} value={rgbOutput} disabled />
+          <Input value={rgbOutput} disabled />
         </div>
       </div>
       <h3>十六进制颜色码转换成RGB颜色值:</h3>
@@ -119,7 +113,6 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="items">
           <span>#</span>
           <Input
-            appTheme={appTheme}
             value={rgbInput}
             onChange={e => {
               const ipt = e.target.value
@@ -144,11 +137,11 @@ const ColorConvert: React.FC<Props> = ({ appTheme }: Props) => {
       <div className={hexGroup(appTheme)}>
         <div className="title">输出:</div>
         <div className="items">
-          <Input appTheme={appTheme} style={{ width: '50px' }} value={calcR} disabled />
+          <Input style={{ width: '50px' }} value={calcR} disabled />
           ,
-          <Input appTheme={appTheme} style={{ width: '50px' }} value={calcG} disabled />
+          <Input style={{ width: '50px' }} value={calcG} disabled />
           ,
-          <Input appTheme={appTheme} style={{ width: '50px' }} value={calcB} disabled />
+          <Input style={{ width: '50px' }} value={calcB} disabled />
         </div>
       </div>
     </div>

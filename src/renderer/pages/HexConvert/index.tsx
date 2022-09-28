@@ -1,17 +1,14 @@
 import React, { useMemo, useState } from 'react'
-import Radio from '~/renderer/component/Radio'
 import Input from '~/renderer/component/Input'
-import { Theme as AppTheme } from '~/renderer/styles/theme'
+import Radio from '~/renderer/component/Radio'
+import { useTheme } from '~/renderer/component/UseTheme'
 import { container, hexGroup } from './styles'
 
 const CommonHex = [2, 4, 8, 10, 16, 32]
 const HexStr = '0123456789abcdefghijklmnopqrstuvwxyz'
 
-type Props = {
-  appTheme: AppTheme
-}
-
-const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
+const HexConvert: React.FC = () => {
+  const appTheme = useTheme()
   const [from, setFrom] = useState(10)
   const [to, setTo] = useState(16)
   const [value, setValue] = useState('')
@@ -36,7 +33,6 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
               hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === from}
-              appTheme={appTheme}
               onChange={() => {
                 setFrom(item)
                 setValue('')
@@ -44,7 +40,6 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
             />
           ))}
           <Input
-            appTheme={appTheme}
             type={'number'}
             min={2}
             max={36}
@@ -65,14 +60,12 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
               hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === to}
-              appTheme={appTheme}
               onChange={() => {
                 setTo(item)
               }}
             />
           ))}
           <Input
-            appTheme={appTheme}
             type={'number'}
             min={2}
             max={36}
@@ -85,7 +78,6 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
         <div className="title">输入:</div>
         <div className="items">
           <Input
-            appTheme={appTheme}
             value={value}
             onChange={e => {
               const allowCode = HexStr.substring(0, from)
@@ -104,7 +96,7 @@ const HexConvert: React.FC<Props> = ({ appTheme }: Props) => {
       <div className={hexGroup(appTheme)}>
         <div className="title">输出:</div>
         <div className="items">
-          <Input appTheme={appTheme} value={result} disabled />
+          <Input value={result} disabled />
         </div>
       </div>
     </div>

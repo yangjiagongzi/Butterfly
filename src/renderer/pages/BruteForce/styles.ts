@@ -8,23 +8,66 @@ export const container = (appTheme: AppTheme) => css`
   flex-direction: column;
   flex: 1;
   box-sizing: border-box;
+`
+
+export const tabList = (appTheme: AppTheme) => css`
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid ${appTheme.colors.divider};
+`
+
+export const tabItem = (appTheme: AppTheme, active: boolean) => css`
+  padding: ${appTheme.spacing.medium}px ${appTheme.spacing.xlarge}px;
+  border-right: 1px solid ${appTheme.colors.divider};
+  color: ${active ? appTheme.colors.textDark : appTheme.colors.textLight};
+  background: ${active ? appTheme.colors.background : appTheme.colors.primaryBackground};
+`
+
+export const content = (appTheme: AppTheme) => css`
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1;
   padding: ${appTheme.spacing.medium}px;
 `
 
-export const paramGroup = (appTheme: AppTheme) => css`
-  display: flex;
-  flex-direction: column;
-  padding: ${appTheme.spacing.xsmall}px 0;
+export const contentItem = (appTheme: AppTheme) => css`
+  width: 100%;
+  height: 100%;
+  flex: 1;
 
-  .title {
-    width: 75px;
-    flex: 0 0 auto;
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: ${appTheme.spacing.medium}px;
+    border-radius: 10px;
+    background: ${appTheme.colors.secondaryBackground};
+    resize: none;
     color: ${appTheme.colors.textDark};
+    line-height: ${appTheme.fontSizes.large};
+    outline: none;
   }
 
-  .items {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
+  .payload {
+    height: 100%;
+  }
+
+  .title {
+    padding: ${appTheme.spacing.medium}px 0;
+    color: ${appTheme.colors.textDark};
+  }
+`
+
+export const curlStringBox = (appTheme: AppTheme, hasValue: boolean) => css`
+  position: relative;
+
+  .button-container {
+    position: absolute;
+    top: ${appTheme.spacing.small}px;
+    right: ${appTheme.spacing.small}px;
+    visibility: ${hasValue ? 'visible' : 'hidden'};
+    button {
+      margin: 0 ${appTheme.spacing.xxsmall}px;
+    }
   }
 `

@@ -1,4 +1,4 @@
-import { dialog, ipcMain } from 'electron'
+import { dialog, ipcMain, nativeTheme } from 'electron'
 import { EventName, EventParams } from '~/constant/event'
 
 export function registListener() {
@@ -6,6 +6,17 @@ export function registListener() {
     EventName.ShowMessageBox,
     (event, params: EventParams[typeof EventName.ShowMessageBox]) => {
       dialog.showMessageBox({ message: params })
+    }
+  )
+
+  ipcMain.handle(EventName.RequestThemeMode, () => {
+    return nativeTheme.themeSource
+  })
+
+  ipcMain.handle(
+    EventName.UpdateThemeMode,
+    (event, params: EventParams[typeof EventName.UpdateThemeMode]) => {
+      nativeTheme.themeSource = params
     }
   )
 }

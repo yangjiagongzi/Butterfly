@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dics } from '~/constant/dictionary'
 import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
@@ -20,7 +20,7 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
     caseSensitive: boolean
   }>({ number: false, letter: false, caseSensitive: false })
 
-  useMemo(() => {
+  useEffect(() => {
     if (choose !== characterName) {
       const result = Dics.find(item => item.name === choose)?.result || []
       setResultList([...new Set(result)])
@@ -47,6 +47,7 @@ const BruteForce: React.FC<Props> = ({ appTheme }: Props) => {
           <Select
             appTheme={appTheme}
             data={[characterName, ...Dics.map(item => item.name)]}
+            value={characterName}
             onChange={(value: string) => setChoose(value)}
           />
         </div>

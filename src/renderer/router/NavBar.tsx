@@ -21,7 +21,7 @@ const NavBarItem: React.FC<NavBarItemProps> = ({
 }: NavBarItemProps) => {
   const navigate = useNavigate()
   const location = useLocation()
-  const active = location.pathname.startsWith(routePath)
+  const active = location.pathname.startsWith(routePath.replace(/\*$/g, ''))
   const iconColor = active ? appTheme.colors.textDark : appTheme.colors.textLight
 
   return (

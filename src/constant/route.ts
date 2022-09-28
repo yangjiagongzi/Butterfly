@@ -28,5 +28,8 @@ export const RoutePath = {
       }
     ]
   },
-  SETTINGS: { path: '/settings' }
+  SETTINGS: {
+    path: '/settings/*',
+    childs: [{ title: '通用', path: 'general' }]
+  }
 } as const

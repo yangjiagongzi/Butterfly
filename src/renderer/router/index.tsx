@@ -28,7 +28,7 @@ const Root: React.FC = () => {
             <Route path={RoutePath.DECODER.path} element={<Decoder />} />
             <Route path={RoutePath.COMPARER.path} element={<Comparer />} />
             <Route path={RoutePath.OTHERTOOLS.path} element={<OtherTools appTheme={appTheme} />} />
-            <Route path={RoutePath.SETTINGS.path} element={<Settings />} />
+            <Route path={RoutePath.SETTINGS.path} element={<Settings appTheme={appTheme} />} />
           </Routes>
         </div>
         <Global appTheme={appTheme} />

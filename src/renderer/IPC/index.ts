@@ -24,3 +24,7 @@ export const getThemeMode = async () => {
 export const setThemeMode = async (themeMode: Values<typeof ThemeMode>) => {
   return await ipcInvoke(EventName.UpdateThemeMode, themeMode)
 }
+
+export const getDarkMode = async () => {
+  return await ipcInvoke(EventName.RequestDarkMode, undefined)
+}

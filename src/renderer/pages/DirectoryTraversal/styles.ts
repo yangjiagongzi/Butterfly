@@ -19,6 +19,7 @@ export const paramGroup = (appTheme: AppTheme) => css`
   .title {
     width: 100px;
     flex: 0 0 auto;
+    color: ${appTheme.colors.textDark};
   }
 
   .items {

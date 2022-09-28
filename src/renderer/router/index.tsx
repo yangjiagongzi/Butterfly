@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { Theme } from '~/constant/app'
 import { RoutePath } from '~/constant/route'
 import Comparer from '~/renderer/pages/Comparer'
 import Decoder from '~/renderer/pages/Decoder'
@@ -8,19 +7,18 @@ import HomePage from '~/renderer/pages/HomePage'
 import Intruder from '~/renderer/pages/Intruder'
 import OtherTools from '~/renderer/pages/OtherTools'
 import Settings from '~/renderer/pages/Settings'
-import { router, content } from '~/renderer/styles/router'
-import { AppTheme } from '~/renderer/styles/theme'
+import { content, router } from '~/renderer/styles/router'
 import Global from '../component/Global'
+import { useTheme } from '../component/UseTheme'
 import NavBar from './NavBar'
 
 const Root: React.FC = () => {
-  const [theme, setTheme] = useState<Values<typeof Theme>>(Theme.DARK)
-  const appTheme = AppTheme(theme)
+  const appTheme = useTheme()
 
   return (
     <HashRouter>
       <div className={router(appTheme)}>
-        <NavBar appTheme={appTheme} setTheme={setTheme} />
+        <NavBar appTheme={appTheme} />
         <div className={content(appTheme)}>
           <Routes>
             <Route path={RoutePath.HOME.path} element={<HomePage />} />

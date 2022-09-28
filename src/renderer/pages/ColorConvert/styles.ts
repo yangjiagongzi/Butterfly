@@ -7,6 +7,7 @@ export const container = (appTheme: AppTheme) => css`
   flex: 1;
   box-sizing: border-box;
   padding: ${appTheme.spacing.medium}px;
+  color: ${appTheme.colors.textDark};
 `
 
 export const hexGroup = (appTheme: AppTheme) => css`
@@ -17,6 +18,7 @@ export const hexGroup = (appTheme: AppTheme) => css`
   .title {
     width: 50px;
     flex: 0 0 auto;
+    color: ${appTheme.colors.textDark};
   }
 
   .items {

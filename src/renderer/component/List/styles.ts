@@ -35,4 +35,5 @@ export const resultItem = (appTheme: AppTheme) => css`
   margin: 2px;
   background: ${appTheme.colors.primaryBackground};
   list-style: none;
+  color: ${appTheme.colors.textDark};
 `

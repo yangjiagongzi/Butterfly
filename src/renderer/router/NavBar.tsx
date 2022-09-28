@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Theme } from '~/constant/app'
 import { RoutePath } from '~/constant/route'
 import { navBar, navBarItem } from '~/renderer/styles/router'
 import Icon, { IconName } from '~/renderer/component/Icon'
@@ -35,9 +34,8 @@ const NavBarItem: React.FC<NavBarItemProps> = ({
 
 type NavBarProps = {
   appTheme: AppTheme
-  setTheme: (theme: Values<typeof Theme>) => void
 }
-const NavBar: React.FC<NavBarProps> = ({ appTheme, setTheme }: NavBarProps) => {
+const NavBar: React.FC<NavBarProps> = ({ appTheme }: NavBarProps) => {
   return (
     <div className={navBar(appTheme)}>
       <NavBarItem

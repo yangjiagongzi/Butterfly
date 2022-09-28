@@ -8,6 +8,10 @@ export const RoutePath = {
         path: 'directoryTraversal'
       },
       {
+        title: '字典生成',
+        path: 'dictionaryGenerate'
+      },
+      {
         title: '爆破',
         path: 'bruteForce'
       }

@@ -13,7 +13,7 @@ export const container = (appTheme: AppTheme) => css`
 
 export const paramGroup = (appTheme: AppTheme) => css`
   display: flex;
-  flex-direction: column;
+  align-items: center;
   padding: ${appTheme.spacing.xsmall}px 0;
 
   .title {
@@ -27,4 +27,15 @@ export const paramGroup = (appTheme: AppTheme) => css`
     display: flex;
     flex-wrap: wrap;
   }
+`
+export const resultListContainer = (appTheme: AppTheme) => css`
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  overflow: hidden;
+  margin: ${appTheme.spacing.medium}px 0;
+  padding: ${appTheme.spacing.medium}px;
+  border-radius: 10px;
+  background: ${appTheme.colors.secondaryBackground};
 `

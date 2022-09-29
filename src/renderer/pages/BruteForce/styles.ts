@@ -36,18 +36,6 @@ export const contentItem = (appTheme: AppTheme) => css`
   height: 100%;
   flex: 1;
 
-  textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: ${appTheme.spacing.medium}px;
-    border-radius: 10px;
-    background: ${appTheme.colors.secondaryBackground};
-    resize: none;
-    color: ${appTheme.colors.textDark};
-    line-height: ${appTheme.fontSizes.large};
-    outline: none;
-  }
-
   .payload {
     height: 100%;
   }

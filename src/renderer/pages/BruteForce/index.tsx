@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Button from '~/renderer/component/Button'
+import Textarea from '~/renderer/component/Textarea'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { container, tabList, tabItem, content, contentItem, curlStringBox } from './styles'
 
@@ -38,7 +39,7 @@ const BruteForce: React.FC = (props: any) => {
       <div className={content(appTheme)}>
         {chooseTab === 1 ? (
           <div className={contentItem(appTheme)}>
-            <textarea
+            <Textarea
               className={'payload'}
               value={dictionary}
               onChange={e => setDictionary(e.target.value)}
@@ -49,7 +50,7 @@ const BruteForce: React.FC = (props: any) => {
           <div className={contentItem(appTheme)}>
             <div className="title">解析curl命令</div>
             <div className={curlStringBox(appTheme, !!curlStr.trim())}>
-              <textarea
+              <Textarea
                 rows={5}
                 value={curlStr}
                 placeholder={'粘贴curl命令进行解析'}

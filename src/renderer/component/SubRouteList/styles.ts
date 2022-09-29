@@ -13,7 +13,7 @@ export const toolList = (appTheme: AppTheme) => css`
 export const toolItem = (appTheme: AppTheme) => css`
   padding: ${appTheme.spacing.small}px;
   text-align: center;
-  color: ${appTheme.colors.textLight};
+  color: ${appTheme.colors.textDark};
   cursor: pointer;
 
   &:hover {
@@ -21,7 +21,7 @@ export const toolItem = (appTheme: AppTheme) => css`
   }
 
   &.active {
-    color: ${appTheme.colors.textDark};
+    color: ${appTheme.colors.active};
     background: ${appTheme.colors.background};
   }
 `

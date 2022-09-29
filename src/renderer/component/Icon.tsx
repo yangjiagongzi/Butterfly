@@ -1,16 +1,24 @@
 import React from 'react'
 import comparer from '~/assets/svg/comparer.svg'
 import decoder from '~/assets/svg/decoder.svg'
+import home from '~/assets/svg/home.svg'
 import intruder from '~/assets/svg/intruder.svg'
-import otherTools from '~/assets/svg/otherTools.svg'
+import note from '~/assets/svg/note.svg'
+import output from '~/assets/svg/output.svg'
+import project from '~/assets/svg/project.svg'
 import settings from '~/assets/svg/settings.svg'
+import tool from '~/assets/svg/tool.svg'
 
 const IconMap = {
   Comparer: comparer,
   Decoder: decoder,
+  Home: home,
   Intruder: intruder,
-  OtherTools: otherTools,
-  Settings: settings
+  Note: note,
+  Output: output,
+  Project: project,
+  Settings: settings,
+  Tool: tool
 } as const
 
 const SVGSizes = {

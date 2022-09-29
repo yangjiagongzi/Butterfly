@@ -1,7 +1,5 @@
 import { clipboard } from 'electron'
 import React, { HTMLAttributes } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { RoutePath } from '~/constant/route'
 import Button from '../Button'
 import Notification from '../Notification'
 import { useTheme } from '../UseTheme'
@@ -13,7 +11,6 @@ type Props = HTMLAttributes<HTMLUListElement> & {
 
 const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   const appTheme = useTheme()
-  const navigate = useNavigate()
 
   const copy = () => {
     const str = data.join('\n')
@@ -22,9 +19,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   }
 
   const start = () => {
-    navigate(RoutePath.INTRUDER.path.replace(/\*$/g, '') + RoutePath.INTRUDER.childs[2].path, {
-      state: data.join('\n')
-    })
+    console.log(data.join('\n'))
   }
 
   return (

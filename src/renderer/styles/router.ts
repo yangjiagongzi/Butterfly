@@ -22,13 +22,14 @@ export const content = ({ colors }: AppTheme) => css`
   background: ${colors.primaryBackground};
 `
 
-export const navBarItem = ({ colors, fontSizes }: AppTheme) => css`
+export const navBarItem = ({ colors, fontSizes }: AppTheme, active: boolean) => css`
   width: 48px;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  background: ${active ? colors.active : 'none'};
 
   .note {
     display: none;
@@ -42,14 +43,5 @@ export const navBarItem = ({ colors, fontSizes }: AppTheme) => css`
 
   &:hover .note {
     display: block;
-  }
-
-  .activeBar {
-    height: 100%;
-    width: 2px;
-    background: ${colors.textDark};
-    position: absolute;
-    left: 0;
-    top: 0;
   }
 `

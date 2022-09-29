@@ -1,24 +1,8 @@
 export const RoutePath = {
   HOME: { path: '/' },
-  INTRUDER: {
-    path: '/intruder/*',
-    childs: [
-      {
-        title: '目录遍历',
-        path: 'directoryTraversal'
-      },
-      {
-        title: '字典生成',
-        path: 'dictionaryGenerate'
-      },
-      {
-        title: '爆破',
-        path: 'bruteForce'
-      }
-    ]
-  },
-  DECODER: { path: '/decoder' },
-  COMPARER: { path: '/comparer' },
+  INTRUDER: { path: '/intruder' },
+  OUTPUT: { path: '/output' },
+  NOTE: { path: '/note' },
   OTHERTOOLS: {
     path: '/otherTools/*',
     childs: [

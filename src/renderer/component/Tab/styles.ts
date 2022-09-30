@@ -18,8 +18,8 @@ export const tabItem = (
 
   .text {
     color: ${active ? colors.active : colors.textMedium};
-    font-size: ${small ? fontSizes.extraSmall : fontSizes.small};
-    line-height: ${small ? fontSizes.extraSmall : fontSizes.small};
+    font-size: ${small ? fontSizes.extraSmall : fontSizes.small}px;
+    line-height: ${small ? fontSizes.extraSmall : fontSizes.small}px;
     padding: ${spacing.medium}px;
     cursor: pointer;
     z-index: 2;

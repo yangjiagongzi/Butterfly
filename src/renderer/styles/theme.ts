@@ -7,13 +7,13 @@ const BaseColors = {
 } as const
 
 const Fonts = {
-  extraExtraLarge: '40px',
-  extraLarge: '36px',
-  large: '24px',
-  medium: '20px',
-  small: '16px',
-  extraSmall: '14px',
-  extraExtraSmall: '12px'
+  extraExtraLarge: 40,
+  extraLarge: 36,
+  large: 24,
+  medium: 20,
+  small: 16,
+  extraSmall: 14,
+  extraExtraSmall: 12
 } as const
 
 const Spacing = {

@@ -36,7 +36,7 @@ export const navBarItem = ({ colors, fontSizes }: AppTheme, active: boolean) => 
     position: absolute;
     left: 50px;
     white-space: nowrap;
-    font-size: ${fontSizes.extraExtraSmall};
+    font-size: ${fontSizes.extraExtraSmall}px;
     padding: 4px;
     border: 1px solid #fff;
   }

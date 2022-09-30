@@ -6,10 +6,10 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   title: string
 }
 
-const Button: React.FC<Props> = ({ title, ...otherProps }: Props) => {
+const Button: React.FC<Props> = ({ title, className, ...otherProps }: Props) => {
   const appTheme = useTheme()
   return (
-    <button className={button(appTheme)} {...otherProps}>
+    <button className={`${button(appTheme)} ${className || ''}`} {...otherProps}>
       {title}
     </button>
   )

@@ -9,6 +9,6 @@ export const textarea = (appTheme: AppTheme) => css`
   background: ${appTheme.colors.secondaryBackground};
   resize: none;
   color: ${appTheme.colors.textDark};
-  line-height: ${appTheme.fontSizes.large};
+  line-height: ${appTheme.fontSizes.large}px;
   outline: none;
 `

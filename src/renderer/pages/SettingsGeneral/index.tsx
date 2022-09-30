@@ -9,7 +9,7 @@ const ThemeOptionList = Object.values(ThemeOptionsName)
 
 const SettingsGeneral: React.FC = () => {
   const appTheme = useTheme()
-  const [choose, setChoose] = useState<string>('')
+  const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   useEffect(() => {
     getThemeMode().then(result => {

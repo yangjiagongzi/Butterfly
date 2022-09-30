@@ -9,6 +9,7 @@ export const container = (appTheme: AppTheme) => css`
   flex-direction: column;
   padding: ${appTheme.spacing.medium}px;
   position: relative;
+  color: ${appTheme.colors.textDark};
 `
 
 export const startBtn = ({ colors, fontSizes, spacing }: AppTheme) => css`
@@ -32,7 +33,7 @@ export const inputBox = ({ colors, fontSizes, spacing }: AppTheme) => css`
 
 export const introduce = ({ colors, fontSizes, spacing }: AppTheme) => css`
   border-top: 1px solid ${colors.divider};
-  margin-top: ${spacing.medium}px;
+  margin-top: ${spacing.xlarge}px;
   padding-top: ${spacing.medium}px;
   font-size: ${fontSizes.small}px;
 

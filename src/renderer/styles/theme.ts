@@ -91,55 +91,11 @@ const DarkTheme = {
   statusBarColor: '#1641d6'
 } as const
 
+const Shadow =
+  '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)'
+
 const ThemeExcludeColors = {
-  shadows: {
-    lightShallow: {
-      shadowRadius: 1,
-      shadowOffset: { height: 2, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.02,
-      elevation: 1
-    },
-    shallow: {
-      shadowRadius: 6,
-      shadowOffset: { height: 3, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.1,
-      elevation: 3
-    },
-    deep: {
-      shadowRadius: 10,
-      shadowOffset: { height: 8, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.2,
-      elevation: 5
-    },
-    deepNoOffset: {
-      shadowRadius: 10,
-      shadowColor: BaseColors.black,
-      shadowOpacity: 1,
-      elevation: 5
-    },
-    bottomDrawer: {
-      shadowRadius: 8,
-      shadowOffset: { height: -5, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.2,
-      elevation: 10
-    },
-    cardStackedTop: {
-      shadowRadius: 12,
-      shadowOffset: { height: 4, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.4
-    },
-    cardStackedBottom: {
-      shadowRadius: 6,
-      shadowOffset: { height: 2, width: 0 },
-      shadowColor: BaseColors.black,
-      shadowOpacity: 0.4
-    }
-  },
+  Shadow,
   fontSizes: Fonts,
   spacing: Spacing,
   borderRadius: 10,

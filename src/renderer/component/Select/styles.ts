@@ -46,6 +46,7 @@ export const selectList = (appTheme: AppTheme, height: number) => css`
   background: ${appTheme.colors.secondaryBackground};
   padding: ${appTheme.spacing.xsmall}px 0;
   border-radius: 5px;
+  box-shadow: ${appTheme.Shadow};
 
   .selectItem {
     padding: ${appTheme.spacing.small}px ${appTheme.spacing.medium}px;

@@ -3,7 +3,7 @@ import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 export const input = (appTheme: AppTheme, error: boolean, active: boolean) => css`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   padding: ${appTheme.spacing.medium}px;
   border-radius: 5px;
@@ -22,6 +22,8 @@ export const input = (appTheme: AppTheme, error: boolean, active: boolean) => cs
     background: none;
     outline: none;
     border: none;
+    width: 100%;
+    flex: 1;
   }
 
   .title {

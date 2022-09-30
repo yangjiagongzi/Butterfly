@@ -24,7 +24,7 @@ const Request: React.FC<PropsForRedux> = ({ intruderOptions, updateMethod }: Pro
             updateMethod(value as Values<typeof RequestMeth>)
           }}
         />
-        <Input title="URL*" />
+        <Input className="url-input" title="URL*" placeholder='E.g. "https://example.com/foobar"' />
       </div>
     </div>
   )

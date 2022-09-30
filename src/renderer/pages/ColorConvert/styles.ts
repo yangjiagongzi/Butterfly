@@ -27,4 +27,8 @@ export const hexGroup = (appTheme: AppTheme) => css`
     align-items: center;
     flex-wrap: wrap;
   }
+
+  .fix-width {
+    width: ${appTheme.spacing.gutter}px;
+  }
 `

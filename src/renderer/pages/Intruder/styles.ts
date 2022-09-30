@@ -30,6 +30,10 @@ export const content = ({ colors, fontSizes, spacing }: AppTheme) => css`
 
 export const inputBox = ({ colors, fontSizes, spacing }: AppTheme) => css`
   display: flex;
+
+  .url-input {
+    flex: 1;
+  }
 `
 
 export const introduce = ({ colors, fontSizes, spacing }: AppTheme) => css`

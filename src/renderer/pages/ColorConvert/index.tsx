@@ -56,7 +56,7 @@ const ColorConvert: React.FC = () => {
         <div className="title">输入:</div>
         <div className="items">
           <Input
-            style={{ width: '50px' }}
+            className="fix-width"
             value={r}
             onChange={e => {
               if (e.target.value === '') {
@@ -71,7 +71,7 @@ const ColorConvert: React.FC = () => {
           />
           &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input
-            style={{ width: '50px' }}
+            className="fix-width"
             value={g}
             onChange={e => {
               if (e.target.value === '') {
@@ -86,7 +86,7 @@ const ColorConvert: React.FC = () => {
           />
           &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input
-            style={{ width: '50px' }}
+            className="fix-width"
             value={b}
             onChange={e => {
               if (e.target.value === '') {
@@ -137,11 +137,11 @@ const ColorConvert: React.FC = () => {
       <div className={hexGroup(appTheme)}>
         <div className="title">输出:</div>
         <div className="items">
-          <Input style={{ width: '50px' }} value={calcR} disabled />
+          <Input className="fix-width" value={calcR} disabled />
           &nbsp;&nbsp;,&nbsp;&nbsp;
-          <Input style={{ width: '50px' }} value={calcG} disabled />
+          <Input className="fix-width" value={calcG} disabled />
           &nbsp;&nbsp;,&nbsp;&nbsp;
-          <Input style={{ width: '50px' }} value={calcB} disabled />
+          <Input className="fix-width" value={calcB} disabled />
         </div>
       </div>
     </div>

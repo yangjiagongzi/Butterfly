@@ -7,6 +7,17 @@ export const AttackType = {
   ClusterBomb: '饱和攻击'
 } as const
 
+export const RequestMeth = {
+  get: 'GET',
+  post: 'POST',
+  put: 'PUT',
+  patch: 'PATCH',
+  delete: 'DELETE',
+  head: 'HEAD',
+  options: 'OPTIONS'
+} as const
+
 export const IntruderOptionsDefaultValue: IntruderOptions = {
-  attackType: AttackType.Sniper
+  attackType: AttackType.Sniper,
+  method: RequestMeth.get
 }

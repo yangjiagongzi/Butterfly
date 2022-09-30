@@ -10,6 +10,7 @@ export const container = (appTheme: AppTheme) => css`
   padding: ${appTheme.spacing.medium}px;
   position: relative;
   color: ${appTheme.colors.textDark};
+  user-select: none;
 `
 
 export const startBtn = ({ colors, fontSizes, spacing }: AppTheme) => css`

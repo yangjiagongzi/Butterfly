@@ -1,19 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
+import { AttackType } from '~/constant/intruder'
+import IntruderReduxAction from '~/renderer/action/intruder'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
+import { State as StateType } from '~/type/redux'
 import { container, inputBox } from './styles'
 
-const AttachType: React.FC = () => {
+type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+
+const AttachType: React.FC<PropsForRedux> = ({
+  intruderOptions,
+  updateAttackType
+}: PropsForRedux) => {
   const appTheme = useTheme()
   return (
     <div className={container(appTheme)}>
       <div className={inputBox(appTheme)}>
         <Select
-          title={'攻击类型攻击类型攻击类型攻击类型'}
-          data={['aaa', 'bbb', 'ccc']}
-          value={'aaa'}
-          onChange={() => {
-            console.log(1)
+          title={'攻击类型'}
+          data={Object.values(AttackType)}
+          value={intruderOptions.attackType}
+          onChange={(value: string) => {
+            updateAttackType(value as Values<typeof AttackType>)
           }}
         />
       </div>
@@ -21,4 +31,18 @@ const AttachType: React.FC = () => {
   )
 }
 
-export default AttachType
+function mapStateToProps(state: StateType) {
+  return {
+    intruderOptions: state.intruderOptions
+  }
+}
+function mapDispatchToProps(dispatch: Dispatch) {
+  return bindActionCreators(
+    {
+      updateAttackType: IntruderReduxAction.updateAttackType
+    },
+    dispatch
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AttachType)

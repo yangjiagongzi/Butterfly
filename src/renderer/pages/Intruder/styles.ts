@@ -21,7 +21,9 @@ export const startBtn = ({ colors, fontSizes, spacing }: AppTheme) => css`
 export const content = ({ colors, fontSizes, spacing }: AppTheme) => css`
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   flex: 1;
+  padding-top: ${spacing.medium}px;
 `
 
 export const inputBox = ({ colors, fontSizes, spacing }: AppTheme) => css`

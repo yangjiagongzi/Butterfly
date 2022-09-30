@@ -39,6 +39,8 @@ export const navBarItem = ({ colors, fontSizes }: AppTheme, active: boolean) => 
     font-size: ${fontSizes.extraExtraSmall}px;
     padding: 4px;
     border: 1px solid #fff;
+    z-index: 100;
+    background: ${colors.primaryBackground};
   }
 
   &:hover .note {

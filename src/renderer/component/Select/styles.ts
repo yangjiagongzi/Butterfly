@@ -19,6 +19,7 @@ export const selectBox = (appTheme: AppTheme, active: boolean) => css`
     color: ${active ? appTheme.colors.active : appTheme.colors.textLight};
     line-height: ${appTheme.fontSizes.extraExtraSmall}px;
     font-size: ${appTheme.fontSizes.extraExtraSmall}px;
+    padding: 0 ${appTheme.spacing.xxsmall}px;
     position: absolute;
     top: -${appTheme.fontSizes.extraExtraSmall / 2}px;
     left: ${appTheme.spacing.medium}px;

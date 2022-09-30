@@ -2,7 +2,8 @@ import { css } from 'emotion'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 
 export const radio = (appTheme: AppTheme) => css`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   line-height: ${appTheme.fontSizes.extraSmall}px;
   font-size: ${appTheme.fontSizes.extraSmall}px;
   vertical-align: top;

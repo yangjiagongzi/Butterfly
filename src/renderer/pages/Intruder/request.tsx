@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { RequestMeth } from '~/constant/intruder'
 import IntruderReduxAction from '~/renderer/action/intruder'
+import Input from '~/renderer/component/Input'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { State as StateType } from '~/type/redux'
@@ -23,6 +24,7 @@ const Request: React.FC<PropsForRedux> = ({ intruderOptions, updateMethod }: Pro
             updateMethod(value as Values<typeof RequestMeth>)
           }}
         />
+        <Input title="URL*" />
       </div>
     </div>
   )

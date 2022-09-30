@@ -1,17 +1,48 @@
 import { css } from 'emotion'
 import { Theme as AppTheme } from '~/renderer/styles/theme'
 
-export const input = (appTheme: AppTheme, error: boolean) => css`
-  display: inline-block;
-  line-height: ${appTheme.fontSizes.extraSmall}px;
-  font-size: ${appTheme.fontSizes.extraSmall}px;
-  padding: ${appTheme.spacing.xsmall}px;
-  color: ${appTheme.colors.textDark};
-  background: ${appTheme.colors.secondaryBackground};
+export const input = (appTheme: AppTheme, error: boolean, active: boolean) => css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: ${appTheme.spacing.medium}px;
   border-radius: 5px;
-  border: none;
-  ${error ? 'outline: 2px solid red' : ''};
+  border: 1px solid
+    ${error ? appTheme.colors.red : active ? appTheme.colors.active : appTheme.colors.divider};
+  outline: none;
+  position: relative;
+  box-sizing: border-box;
+
   ${error ? 'animation: inputShake 0.3s ease-out 1;' : ''}
+
+  input {
+    line-height: ${appTheme.fontSizes.small}px;
+    font-size: ${appTheme.fontSizes.small}px;
+    color: ${appTheme.colors.textDark};
+    background: none;
+    outline: none;
+    border: none;
+  }
+
+  .title {
+    color: ${error
+      ? appTheme.colors.red
+      : active
+      ? appTheme.colors.active
+      : appTheme.colors.textLight};
+    line-height: ${appTheme.fontSizes.extraExtraSmall}px;
+    font-size: ${appTheme.fontSizes.extraExtraSmall}px;
+    padding: 0 ${appTheme.spacing.xxsmall}px;
+    position: absolute;
+    top: -${appTheme.fontSizes.extraExtraSmall / 2}px;
+    left: ${appTheme.spacing.medium}px;
+    background: ${appTheme.colors.primaryBackground};
+  }
+
+  .layout-placehold {
+    height: 0;
+    overflow: hidden;
+  }
 
   @keyframes inputShake {
     0% {

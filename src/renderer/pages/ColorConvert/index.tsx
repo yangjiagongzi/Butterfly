@@ -69,7 +69,7 @@ const ColorConvert: React.FC = () => {
               }
             }}
           />
-          ,
+          &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input
             style={{ width: '50px' }}
             value={g}
@@ -84,7 +84,7 @@ const ColorConvert: React.FC = () => {
               }
             }}
           />
-          ,
+          &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input
             style={{ width: '50px' }}
             value={b}
@@ -138,9 +138,9 @@ const ColorConvert: React.FC = () => {
         <div className="title">输出:</div>
         <div className="items">
           <Input style={{ width: '50px' }} value={calcR} disabled />
-          ,
+          &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input style={{ width: '50px' }} value={calcG} disabled />
-          ,
+          &nbsp;&nbsp;,&nbsp;&nbsp;
           <Input style={{ width: '50px' }} value={calcB} disabled />
         </div>
       </div>

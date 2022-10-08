@@ -4,13 +4,13 @@ import { bindActionCreators, Dispatch } from 'redux'
 import IntruderReduxAction from '~/renderer/action/intruder'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { State as StateType } from '~/type/redux'
-import { container } from './styles'
+import { content } from './styles'
 
 type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 const Payload: React.FC<PropsForRedux> = ({ intruderOptions, updateAttackType }: PropsForRedux) => {
   const appTheme = useTheme()
-  return <div className={container(appTheme)}>Payload</div>
+  return <div className={content(appTheme)}>Payload</div>
 }
 
 function mapStateToProps(state: StateType) {

@@ -6,7 +6,7 @@ import IntruderReduxAction from '~/renderer/action/intruder'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { State as StateType } from '~/type/redux'
-import { container, inputBox, introduce } from './styles'
+import { content, inputBox, introduce } from './styles'
 
 type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
@@ -16,7 +16,7 @@ const AttachType: React.FC<PropsForRedux> = ({
 }: PropsForRedux) => {
   const appTheme = useTheme()
   return (
-    <div className={container(appTheme)}>
+    <div className={content(appTheme)}>
       <div className={inputBox(appTheme)}>
         <Select
           title={'攻击类型'}

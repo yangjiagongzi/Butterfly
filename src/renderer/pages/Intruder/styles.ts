@@ -31,8 +31,17 @@ export const content = ({ colors, fontSizes, spacing }: AppTheme) => css`
 export const inputBox = ({ colors, fontSizes, spacing }: AppTheme) => css`
   display: flex;
 
+  .method-select {
+    border-radius: 5px 0 0 5px;
+  }
+
   .url-input {
     flex: 1;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .curl-parse-btn {
+    margin-left: ${spacing.small}px;
   }
 `
 

@@ -8,6 +8,9 @@ import { useTheme } from '~/renderer/component/UseTheme'
 import { State as StateType } from '~/type/redux'
 import { content, inputBox, introduce } from './styles'
 
+const Payload1 = ['a', 'b', 'c', 'd']
+const Payload2 = ['x', 'y', 'z']
+
 type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 const AttachType: React.FC<PropsForRedux> = ({
@@ -34,64 +37,45 @@ const AttachType: React.FC<PropsForRedux> = ({
               只能使用一组<span>payload</span>集合, 每次只替换一个<span>payload 标记位置</span>
             </div>
             <div className="example-flag">
-              标记位置: <span>标记位置1</span>, <span>标记位置2</span>
+              标记位置: <SpanList data={['标记位置1', '标记位置2']} />
             </div>
             <div className="example-payload">
-              攻击载荷: <span>a</span>, <span>b</span>, <span>c</span>
+              攻击载荷: <SpanList data={Payload1} />
             </div>
             <table>
-              <tr>
-                <th scope="col">攻击编号</th>
-                <th scope="col">标记位置1</th>
-                <th scope="col">标记位置2</th>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>不替换</td>
-                <td>不替换</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>
-                  <span>a</span>
-                </td>
-                <td>不替换</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <span>b</span>
-                </td>
-                <td>不替换</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <span>c</span>
-                </td>
-                <td>不替换</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>不替换</td>
-                <td>
-                  <span>a</span>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>不替换</td>
-                <td>
-                  <span>b</span>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>不替换</td>
-                <td>
-                  <span>c</span>
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th scope="col">攻击编号</th>
+                  <th scope="col">标记位置1</th>
+                  <th scope="col">标记位置2</th>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>不替换</td>
+                  <td>不替换</td>
+                </tr>
+                {new Array(Math.min(Payload1.length * 2)).fill('').map((item, idx) => {
+                  return (
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>
+                        {idx < Payload1.length ? (
+                          <span>{Payload1[idx % Payload1.length]}</span>
+                        ) : (
+                          '不替换'
+                        )}
+                      </td>
+                      <td>
+                        {idx >= Payload1.length ? (
+                          <span>{Payload1[idx % Payload1.length]}</span>
+                        ) : (
+                          '不替换'
+                        )}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           </div>
         ) : null}
@@ -101,49 +85,37 @@ const AttachType: React.FC<PropsForRedux> = ({
               只能使用一组<span>payload</span>集合, 每次替换所有的<span>payload 标记位置</span>
             </div>
             <div className="example-flag">
-              标记位置: <span>标记位置1</span>, <span>标记位置2</span>
+              标记位置: <SpanList data={['标记位置1', '标记位置2']} />
             </div>
             <div className="example-payload">
-              攻击载荷: <span>a</span>, <span>b</span>, <span>c</span>
+              攻击载荷: <SpanList data={Payload1} />
             </div>
             <table>
-              <tr>
-                <th scope="col">攻击编号</th>
-                <th scope="col">标记位置1</th>
-                <th scope="col">标记位置2</th>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>不替换</td>
-                <td>不替换</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>
-                  <span>a</span>
-                </td>
-                <td>
-                  <span>a</span>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <span>b</span>
-                </td>
-                <td>
-                  <span>b</span>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <span>c</span>
-                </td>
-                <td>
-                  <span>c</span>
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th scope="col">攻击编号</th>
+                  <th scope="col">标记位置1</th>
+                  <th scope="col">标记位置2</th>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>不替换</td>
+                  <td>不替换</td>
+                </tr>
+                {Payload1.map((item, idx) => {
+                  return (
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>
+                        <span>{item}</span>
+                      </td>
+                      <td>
+                        <span>{item}</span>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           </div>
         ) : null}
@@ -155,41 +127,40 @@ const AttachType: React.FC<PropsForRedux> = ({
               直到某个<span>payload</span>集合遍历完
             </div>
             <div className="example-flag">
-              标记位置: <span>标记位置1</span>, <span>标记位置2</span>
+              标记位置: <SpanList data={['标记位置1', '标记位置2']} />
             </div>
             <div className="example-payload">
-              标记位置1 对应的攻击载荷: <span>a</span>, <span>b</span>, <span>c</span>,{' '}
-              <span>d</span>
+              标记位置1 对应的攻击载荷: <SpanList data={Payload1} />
             </div>
             <div className="example-payload">
-              标记位置2 对应的攻击载荷: <span>x</span>, <span>y</span>, <span>z</span>
+              标记位置2 对应的攻击载荷: <SpanList data={Payload2} />
             </div>
             <table>
-              <tr>
-                <th scope="col">攻击编号</th>
-                <th scope="col">标记位置1</th>
-                <th scope="col">标记位置2</th>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>不替换</td>
-                <td>不替换</td>
-              </tr>
-              {new Array(Math.min(['a', 'b', 'c', 'd'].length, ['x', 'y', 'z'].length))
-                .fill('')
-                .map((item, idx) => {
+              <tbody>
+                <tr>
+                  <th scope="col">攻击编号</th>
+                  <th scope="col">标记位置1</th>
+                  <th scope="col">标记位置2</th>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>不替换</td>
+                  <td>不替换</td>
+                </tr>
+                {new Array(Math.min(Payload1.length, Payload2.length)).fill('').map((item, idx) => {
                   return (
                     <tr key={idx}>
                       <td>{idx + 1}</td>
                       <td>
-                        <span>{['a', 'b', 'c', 'd'][idx]}</span>
+                        <span>{Payload1[idx]}</span>
                       </td>
                       <td>
-                        <span>{['x', 'y', 'z'][idx]}</span>
+                        <span>{Payload2[idx]}</span>
                       </td>
                     </tr>
                   )
                 })}
+              </tbody>
             </table>
           </div>
         ) : null}
@@ -200,43 +171,42 @@ const AttachType: React.FC<PropsForRedux> = ({
               <span>payload</span>集合的所有排列组合
             </div>
             <div className="example-flag">
-              标记位置: <span>标记位置1</span>, <span>标记位置2</span>
+              标记位置: <SpanList data={['标记位置1', '标记位置2']} />
             </div>
             <div className="example-payload">
-              标记位置1 对应的攻击载荷: <span>a</span>, <span>b</span>, <span>c</span>,{' '}
-              <span>d</span>
+              标记位置1 对应的攻击载荷: <SpanList data={Payload1} />
             </div>
             <div className="example-payload">
-              标记位置2 对应的攻击载荷: <span>x</span>, <span>y</span>, <span>z</span>
+              标记位置2 对应的攻击载荷: <SpanList data={Payload2} />
             </div>
             <table>
-              <tr>
-                <th scope="col">攻击编号</th>
-                <th scope="col">标记位置1</th>
-                <th scope="col">标记位置2</th>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>不替换</td>
-                <td>不替换</td>
-              </tr>
-              {['x', 'y', 'z'].map((payload1, idx1) => {
-                return (
-                  <>
-                    {['a', 'b', 'c', 'd'].map((payload2, idx2) => (
-                      <tr key={`${payload1}-${payload2}`}>
-                        <td>{idx1 * 4 + (idx2 + 1)}</td>
+              <tbody>
+                <tr>
+                  <th scope="col">攻击编号</th>
+                  <th scope="col">标记位置1</th>
+                  <th scope="col">标记位置2</th>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>不替换</td>
+                  <td>不替换</td>
+                </tr>
+                {new Array(Math.min(Payload1.length * Payload2.length))
+                  .fill('')
+                  .map((item, idx) => {
+                    return (
+                      <tr key={idx}>
+                        <td>{idx + 1}</td>
                         <td>
-                          <span>{payload2}</span>
+                          <span>{Payload1[idx % Payload1.length]}</span>
                         </td>
                         <td>
-                          <span>{payload1}</span>
+                          <span>{Payload2[~~(idx / Payload1.length)]}</span>
                         </td>
                       </tr>
-                    ))}
-                  </>
-                )
-              })}
+                    )
+                  })}
+              </tbody>
             </table>
           </div>
         ) : null}
@@ -260,3 +230,26 @@ function mapDispatchToProps(dispatch: Dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AttachType)
+
+type SpanListProps = {
+  data: string[]
+}
+
+const SpanList: React.FC<SpanListProps> = ({ data }: SpanListProps) => {
+  return (
+    <>
+      {new Array(Math.min(data.length * 2 - 1)).fill('').map((item, idx) => {
+        const isInterval = idx % 2 > 0
+        if (isInterval) {
+          return (
+            <span key={idx} className="normal">
+              ,{' '}
+            </span>
+          )
+        }
+        const realIdx = ~~(idx / 2)
+        return <span key={idx}>{data[realIdx]}</span>
+      })}
+    </>
+  )
+}

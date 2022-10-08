@@ -57,6 +57,12 @@ export const introduce = ({ colors, fontSizes, spacing }: AppTheme) => css`
     color: ${colors.activeOpacity};
     font-weight: 700;
     padding: 0 ${spacing.xxsmall}px;
+
+    &.normal {
+      color: ${colors.textDark};
+      font-weight: normal;
+      padding: 0;
+    }
   }
 
   .text {

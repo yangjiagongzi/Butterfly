@@ -25,6 +25,8 @@ export const content = ({ colors, fontSizes, spacing }: AppTheme) => css`
   height: 100%;
   box-sizing: border-box;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding-top: ${spacing.medium}px;
 `
 
@@ -96,5 +98,22 @@ export const introduce = ({ colors, fontSizes, spacing }: AppTheme) => css`
       line-height: ${fontSizes.small * 2}px;
       padding: 0 ${spacing.medium}px;
     }
+  }
+`
+
+export const requestContent = ({ colors, fontSizes, spacing }: AppTheme) => css`
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  padding-top: ${spacing.medium}px;
+  display: flex;
+  flex-direction: column;
+
+  .requestOptions {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1;
   }
 `

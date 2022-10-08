@@ -44,6 +44,7 @@ export const selectList = (appTheme: AppTheme, height: number) => css`
   position: absolute;
   left: 0;
   top: ${height}px;
+  z-index: 10;
   background: ${appTheme.colors.secondaryBackground};
   padding: ${appTheme.spacing.xsmall}px 0;
   border-radius: 5px;

@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
 import Button from '~/renderer/component/Button'
 import Tab from '~/renderer/component/Tab'
 import { useTheme } from '~/renderer/component/UseTheme'
+import { State as StateType } from '~/type/redux'
 import AttachType from './attack-type'
 import Payload from './payload'
 import Request from './request'
 import Settings from './settings'
-import { container, startBtn, content } from './styles'
+import { container, content, startBtn } from './styles'
 
-const Intruder: React.FC = () => {
+type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+
+const Intruder: React.FC<PropsForRedux> = ({ intruderOptions }: PropsForRedux) => {
   const appTheme = useTheme()
   const [choose, setChoose] = useState('攻击类型')
   return (
     <div className={container(appTheme)}>
-      <Button className={startBtn(appTheme)} title={'开始'} />
+      <Button
+        className={startBtn(appTheme)}
+        title={'开始'}
+        onClick={() => console.log(intruderOptions)}
+      />
       <Tab
         size="large"
         data={['攻击类型', '请求', '载荷', '设置']}
@@ -29,4 +38,13 @@ const Intruder: React.FC = () => {
   )
 }
 
-export default Intruder
+function mapStateToProps(state: StateType) {
+  return {
+    intruderOptions: state.intruderOptions
+  }
+}
+function mapDispatchToProps(dispatch: Dispatch) {
+  return bindActionCreators({}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Intruder)

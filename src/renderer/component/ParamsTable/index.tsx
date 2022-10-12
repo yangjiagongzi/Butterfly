@@ -1,6 +1,7 @@
 import React from 'react'
 import { HeaderParamsItem } from '~/type/redux/intruder'
 import Icon from '../Icon'
+import Switch from '../Switch'
 import { useTheme } from '../UseTheme'
 import { tableContainer } from './styles'
 
@@ -42,7 +43,10 @@ const ParamsTable: React.FC<Props> = ({ params, onChange, onDelete }: Props) => 
                   />
                 </td>
                 <td>
-                  {item.enable ? 1 : 0}
+                  <Switch
+                    enable={item.enable}
+                    onChange={value => onChange(idx, { ...item, enable: value })}
+                  />
                   {item.key || item.value ? (
                     <div className="del" onClick={() => onDelete(idx)}>
                       <Icon name={'Close'} size={'xs'} color={appTheme.colors.textDark} />

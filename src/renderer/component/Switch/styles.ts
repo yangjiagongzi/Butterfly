@@ -1,0 +1,20 @@
+import { css } from 'emotion'
+import { Theme as AppTheme } from '~/renderer/styles/theme'
+
+export const switchClass = (appTheme: AppTheme, enable: boolean) => css`
+  display: inline-block;
+  height: ${appTheme.spacing.large}px;
+  width: ${appTheme.spacing.large * 2}px;
+  border-radius: ${appTheme.spacing.large}px;
+  border: 2px solid ${appTheme.colors.divider};
+  background: ${enable ? appTheme.colors.active : appTheme.colors.primaryBackground};
+
+  div {
+    height: ${appTheme.spacing.large}px;
+    width: ${appTheme.spacing.large}px;
+    border-radius: ${appTheme.spacing.large}px;
+    background: ${appTheme.colors.white};
+    transform: translateX(${enable ? appTheme.spacing.large : 0}px);
+    transition: all 0.3s linear;
+  }
+`

@@ -30,7 +30,6 @@ const HexConvert: React.FC = () => {
           {CommonHex.map(item => (
             <Radio
               key={item}
-              hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === from}
               onChange={() => {
@@ -57,7 +56,6 @@ const HexConvert: React.FC = () => {
           {CommonHex.map(item => (
             <Radio
               key={item}
-              hexKey={`${item}`}
               title={`${item}进制`}
               checked={item === to}
               onChange={() => {

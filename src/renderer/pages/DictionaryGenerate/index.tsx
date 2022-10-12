@@ -53,7 +53,6 @@ const DictionaryGenerate: React.FC = () => {
           <div className="title">字符规则:</div>
           <div className="items">
             <Radio
-              hexKey={'数字'}
               title={'数字'}
               checked={characterOption.number}
               onChange={() => {
@@ -61,7 +60,6 @@ const DictionaryGenerate: React.FC = () => {
               }}
             />
             <Radio
-              hexKey={'字母'}
               title={'字母'}
               checked={characterOption.letter}
               onChange={() => {
@@ -69,7 +67,6 @@ const DictionaryGenerate: React.FC = () => {
               }}
             />
             <Radio
-              hexKey={'大小写敏感'}
               title={'大小写敏感'}
               checked={characterOption.caseSensitive}
               onChange={() => {

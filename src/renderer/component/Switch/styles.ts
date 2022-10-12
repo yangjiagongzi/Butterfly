@@ -14,6 +14,7 @@ export const switchClass = (appTheme: AppTheme, enable: boolean) => css`
     width: ${appTheme.spacing.large}px;
     border-radius: ${appTheme.spacing.large}px;
     background: ${appTheme.colors.white};
+    box-shadow: 0 0 0 2px ${appTheme.colors.divider};
     transform: translateX(${enable ? appTheme.spacing.large : 0}px);
     transition: all 0.3s linear;
   }

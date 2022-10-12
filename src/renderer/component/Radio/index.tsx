@@ -3,30 +3,25 @@ import { useTheme } from '../UseTheme'
 import { radio } from './styles'
 
 type Props = {
-  hexKey: string
   checked: boolean
   title: string
-  onChange: (key: string) => void
+  onChange: (value: boolean) => void
 }
 
-const Radio: React.FC<Props> = ({ hexKey, checked, title, onChange }: Props) => {
+const Radio: React.FC<Props> = ({ checked, title, onChange }: Props) => {
   const appTheme = useTheme()
 
   return (
-    <div className={radio(appTheme)}>
-      <label>
-        <input
-          type="radio"
-          checked={checked}
-          onClick={() => {
-            onChange(hexKey)
-          }}
-          onChange={() => {
-            // pass
-          }}
-        />
-        {title}
-      </label>
+    <div
+      className={radio(appTheme, checked)}
+      onClick={() => {
+        onChange(!checked)
+      }}
+    >
+      <div>
+        <span></span>
+      </div>
+      {title}
     </div>
   )
 }

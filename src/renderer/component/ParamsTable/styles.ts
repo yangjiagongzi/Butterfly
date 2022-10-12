@@ -37,7 +37,7 @@ export const tableContainer = ({ fontSizes, colors, spacing }: AppTheme) => css`
       display: table;
       width: 100%;
       box-sizing: border-box;
-      border-bottom: 1px solid rgb(81, 81, 81);
+      border-bottom: 1px solid ${colors.divider};
     }
 
     th {

@@ -7,6 +7,7 @@ import {
   HEADERS_UPDATE,
   PARAMS_UPDATE
 } from '~/type/redux/intruder'
+import uuid from '~/utils/UuidUtil'
 
 export const ATTACK_TYPE_UPDATE_KEY = 'ATTACKTYPE/UPDATE'
 export const METHOD_UPDATE_KEY = 'METHOD/UPDATE'
@@ -54,46 +55,46 @@ class IntruderReduxAction {
     }
   }
 
-  updateHeaders = (idx: number, value: HeaderParamsItem) => {
+  updateHeaders = (id: string, value: HeaderParamsItem) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
       const headers = intruderOptions.headers
-      const newHeaders = headers.map((item, i) => (i === idx ? value : item))
+      const newHeaders = headers.map(item => (item.id === id ? value : item))
       const hasEmpty = newHeaders.some(item => !item.key && !item.value)
       if (!hasEmpty) {
-        newHeaders.push({ key: '', value: '', enable: true })
+        newHeaders.push({ id: uuid(), key: '', value: '', enable: true })
       }
       dispatch(updateHeaders(newHeaders))
     }
   }
 
-  deleteHeadersItem = (idx: number) => {
+  deleteHeadersItem = (id: string) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
       const headers = intruderOptions.headers
-      const newHeaders = headers.filter((item, i) => i != idx)
+      const newHeaders = headers.filter(item => item.id != id)
       dispatch(updateHeaders(newHeaders))
     }
   }
 
-  updateParams = (idx: number, value: HeaderParamsItem) => {
+  updateParams = (id: string, value: HeaderParamsItem) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
       const params = intruderOptions.params
-      const newParams = params.map((item, i) => (i === idx ? value : item))
+      const newParams = params.map(item => (item.id === id ? value : item))
       const hasEmpty = newParams.some(item => !item.key && !item.value)
       if (!hasEmpty) {
-        newParams.push({ key: '', value: '', enable: true })
+        newParams.push({ id: uuid(), key: '', value: '', enable: true })
       }
       dispatch(updateParams(newParams))
     }
   }
 
-  deleteParamsItem = (idx: number) => {
+  deleteParamsItem = (id: string) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
       const params = intruderOptions.params
-      const newParams = params.filter((item, i) => i != idx)
+      const newParams = params.filter(item => item.id != id)
       dispatch(updateParams(newParams))
     }
   }

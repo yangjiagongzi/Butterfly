@@ -20,6 +20,6 @@ export const RequestMeth = {
 export const IntruderOptionsDefaultValue: IntruderOptions = {
   attackType: AttackType.Sniper,
   method: RequestMeth.get,
-  headers: [{ key: '', value: '', enable: true }],
-  params: [{ key: '', value: '', enable: true }]
+  headers: [{ id: 'default-empty', key: '', value: '', enable: true }],
+  params: [{ id: 'default-empty', key: '', value: '', enable: true }]
 }

@@ -7,6 +7,7 @@ import {
 } from '~/renderer/action/intruder'
 
 export type HeaderParamsItem = {
+  id: string
   key: string
   value: string
   enable: boolean

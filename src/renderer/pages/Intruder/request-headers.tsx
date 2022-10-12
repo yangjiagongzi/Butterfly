@@ -2,19 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import IntruderReduxAction from '~/renderer/action/intruder'
-import { useTheme } from '~/renderer/component/UseTheme'
+import ParamsTable from '~/renderer/component/ParamsTable'
 import { State as StateType } from '~/type/redux'
-import { requestContent } from './styles'
 
 type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 const RequestHeaders: React.FC<PropsForRedux> = ({
   intruderOptions,
-  updateMethod
+  updateHeader,
+  deleteHeaderItem
 }: PropsForRedux) => {
-  const appTheme = useTheme()
-
-  return <div className={requestContent(appTheme)}></div>
+  return (
+    <ParamsTable
+      params={intruderOptions.header}
+      onChange={updateHeader}
+      onDelete={deleteHeaderItem}
+    />
+  )
 }
 
 function mapStateToProps(state: StateType) {
@@ -25,7 +29,8 @@ function mapStateToProps(state: StateType) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return bindActionCreators(
     {
-      updateMethod: IntruderReduxAction.updateMethod
+      updateHeader: IntruderReduxAction.updateHeader,
+      deleteHeaderItem: IntruderReduxAction.deleteHeaderItem
     },
     dispatch
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import close from '~/assets/svg/close.svg'
 import comparer from '~/assets/svg/comparer.svg'
 import decoder from '~/assets/svg/decoder.svg'
 import home from '~/assets/svg/home.svg'
@@ -10,6 +11,7 @@ import settings from '~/assets/svg/settings.svg'
 import tool from '~/assets/svg/tool.svg'
 
 const IconMap = {
+  Close: close,
   Comparer: comparer,
   Decoder: decoder,
   Home: home,

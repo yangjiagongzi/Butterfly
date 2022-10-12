@@ -28,6 +28,7 @@ export const content = ({ colors, fontSizes, spacing }: AppTheme) => css`
   display: flex;
   flex-direction: column;
   padding-top: ${spacing.medium}px;
+  overflow: hidden;
 `
 
 export const inputBox = ({ colors, fontSizes, spacing }: AppTheme) => css`
@@ -115,11 +116,14 @@ export const requestContent = ({ colors, fontSizes, spacing }: AppTheme) => css`
   padding-top: ${spacing.medium}px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .requestOptions {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    display: flex;
     flex: 1;
+    overflow: hidden;
   }
 `

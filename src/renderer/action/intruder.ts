@@ -1,9 +1,15 @@
 import { AttackType, RequestMeth } from '~/constant/intruder'
 import { Dispatch, GetState } from '~/type/redux'
-import { ATTACK_TYPE_UPDATE, METHOD_UPDATE } from '~/type/redux/intruder'
+import {
+  HeaderParamsItem,
+  ATTACK_TYPE_UPDATE,
+  METHOD_UPDATE,
+  HEADER_UPDATE
+} from '~/type/redux/intruder'
 
 export const ATTACK_TYPE_UPDATE_KEY = 'ATTACKTYPE/UPDATE'
 export const METHOD_UPDATE_KEY = 'METHOD/UPDATE'
+export const HEADER_UPDATE_KEY = 'HEADER/UPDATE'
 
 function updateAttackType(type: Values<typeof AttackType>): ATTACK_TYPE_UPDATE {
   return {
@@ -19,6 +25,13 @@ function updateMethod(method: Values<typeof RequestMeth>): METHOD_UPDATE {
   }
 }
 
+function updateHeader(header: HeaderParamsItem[]): HEADER_UPDATE {
+  return {
+    type: HEADER_UPDATE_KEY,
+    header: header
+  }
+}
+
 class IntruderReduxAction {
   updateAttackType = (type: Values<typeof AttackType>) => {
     return (dispatch: Dispatch, getState: GetState) => {
@@ -29,6 +42,28 @@ class IntruderReduxAction {
   updateMethod = (method: Values<typeof RequestMeth>) => {
     return (dispatch: Dispatch, getState: GetState) => {
       dispatch(updateMethod(method))
+    }
+  }
+
+  updateHeader = (idx: number, value: HeaderParamsItem) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const { intruderOptions } = getState()
+      const header = intruderOptions.header
+      const newHeader = header.map((item, i) => (i === idx ? value : item))
+      const hasEmpty = newHeader.some(item => !item.key && !item.value)
+      if (!hasEmpty) {
+        newHeader.push({ key: '', value: '', enable: true })
+      }
+      dispatch(updateHeader(newHeader))
+    }
+  }
+
+  deleteHeaderItem = (idx: number) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const { intruderOptions } = getState()
+      const header = intruderOptions.header
+      const newHeader = header.filter((item, i) => i != idx)
+      dispatch(updateHeader(newHeader))
     }
   }
 }

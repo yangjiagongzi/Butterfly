@@ -64,9 +64,7 @@ export const tableContainer = ({ fontSizes, colors, spacing }: AppTheme) => css`
     td:last-child {
       width: 100px;
       box-sizing: content-box;
-      padding-top: 3px;
       padding-right: ${spacing.medium * 3}px;
-      text-align: center;
       position: relative;
     }
 

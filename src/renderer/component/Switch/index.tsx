@@ -20,7 +20,9 @@ const Switch: React.FC<Props> = ({ enable, onChange }: Props) => {
         onChange(newValue)
       }}
     >
-      <div />
+      <div className="box">
+        <div />
+      </div>
     </div>
   )
 }

@@ -4,12 +4,14 @@ import {
   HeaderParamsItem,
   ATTACK_TYPE_UPDATE,
   METHOD_UPDATE,
-  HEADER_UPDATE
+  HEADERS_UPDATE,
+  PARAMS_UPDATE
 } from '~/type/redux/intruder'
 
 export const ATTACK_TYPE_UPDATE_KEY = 'ATTACKTYPE/UPDATE'
 export const METHOD_UPDATE_KEY = 'METHOD/UPDATE'
-export const HEADER_UPDATE_KEY = 'HEADER/UPDATE'
+export const HEADERS_UPDATE_KEY = 'HEADERS/UPDATE'
+export const PARAMS_UPDATE_KEY = 'PARAMS/UPDATE'
 
 function updateAttackType(type: Values<typeof AttackType>): ATTACK_TYPE_UPDATE {
   return {
@@ -25,10 +27,17 @@ function updateMethod(method: Values<typeof RequestMeth>): METHOD_UPDATE {
   }
 }
 
-function updateHeader(header: HeaderParamsItem[]): HEADER_UPDATE {
+function updateHeaders(headers: HeaderParamsItem[]): HEADERS_UPDATE {
   return {
-    type: HEADER_UPDATE_KEY,
-    header: header
+    type: HEADERS_UPDATE_KEY,
+    headers: headers
+  }
+}
+
+function updateParams(params: HeaderParamsItem[]): PARAMS_UPDATE {
+  return {
+    type: PARAMS_UPDATE_KEY,
+    params: params
   }
 }
 
@@ -45,25 +54,47 @@ class IntruderReduxAction {
     }
   }
 
-  updateHeader = (idx: number, value: HeaderParamsItem) => {
+  updateHeaders = (idx: number, value: HeaderParamsItem) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
-      const header = intruderOptions.header
-      const newHeader = header.map((item, i) => (i === idx ? value : item))
-      const hasEmpty = newHeader.some(item => !item.key && !item.value)
+      const headers = intruderOptions.headers
+      const newHeaders = headers.map((item, i) => (i === idx ? value : item))
+      const hasEmpty = newHeaders.some(item => !item.key && !item.value)
       if (!hasEmpty) {
-        newHeader.push({ key: '', value: '', enable: true })
+        newHeaders.push({ key: '', value: '', enable: true })
       }
-      dispatch(updateHeader(newHeader))
+      dispatch(updateHeaders(newHeaders))
     }
   }
 
-  deleteHeaderItem = (idx: number) => {
+  deleteHeadersItem = (idx: number) => {
     return (dispatch: Dispatch, getState: GetState) => {
       const { intruderOptions } = getState()
-      const header = intruderOptions.header
-      const newHeader = header.filter((item, i) => i != idx)
-      dispatch(updateHeader(newHeader))
+      const headers = intruderOptions.headers
+      const newHeaders = headers.filter((item, i) => i != idx)
+      dispatch(updateHeaders(newHeaders))
+    }
+  }
+
+  updateParams = (idx: number, value: HeaderParamsItem) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const { intruderOptions } = getState()
+      const params = intruderOptions.params
+      const newParams = params.map((item, i) => (i === idx ? value : item))
+      const hasEmpty = newParams.some(item => !item.key && !item.value)
+      if (!hasEmpty) {
+        newParams.push({ key: '', value: '', enable: true })
+      }
+      dispatch(updateParams(newParams))
+    }
+  }
+
+  deleteParamsItem = (idx: number) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const { intruderOptions } = getState()
+      const params = intruderOptions.params
+      const newParams = params.filter((item, i) => i != idx)
+      dispatch(updateParams(newParams))
     }
   }
 }

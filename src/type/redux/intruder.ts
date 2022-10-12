@@ -2,7 +2,8 @@ import { AttackType, RequestMeth } from '~/constant/intruder'
 import {
   ATTACK_TYPE_UPDATE_KEY,
   METHOD_UPDATE_KEY,
-  HEADER_UPDATE_KEY
+  HEADERS_UPDATE_KEY,
+  PARAMS_UPDATE_KEY
 } from '~/renderer/action/intruder'
 
 export type HeaderParamsItem = {
@@ -14,7 +15,8 @@ export type HeaderParamsItem = {
 export type IntruderOptions = {
   attackType: Values<typeof AttackType>
   method: Values<typeof RequestMeth>
-  header: HeaderParamsItem[]
+  headers: HeaderParamsItem[]
+  params: HeaderParamsItem[]
 }
 
 export interface ATTACK_TYPE_UPDATE {
@@ -27,9 +29,14 @@ export interface METHOD_UPDATE {
   method: Values<typeof RequestMeth>
 }
 
-export interface HEADER_UPDATE {
-  type: typeof HEADER_UPDATE_KEY
-  header: HeaderParamsItem[]
+export interface HEADERS_UPDATE {
+  type: typeof HEADERS_UPDATE_KEY
+  headers: HeaderParamsItem[]
 }
 
-export type IntruderAction = ATTACK_TYPE_UPDATE | METHOD_UPDATE | HEADER_UPDATE
+export interface PARAMS_UPDATE {
+  type: typeof PARAMS_UPDATE_KEY
+  params: HeaderParamsItem[]
+}
+
+export type IntruderAction = ATTACK_TYPE_UPDATE | METHOD_UPDATE | HEADERS_UPDATE | PARAMS_UPDATE

@@ -69,6 +69,7 @@ export const introduce = ({ colors, fontSizes, spacing }: AppTheme) => css`
   .text {
     font-size: ${fontSizes.medium}px;
     margin-bottom: ${spacing.medium}px;
+    white-space: pre-wrap;
   }
 
   .example-payload,

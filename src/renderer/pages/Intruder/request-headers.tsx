@@ -9,14 +9,14 @@ type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapD
 
 const RequestHeaders: React.FC<PropsForRedux> = ({
   intruderOptions,
-  updateHeader,
-  deleteHeaderItem
+  updateHeaders,
+  deleteHeadersItem
 }: PropsForRedux) => {
   return (
     <ParamsTable
-      params={intruderOptions.header}
-      onChange={updateHeader}
-      onDelete={deleteHeaderItem}
+      params={intruderOptions.headers}
+      onChange={updateHeaders}
+      onDelete={deleteHeadersItem}
     />
   )
 }
@@ -29,8 +29,8 @@ function mapStateToProps(state: StateType) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return bindActionCreators(
     {
-      updateHeader: IntruderReduxAction.updateHeader,
-      deleteHeaderItem: IntruderReduxAction.deleteHeaderItem
+      updateHeaders: IntruderReduxAction.updateHeaders,
+      deleteHeadersItem: IntruderReduxAction.deleteHeadersItem
     },
     dispatch
   )

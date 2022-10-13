@@ -20,7 +20,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "cross-env NODE_ENV=production electron-forge make",
     "lint": "eslint --fix src/ --ext .ts,.tsx,.js,jsx",
     "tsc": "tsc -p tsconfig.json"
   },
@@ -47,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^5.34.0",
     "@typescript-eslint/parser": "^5.34.0",
     "babel-loader": "^8.2.5",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "electron": "20.0.3",
     "emotion": "^10.0.23",

@@ -23,5 +23,5 @@ module.exports = {
   port,
   host,
   cpuSize,
-  isDev: true
+  isDev: process.env.NODE_ENV != 'production'
 }

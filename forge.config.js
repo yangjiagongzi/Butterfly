@@ -19,10 +19,12 @@ module.exports = {
           nodeIntegration: false,
           entryPoints: [
             {
+              name: 'main_window',
               html: './src/renderer/index.html',
               js: './src/renderer/index.tsx',
-              name: 'main_window',
-              preload: './src/preload/preload.js'
+              preload: {
+                js: './src/preload/preload.ts'
+              }
             }
           ]
         }

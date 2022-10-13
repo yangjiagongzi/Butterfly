@@ -14,8 +14,6 @@ class BrowserWindowManagement {
         nodeIntegration: false,
         contextIsolation: true,
         sandbox: true,
-        webSecurity: false,
-        allowRunningInsecureContent: true,
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
       }
     })

@@ -1,4 +1,3 @@
-import { clipboard } from 'electron'
 import React, { HTMLAttributes } from 'react'
 import Button from '../Button'
 import Notification from '../Notification'
@@ -14,7 +13,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
 
   const copy = () => {
     const str = data.join('\n')
-    clipboard.writeText(str)
+    window.api.clipboardWriteText(str)
     Notification.show('复制成功!')
   }
 

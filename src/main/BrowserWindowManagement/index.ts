@@ -1,4 +1,5 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, nativeTheme } from 'electron'
+import { EventName } from '~/constant/event'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
@@ -11,10 +12,14 @@ class BrowserWindowManagement {
       fullscreen: true,
       backgroundColor: '#171717',
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
+        nodeIntegration: false,
+        contextIsolation: true,
+        sandbox: true,
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
       }
+    })
+    this.mainWindow.on('ready-to-show', () => {
+      this.mainWindow!.webContents.send(EventName.OnDarkModeUpdate, nativeTheme.shouldUseDarkColors)
     })
     // and load the index.html of the app.
     this.mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)

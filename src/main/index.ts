@@ -2,11 +2,15 @@ import { app } from 'electron'
 import Application from './Application'
 import BrowserWindowManagement from './BrowserWindowManagement'
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   // eslint-disable-line global-require
   app.quit()
 }
+
+app.enableSandbox()
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -1,16 +1,15 @@
-import { ipcRenderer } from 'electron'
 import { ThemeMode } from '~/constant/app'
 import { EventName, EventParams, EventResponse } from '~/constant/event'
 
 function ipcSend<E extends Values<typeof EventName>>(eventName: E, params: EventParams[E]) {
-  ipcRenderer.send(eventName, params)
+  window.api.ipcSend(eventName, params)
 }
 
 function ipcInvoke<E extends Values<typeof EventName>>(
   eventName: E,
   params: EventParams[E]
 ): Promise<EventResponse[E]> {
-  return ipcRenderer.invoke(eventName, params)
+  return window.api.ipcInvoke(eventName, params)
 }
 
 export const showMessageBox = (message: string) => {

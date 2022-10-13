@@ -16,12 +16,13 @@ module.exports = {
         mainConfig: './config/webpack.config.main',
         renderer: {
           config: './config/webpack.config.renderer',
-          nodeIntegration: true,
+          nodeIntegration: false,
           entryPoints: [
             {
               html: './src/renderer/index.html',
               js: './src/renderer/index.tsx',
-              name: 'main_window'
+              name: 'main_window',
+              preload: './src/preload/preload.js'
             }
           ]
         }

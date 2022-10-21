@@ -13,7 +13,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
 
   const copy = () => {
     const str = data.join('\n')
-    window.api.clipboardWriteText(str)
+    window.service.Clipboard.writeText(str)
     Notification.show('复制成功!')
   }
 

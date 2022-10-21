@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { ThemeMode, ThemeOptionsName } from '~/constant/app'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { getThemeMode, setThemeMode } from '~/renderer/IPC'
 import { container, paramGroup } from './styles'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
@@ -12,7 +11,7 @@ const SettingsGeneral: React.FC = () => {
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   useEffect(() => {
-    getThemeMode().then(result => {
+    window.service.Theme.get().then(result => {
       setChoose(ThemeOptionsName[result])
     })
   }, [])
@@ -23,7 +22,7 @@ const SettingsGeneral: React.FC = () => {
       key => ThemeOptionsName[key as Values<typeof ThemeMode>] === value
     )
     if (mode) {
-      setThemeMode(mode as Values<typeof ThemeMode>)
+      window.service.Theme.set(mode as Values<typeof ThemeMode>)
     }
   }, [])
 

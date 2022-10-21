@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { AppTheme } from '~/renderer/styles/theme'
 import { Theme } from '~/constant/app'
-import { getDarkMode } from '../IPC'
 import { EventName, EventParams } from '~/constant/event'
 
 let themeInit: Values<typeof Theme> = Theme.LIGHT
 
-getDarkMode().then(result => {
+window.service.Theme.isDarkMode().then(result => {
   if (result) {
     themeInit = Theme.DARK
   } else {
@@ -29,9 +28,9 @@ export function useTheme() {
     }
   }
   useEffect(() => {
-    window.api.ipcOn(EventName.OnDarkModeUpdate, onDarkModeUpdate)
+    window.service.IpcEvent.on(EventName.OnDarkModeUpdate, onDarkModeUpdate)
     return () => {
-      window.api.ipcRemoveListener(EventName.OnDarkModeUpdate, onDarkModeUpdate)
+      window.service.IpcEvent.removeListener(EventName.OnDarkModeUpdate, onDarkModeUpdate)
     }
   }, [])
 

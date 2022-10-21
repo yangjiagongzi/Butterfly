@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { AppTheme } from '~/renderer/styles/theme'
 import { Theme } from '~/constant/app'
-import { EventName, EventParams } from '~/constant/event'
+import { MainSendEventName } from '~/constant/event'
+import { AppTheme } from '~/renderer/styles/theme'
 
 let themeInit: Values<typeof Theme> = Theme.LIGHT
 
@@ -15,10 +15,7 @@ window.service.Theme.isDarkMode().then(result => {
 
 export function useTheme() {
   const [theme, setTheme] = useState<Values<typeof Theme>>(themeInit)
-  const onDarkModeUpdate = (
-    event: Electron.IpcRendererEvent,
-    value: EventParams[typeof EventName.OnDarkModeUpdate]
-  ) => {
+  const onDarkModeUpdate = (event: Electron.IpcRendererEvent, value: boolean) => {
     if (value) {
       setTheme(Theme.DARK)
       themeInit = Theme.DARK
@@ -28,9 +25,9 @@ export function useTheme() {
     }
   }
   useEffect(() => {
-    window.service.IpcEvent.on(EventName.OnDarkModeUpdate, onDarkModeUpdate)
+    window.service.IpcEvent.on(MainSendEventName.OnDarkModeUpdate, onDarkModeUpdate)
     return () => {
-      window.service.IpcEvent.removeListener(EventName.OnDarkModeUpdate, onDarkModeUpdate)
+      window.service.IpcEvent.removeListener(MainSendEventName.OnDarkModeUpdate, onDarkModeUpdate)
     }
   }, [])
 

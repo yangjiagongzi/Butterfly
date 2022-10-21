@@ -1,11 +1,18 @@
+import { EventParams, MainSendEventName } from '~/constant/event'
 import IPC from '../common/IPC'
 
 export default class IpcEvent {
-  public on = (channel: string, listener: (...args: any[]) => void) => {
-    IPC.on(channel, listener)
+  public on = <E extends Values<typeof MainSendEventName>>(
+    eventName: E,
+    listener: (event: Electron.IpcRendererEvent, params: EventParams[E]) => void
+  ) => {
+    IPC.on(eventName, listener)
   }
 
-  public removeListener = (channel: string, listener: (...args: any[]) => void) => {
-    IPC.removeListener(channel, listener)
+  public removeListener = <E extends Values<typeof MainSendEventName>>(
+    eventName: E,
+    listener: (event: Electron.IpcRendererEvent, params: EventParams[E]) => void
+  ) => {
+    IPC.removeListener(eventName, listener)
   }
 }

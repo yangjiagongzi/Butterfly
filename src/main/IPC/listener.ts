@@ -1,32 +1,40 @@
 import { dialog, ipcMain, nativeTheme } from 'electron'
-import { EventName, EventParams, EventResponse } from '~/constant/event'
+import {
+  RendererSendEventName,
+  RendererInvokeEventName,
+  EventParams,
+  EventResponse
+} from '~/constant/event'
 import { onDarkModeUpdate } from './send'
 
 export function registListener() {
   ipcMain.on(
-    EventName.ShowMessageBox,
-    (event, params: EventParams[typeof EventName.ShowMessageBox]) => {
+    RendererSendEventName.ShowMessageBox,
+    (event, params: EventParams[typeof RendererSendEventName.ShowMessageBox]) => {
       dialog.showMessageBox({ message: params })
     }
   )
 
   ipcMain.handle(
-    EventName.RequestThemeMode,
-    (): EventResponse[typeof EventName.RequestThemeMode] => {
+    RendererInvokeEventName.RequestThemeMode,
+    (): EventResponse[typeof RendererInvokeEventName.RequestThemeMode] => {
       return nativeTheme.themeSource
     }
   )
 
-  ipcMain.handle(
-    EventName.UpdateThemeMode,
-    (event, params: EventParams[typeof EventName.UpdateThemeMode]) => {
+  ipcMain.on(
+    RendererSendEventName.UpdateThemeMode,
+    (event, params: EventParams[typeof RendererSendEventName.UpdateThemeMode]) => {
       nativeTheme.themeSource = params
     }
   )
 
-  ipcMain.handle(EventName.RequestDarkMode, (): EventResponse[typeof EventName.RequestDarkMode] => {
-    return nativeTheme.shouldUseDarkColors
-  })
+  ipcMain.handle(
+    RendererInvokeEventName.RequestDarkMode,
+    (): EventResponse[typeof RendererInvokeEventName.RequestDarkMode] => {
+      return nativeTheme.shouldUseDarkColors
+    }
+  )
 
   nativeTheme.addListener('updated', () => {
     onDarkModeUpdate()
@@ -35,8 +43,7 @@ export function registListener() {
 
 export function removeListener() {
   ipcMain.removeAllListeners()
-  ipcMain.removeHandler(EventName.RequestThemeMode)
-  ipcMain.removeHandler(EventName.UpdateThemeMode)
-  ipcMain.removeHandler(EventName.RequestDarkMode)
+  ipcMain.removeHandler(RendererInvokeEventName.RequestThemeMode)
+  ipcMain.removeHandler(RendererInvokeEventName.RequestDarkMode)
   nativeTheme.removeAllListeners()
 }

@@ -1,25 +1,31 @@
 import { ThemeMode } from './app'
 
-export const EventName = {
+export const RendererSendEventName = {
   ShowMessageBox: 'showMessageBox',
+  UpdateThemeMode: 'updateThemeMode'
+} as const
+
+export const RendererInvokeEventName = {
   RequestThemeMode: 'requestThemeMode',
-  UpdateThemeMode: 'updateThemeMode',
-  RequestDarkMode: 'requestDarkMode',
+  RequestDarkMode: 'requestDarkMode'
+} as const
+
+export const MainSendEventName = {
   OnDarkModeUpdate: 'OnDarkModeUpdate'
 } as const
 
 export type EventParams = {
-  [EventName.ShowMessageBox]: string
-  [EventName.RequestThemeMode]: undefined
-  [EventName.UpdateThemeMode]: Values<typeof ThemeMode>
-  [EventName.RequestDarkMode]: undefined
-  [EventName.OnDarkModeUpdate]: boolean
+  [RendererSendEventName.ShowMessageBox]: string
+  [RendererInvokeEventName.RequestThemeMode]: undefined
+  [RendererSendEventName.UpdateThemeMode]: Values<typeof ThemeMode>
+  [RendererInvokeEventName.RequestDarkMode]: undefined
+  [MainSendEventName.OnDarkModeUpdate]: boolean
 }
 
 export type EventResponse = {
-  [EventName.ShowMessageBox]: void
-  [EventName.RequestThemeMode]: Values<typeof ThemeMode>
-  [EventName.UpdateThemeMode]: void
-  [EventName.RequestDarkMode]: boolean
-  [EventName.OnDarkModeUpdate]: void
+  [RendererSendEventName.ShowMessageBox]: void
+  [RendererInvokeEventName.RequestThemeMode]: Values<typeof ThemeMode>
+  [RendererSendEventName.UpdateThemeMode]: void
+  [RendererInvokeEventName.RequestDarkMode]: boolean
+  [MainSendEventName.OnDarkModeUpdate]: void
 }

@@ -1,8 +1,8 @@
-import { EventName } from '~/constant/event'
+import { RendererSendEventName } from '~/constant/event'
 import IPC from '../common/IPC'
 
 export default class MessageBox {
   public show = (message: string) => {
-    IPC.send(EventName.ShowMessageBox, message)
+    IPC.send(RendererSendEventName.ShowMessageBox, message)
   }
 }

@@ -1,23 +1,38 @@
 import { ipcRenderer } from 'electron'
-import { EventName, EventParams, EventResponse } from '~/constant/event'
+import {
+  RendererSendEventName,
+  RendererInvokeEventName,
+  MainSendEventName,
+  EventParams,
+  EventResponse
+} from '~/constant/event'
 
 export default class IPC {
-  static send = (channel: string, ...args: any[]) => {
-    ipcRenderer.send(channel, ...args)
+  static send = <E extends Values<typeof RendererSendEventName>>(
+    eventName: E,
+    params: EventParams[E]
+  ) => {
+    ipcRenderer.send(eventName, params)
   }
 
-  static invoke = <E extends Values<typeof EventName>>(
+  static invoke = <E extends Values<typeof RendererInvokeEventName>>(
     eventName: E,
     params: EventParams[E]
   ): Promise<EventResponse[E]> => {
     return ipcRenderer.invoke(eventName, params)
   }
 
-  static on = (channel: string, listener: (...args: any[]) => void) => {
-    ipcRenderer.on(channel, listener)
+  static on = <E extends Values<typeof MainSendEventName>>(
+    eventName: E,
+    listener: (event: Electron.IpcRendererEvent, params: EventParams[E]) => void
+  ) => {
+    ipcRenderer.on(eventName, listener)
   }
 
-  static removeListener = (channel: string, listener: (...args: any[]) => void) => {
-    ipcRenderer.removeListener(channel, listener)
+  static removeListener = <E extends Values<typeof MainSendEventName>>(
+    eventName: E,
+    listener: (event: Electron.IpcRendererEvent, params: EventParams[E]) => void
+  ) => {
+    ipcRenderer.removeListener(eventName, listener)
   }
 }

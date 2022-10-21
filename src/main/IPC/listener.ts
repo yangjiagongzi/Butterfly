@@ -1,10 +1,11 @@
 import { dialog, ipcMain, nativeTheme } from 'electron'
 import {
-  RendererSendEventName,
-  RendererInvokeEventName,
   EventParams,
-  EventResponse
+  EventResponse,
+  RendererInvokeEventName,
+  RendererSendEventName
 } from '~/constant/event'
+import { handleGraphql } from '../Graphql'
 import { onDarkModeUpdate } from './send'
 
 export function registListener() {
@@ -12,6 +13,16 @@ export function registListener() {
     RendererSendEventName.ShowMessageBox,
     (event, params: EventParams[typeof RendererSendEventName.ShowMessageBox]) => {
       dialog.showMessageBox({ message: params })
+    }
+  )
+
+  ipcMain.handle(
+    RendererInvokeEventName.Graphql,
+    (
+      event,
+      params: EventParams[typeof RendererInvokeEventName.Graphql]
+    ): EventResponse[typeof RendererInvokeEventName.Graphql] => {
+      return handleGraphql(params)
     }
   )
 
@@ -43,6 +54,7 @@ export function registListener() {
 
 export function removeListener() {
   ipcMain.removeAllListeners()
+  ipcMain.removeHandler(RendererInvokeEventName.Graphql)
   ipcMain.removeHandler(RendererInvokeEventName.RequestThemeMode)
   ipcMain.removeHandler(RendererInvokeEventName.RequestDarkMode)
   nativeTheme.removeAllListeners()

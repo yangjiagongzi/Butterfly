@@ -1,11 +1,12 @@
 import { ThemeMode } from './app'
-
+import { GraphQLArgs, ExecutionResult } from 'graphql'
 export const RendererSendEventName = {
   ShowMessageBox: 'showMessageBox',
   UpdateThemeMode: 'updateThemeMode'
 } as const
 
 export const RendererInvokeEventName = {
+  Graphql: 'graphql',
   RequestThemeMode: 'requestThemeMode',
   RequestDarkMode: 'requestDarkMode'
 } as const
@@ -15,6 +16,7 @@ export const MainSendEventName = {
 } as const
 
 export type EventParams = {
+  [RendererInvokeEventName.Graphql]: Pick<GraphQLArgs, 'source' | 'variableValues'>
   [RendererSendEventName.ShowMessageBox]: string
   [RendererInvokeEventName.RequestThemeMode]: undefined
   [RendererSendEventName.UpdateThemeMode]: Values<typeof ThemeMode>
@@ -23,9 +25,7 @@ export type EventParams = {
 }
 
 export type EventResponse = {
-  [RendererSendEventName.ShowMessageBox]: void
+  [RendererInvokeEventName.Graphql]: Promise<ExecutionResult>
   [RendererInvokeEventName.RequestThemeMode]: Values<typeof ThemeMode>
-  [RendererSendEventName.UpdateThemeMode]: void
   [RendererInvokeEventName.RequestDarkMode]: boolean
-  [MainSendEventName.OnDarkModeUpdate]: void
 }

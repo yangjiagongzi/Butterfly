@@ -1,11 +1,8 @@
-import { GraphQLObjectType, GraphQLSchema } from 'graphql'
-import app from './app'
+import { GraphQLSchema } from 'graphql'
+// import Mutation from './mutations'
+import RootQuery from './queries'
 
 export const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-      app
-    }
-  })
+  query: RootQuery
+  // mutation: Mutation
 })

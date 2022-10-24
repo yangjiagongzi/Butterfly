@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Theme } from '~/constant/app'
-import { MainSendEventName } from '~/constant/event'
 import { AppTheme } from '~/renderer/styles/theme'
 
 let themeInit: Values<typeof Theme> = Theme.LIGHT
@@ -25,9 +24,9 @@ export function useTheme() {
     }
   }
   useEffect(() => {
-    window.service.IpcEvent.on(MainSendEventName.OnDarkModeUpdate, onDarkModeUpdate)
+    window.service.Theme.addListener(onDarkModeUpdate)
     return () => {
-      window.service.IpcEvent.removeListener(MainSendEventName.OnDarkModeUpdate, onDarkModeUpdate)
+      window.service.Theme.removeListener(onDarkModeUpdate)
     }
   }, [])
 

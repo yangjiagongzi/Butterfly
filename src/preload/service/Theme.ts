@@ -1,5 +1,10 @@
 import { ThemeMode } from '~/constant/app'
-import { RendererSendEventName, RendererInvokeEventName } from '~/constant/event'
+import {
+  EventParams,
+  MainSendEventName,
+  RendererInvokeEventName,
+  RendererSendEventName
+} from '~/constant/event'
 import IPC from '../common/IPC'
 
 export default class Theme {
@@ -13,5 +18,23 @@ export default class Theme {
 
   public isDarkMode = async () => {
     return await IPC.invoke(RendererInvokeEventName.RequestDarkMode, undefined)
+  }
+
+  public addListener = (
+    listener: (
+      event: Electron.IpcRendererEvent,
+      params: EventParams[typeof MainSendEventName.OnDarkModeUpdate]
+    ) => void
+  ) => {
+    IPC.on(MainSendEventName.OnDarkModeUpdate, listener)
+  }
+
+  public removeListener = (
+    listener: (
+      event: Electron.IpcRendererEvent,
+      params: EventParams[typeof MainSendEventName.OnDarkModeUpdate]
+    ) => void
+  ) => {
+    IPC.removeListener(MainSendEventName.OnDarkModeUpdate, listener)
   }
 }

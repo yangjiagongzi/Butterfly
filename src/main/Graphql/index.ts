@@ -1,21 +1,9 @@
-import { graphql, buildSchema, GraphQLArgs } from 'graphql'
-
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
-
-const rootValue = {
-  hello: () => {
-    return 'Hello world!'
-  }
-}
+import { graphql, GraphQLArgs } from 'graphql'
+import { schema } from './schema'
 
 export const handleGraphql = (params: Pick<GraphQLArgs, 'source' | 'variableValues'>) => {
   return graphql({
     schema,
-    rootValue,
     ...params
   })
 }

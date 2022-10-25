@@ -10,9 +10,9 @@ module.exports = {
     }
   ],
   plugins: [
-    [
-      '@electron-forge/plugin-webpack',
-      {
+    {
+      name: '@electron-forge/plugin-webpack',
+      config: {
         mainConfig: './config/webpack.config.main',
         renderer: {
           config: './config/webpack.config.renderer',
@@ -29,6 +29,6 @@ module.exports = {
           ]
         }
       }
-    ]
+    }
   ]
 }

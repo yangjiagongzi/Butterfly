@@ -1,3 +1,11 @@
+import Database from 'better-sqlite3'
+import { app } from 'electron'
+import path from 'path'
+
+const databasePath = path.join(app.getPath('userData'), 'database.db')
+console.log(databasePath)
+new Database(databasePath)
+
 const data = {
   types: [
     { id: 1, typeName: '文件上传' },

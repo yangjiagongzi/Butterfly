@@ -1,10 +1,6 @@
-import Database from 'better-sqlite3'
-import { app } from 'electron'
-import path from 'path'
+import database from './sqlite'
 
-const databasePath = path.join(app.getPath('userData'), 'database.db')
-console.log(databasePath)
-new Database(databasePath)
+database.getDatabase()
 
 const data = {
   types: [

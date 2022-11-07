@@ -51,7 +51,7 @@ class DB {
     } else if (property.type === BaseValuesTypeEnum.BIGINT) {
       tableTmp = table.bigInteger(property.name)
     } else if (property.type === BaseValuesTypeEnum.BLOB) {
-      tableTmp = table.binary(property.name, property.length)
+      tableTmp = table.binary(property.name)
     } else if (property.type === BaseValuesTypeEnum.BOOLEAN) {
       tableTmp = table.boolean(property.name)
     } else if (property.type === BaseValuesTypeEnum.DATE) {
@@ -59,7 +59,7 @@ class DB {
     } else if (property.type === BaseValuesTypeEnum.DATETIME) {
       tableTmp = table.datetime(property.name)
     } else if (property.type === BaseValuesTypeEnum.INTEGER) {
-      tableTmp = table.integer(property.name, property.length)
+      tableTmp = table.integer(property.name)
     } else if (property.type === BaseValuesTypeEnum.REAL) {
       tableTmp = table.float(property.name)
     } else if (property.type === BaseValuesTypeEnum.STRING) {

@@ -10,7 +10,7 @@ const databasePath = path.join(app.getPath('userData'), Config.get('DATABASE_PAT
 class DB {
   private db: Knex<any, unknown[]> | undefined
 
-  private shouldUpgradeDb = async (knexClient: Knex<any, unknown[]>) => {
+  private shouldUpgradeDb = async (knexClient: Knex<any, unknown[]>, nowVersion: number) => {
     const hasAppTable = await knexClient.schema.hasTable(TableClass.APP)
     if (!hasAppTable) {
       return true
@@ -18,16 +18,27 @@ class DB {
     const result = await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP)
       .select('*')
       .where('key', 'version')
+      .where('isDeleted', false)
       .first()
     if (!result) {
       return true
     }
-    const nowVersion = Config.get('DATABASE_SCHEMA_VERSION')
+
     const oldVersion = parseInt(result.value)
     if (nowVersion > oldVersion) {
       return true
     }
     return false
+  }
+
+  private flagVersionn = async (knexClient: Knex<any, unknown[]>, version: number) => {
+    await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP).insert({
+      key: 'version',
+      value: `${version}`,
+      updateAt: new Date(),
+      createAt: new Date(),
+      isDeleted: false
+    })
   }
 
   private createColumn = (
@@ -115,10 +126,12 @@ class DB {
   }
 
   private initAllTables = async (knexClient: Knex<any, unknown[]>) => {
-    const shouldUpgradeDb = await this.shouldUpgradeDb(knexClient)
+    const nowVersion = Config.get('DATABASE_SCHEMA_VERSION')
+    const shouldUpgradeDb = await this.shouldUpgradeDb(knexClient, nowVersion)
     for (const schema of AllTableSchemas) {
       await this.initTable(knexClient, schema, shouldUpgradeDb)
     }
+    await this.flagVersionn(knexClient, nowVersion)
   }
 
   init = async () => {

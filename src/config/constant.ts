@@ -24,5 +24,6 @@ export default {
   REQUEST_RETRY: 1,
   REQUEST_RETRY_DELAY: 5000,
   DATABASE_PATH: DATABASE_PATH,
+  DATABASE_SCHEMA_VERSION: 1,
   LOG_LEVEL: 'debug' // none, debug, warn, error
 } as const

@@ -13,32 +13,43 @@ class DB {
   private shouldUpgradeDb = async (knexClient: Knex<any, unknown[]>, nowVersion: number) => {
     const hasAppTable = await knexClient.schema.hasTable(TableClass.APP)
     if (!hasAppTable) {
-      return true
+      return { upgrade: true }
     }
     const result = await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP)
       .select('*')
-      .where('key', 'version')
+      .where('key', 'schemaVersion')
       .where('isDeleted', false)
       .first()
     if (!result) {
-      return true
+      return { upgrade: true }
     }
 
     const oldVersion = parseInt(result.value)
     if (nowVersion > oldVersion) {
-      return true
+      return { upgrade: true, oldVersion }
     }
-    return false
+    return { upgrade: false, oldVersion }
   }
 
-  private flagVersionn = async (knexClient: Knex<any, unknown[]>, version: number) => {
-    await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP).insert({
-      key: 'version',
+  private flagVersionn = async (
+    knexClient: Knex<any, unknown[]>,
+    version: number,
+    oldVersion?: number
+  ) => {
+    const upsertData = {
+      key: 'schemaVersion',
       value: `${version}`,
       updateAt: new Date(),
       createAt: new Date(),
       isDeleted: false
-    })
+    }
+    if (oldVersion === undefined) {
+      await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP).insert(upsertData)
+    } else {
+      await knexClient<PropertiesType[typeof TableClass.APP]>(TableClass.APP)
+        .where('key', 'schemaVersion')
+        .update(upsertData)
+    }
   }
 
   private createColumn = (
@@ -127,11 +138,11 @@ class DB {
 
   private initAllTables = async (knexClient: Knex<any, unknown[]>) => {
     const nowVersion = Config.get('DATABASE_SCHEMA_VERSION')
-    const shouldUpgradeDb = await this.shouldUpgradeDb(knexClient, nowVersion)
+    const { upgrade, oldVersion } = await this.shouldUpgradeDb(knexClient, nowVersion)
     for (const schema of AllTableSchemas) {
-      await this.initTable(knexClient, schema, shouldUpgradeDb)
+      await this.initTable(knexClient, schema, upgrade)
     }
-    await this.flagVersionn(knexClient, nowVersion)
+    await this.flagVersionn(knexClient, nowVersion, oldVersion)
   }
 
   init = async () => {

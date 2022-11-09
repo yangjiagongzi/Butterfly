@@ -1,14 +1,5 @@
 import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql'
-import { getDictFilesByTypeId, getDictListByFileId } from '~/main/Database'
-
-export const AppSchema = new GraphQLObjectType({
-  name: 'App',
-  fields: {
-    version: {
-      type: GraphQLString
-    }
-  }
-})
+import { getDictFilesByTypeId, getDictListByFileId } from '../servers/dict'
 
 export const DictFileSchema = new GraphQLObjectType<{ id: number; fileName: string }>({
   name: 'DictFile',

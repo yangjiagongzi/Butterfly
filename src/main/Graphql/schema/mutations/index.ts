@@ -1,8 +1,10 @@
-import { GraphQLObjectType } from 'graphql'
+import { GraphQLObjectType, GraphQLString } from 'graphql'
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
-  fields: {}
+  fields: {
+    config: { type: GraphQLString }
+  }
 })
 
 export default Mutation

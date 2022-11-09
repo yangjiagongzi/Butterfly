@@ -1,8 +1,8 @@
 import { app } from 'electron'
-import { AppSchema } from '../types'
+import { AppGraphQLSchema } from '../types/app'
 
 export const appField = {
-  type: AppSchema,
+  type: AppGraphQLSchema,
   resolve: () => ({
     version: app.getVersion()
   })

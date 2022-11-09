@@ -1,7 +1,3 @@
-import database from './sqlite'
-
-database.getDatabase()
-
 const data = {
   types: [
     { id: 1, typeName: '文件上传' },

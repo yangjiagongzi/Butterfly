@@ -168,7 +168,8 @@ class DB {
       return this.db
     }
     await this.init()
-    return this.db
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return this.db!
   }
 }
 

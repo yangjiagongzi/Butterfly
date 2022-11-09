@@ -1,3 +1,4 @@
+import { ConfigValueType } from '~/constant/config'
 import { SchemaType, TableClass } from '~/constant/database'
 
 export const Schema: SchemaType = {
@@ -40,7 +41,7 @@ export type PropertiesType = {
   id: number
   key: string
   value: string
-  valueType: 'boolean' | 'number' | 'string' | 'null' | 'array' | 'date'
+  valueType: Values<typeof ConfigValueType>
   updateAt: Date
   createAt: Date
   isDeleted: boolean

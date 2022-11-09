@@ -1,6 +1,6 @@
 import { GraphQLList } from 'graphql'
-import { getAllDictType } from '~/main/Database'
-import { DictTypeSchema } from '../types'
+import { getAllDictType } from '../servers/dict'
+import { DictTypeSchema } from '../types/dict'
 
 export const dictTypeField = {
   type: new GraphQLList(DictTypeSchema),

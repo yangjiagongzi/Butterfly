@@ -4,7 +4,8 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     window.service
       .graphql({
-        source: '{ config { AppearanceTheme MaxmumConcurrentRequests DelayBetweenRequests } }'
+        source:
+          '{ config { AppearanceTheme MaxmumConcurrentRequests DelayBetweenRequests } dictType { id typeName files { id fileName list } }}'
       })
       .then(response => {
         console.log(response)

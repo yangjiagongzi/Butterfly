@@ -7,6 +7,19 @@ import {
 } from '~/constant/config'
 import { Config } from '~/type'
 
+export function configStringify(value: ConfigValues): Pick<Config, 'value' | 'valueType'> {
+  if (typeof value === 'boolean') {
+    return { value: value ? 'true' : 'false', valueType: ConfigValueType.Boolean }
+  }
+  if (typeof value === 'number') {
+    return { value: `${value}`, valueType: ConfigValueType.Number }
+  }
+  if (value instanceof Date) {
+    return { value: `${value.getTime()}`, valueType: ConfigValueType.Date }
+  }
+  return { value: value.toString(), valueType: ConfigValueType.String }
+}
+
 function configParse<K extends ConfigKey>(val: Config): ConfigObject<K> {
   let value: any = val.value
   switch (val.valueType) {
@@ -15,6 +28,9 @@ function configParse<K extends ConfigKey>(val: Config): ConfigObject<K> {
       break
     case ConfigValueType.Number:
       value = Number(value)
+      break
+    case ConfigValueType.Date:
+      value = new Date(Number(value))
       break
     default:
       break

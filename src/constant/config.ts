@@ -43,8 +43,6 @@ type BaseTypeEnum = {
   boolean: boolean
   number: number
   string: string
-  null: null
-  array: any[]
   date: Date
 }
 

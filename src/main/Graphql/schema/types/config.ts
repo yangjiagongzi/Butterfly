@@ -8,6 +8,7 @@ import {
 } from 'graphql'
 import { ConfigSchema, ConfigValueType } from '~/constant/config'
 import { Config } from '~/type'
+import { GraphQLDate } from './base'
 
 function generateConfigFieldsType(type: Config['valueType']) {
   switch (type) {
@@ -15,12 +16,12 @@ function generateConfigFieldsType(type: Config['valueType']) {
       return GraphQLBoolean
     case ConfigValueType.Number:
       return GraphQLFloat
-    case ConfigValueType.String:
-      return GraphQLString
+    case ConfigValueType.Date:
+      return GraphQLDate
     default:
       break
   }
-  return GraphQLFloat
+  return GraphQLString
 }
 
 function generateConfigFields() {

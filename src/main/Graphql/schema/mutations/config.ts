@@ -1,13 +1,6 @@
-import {
-  GraphQLBoolean,
-  GraphQLFieldConfig,
-  GraphQLFloat,
-  GraphQLObjectType,
-  GraphQLResolveInfo,
-  GraphQLString
-} from 'graphql'
+import { GraphQLFieldConfig, GraphQLObjectType, GraphQLResolveInfo, GraphQLString } from 'graphql'
 import { updateConfig, UpdateConfigArgs } from '../servers/config'
-import { GraphQLDate } from '../types/date'
+import { GraphQLConfigValueType } from '../types/config'
 import { MutationResultSchema } from './mutation-result'
 
 const updateConfigFields: GraphQLFieldConfig<any, any, UpdateConfigArgs> = {
@@ -17,7 +10,7 @@ const updateConfigFields: GraphQLFieldConfig<any, any, UpdateConfigArgs> = {
       type: GraphQLString
     },
     value: {
-      type: GraphQLBoolean || GraphQLFloat || GraphQLString || GraphQLDate
+      type: GraphQLConfigValueType
     }
   },
   resolve: async (source: any, args: UpdateConfigArgs) => {

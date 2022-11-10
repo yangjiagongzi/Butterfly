@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
     window.service
       .graphql({
         source: `
-          mutation UpdateConfig($key: String!, $value:Boolean!) {
+          mutation UpdateConfig($key: String!, $value:ConfigValue!) {
             config {
               updateConfig(key: $key, value: $value) {
                 status
@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
           `,
         variableValues: {
           key: 'asdfasdfasdf',
-          value: true
+          value: new Date()
         }
       })
       .then(response => {

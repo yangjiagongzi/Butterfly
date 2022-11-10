@@ -35,11 +35,10 @@ export const GraphQLConfigValueType = new GraphQLScalarType({
     if (!('value' in valueAST)) {
       throw new GraphQLError(`Value is not valid, kind is ${valueAST.kind}`)
     }
-    if (
-      valueAST.kind === Kind.INT ||
-      valueAST.kind === Kind.FLOAT ||
-      valueAST.kind === Kind.BOOLEAN
-    ) {
+    if (valueAST.kind === Kind.INT || valueAST.kind === Kind.FLOAT) {
+      return Number(valueAST.value)
+    }
+    if (valueAST.kind === Kind.BOOLEAN) {
       return valueAST.value
     }
     if (valueAST.kind != Kind.STRING) {

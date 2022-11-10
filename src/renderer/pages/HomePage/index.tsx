@@ -10,26 +10,26 @@ const HomePage: React.FC = () => {
       .then(response => {
         console.log(response)
       })
-    // window.service
-    //   .graphql({
-    //     source: `
-    //       mutation UpdateConfig($arg: UpdateConfigParams!) {
-    //         config {
-    //           updateConfig(arg: $arg) {
-    //             status
-    //             message
-    //           }
-    //         }
-    //       }
-    //       `,
-    //     variableValues: {
-    //       key: 'asdfasdfasdf',
-    //       value: 123123
-    //     }
-    //   })
-    //   .then(response => {
-    //     console.log(response)
-    //   })
+    window.service
+      .graphql({
+        source: `
+          mutation UpdateConfig($key: String!, $value:Boolean!) {
+            config {
+              updateConfig(key: $key, value: $value) {
+                status
+                message
+              }
+            }
+          }
+          `,
+        variableValues: {
+          key: 'asdfasdfasdf',
+          value: true
+        }
+      })
+      .then(response => {
+        console.log(response)
+      })
   }, [])
   return <div>HomePage</div>
 }

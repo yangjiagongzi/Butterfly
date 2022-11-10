@@ -3,6 +3,7 @@ import {
   GraphQLFieldConfig,
   GraphQLFloat,
   GraphQLObjectType,
+  GraphQLResolveInfo,
   GraphQLString
 } from 'graphql'
 import { updateConfig, UpdateConfigArgs } from '../servers/config'
@@ -32,5 +33,8 @@ const ConfigMutationSchema = new GraphQLObjectType({
 })
 
 export const configField = {
-  type: ConfigMutationSchema
+  type: ConfigMutationSchema,
+  resolve(source: any, args: any, context: any, info: GraphQLResolveInfo) {
+    return info
+  }
 }

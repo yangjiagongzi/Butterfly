@@ -1,5 +1,5 @@
 import { ConfigKey, ConfigValue } from '~/constant/config'
-import { getAllConfig } from '~/main/Database/models/config'
+import { getAllConfig, upsertConfig } from '~/main/Database/models/config'
 import { formatConfigWithDefaultValue } from '~/utils/Config'
 
 export const getConfig = async () => {
@@ -13,12 +13,9 @@ export type UpdateConfigArgs<K extends ConfigKey = ConfigKey> = {
 }
 
 export const updateConfig = async ({ key, value }: UpdateConfigArgs) => {
-  console.log('^^^^^^^^^^^^^^^^^^^^^^')
-  console.log(key)
-  console.log(value)
-  console.log('^^^^^^^^^^^^^^^^^^^^^^')
+  await upsertConfig(key, value)
   return {
-    status: 200,
+    successful: true,
     message: 'success'
   }
 }

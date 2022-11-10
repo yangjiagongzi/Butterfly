@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
           mutation UpdateConfig($key: String!, $value:ConfigValue!) {
             config {
               updateConfig(key: $key, value: $value) {
-                status
+                successful
                 message
               }
             }

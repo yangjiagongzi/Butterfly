@@ -16,7 +16,7 @@ const updateConfigFields: GraphQLFieldConfig<any, any, UpdateConfigArgs> = {
       type: GraphQLString
     },
     value: {
-      type: GraphQLString || GraphQLBoolean || GraphQLFloat || GraphQLDate
+      type: GraphQLBoolean || GraphQLFloat || GraphQLString || GraphQLDate
     }
   },
   resolve: async (source: any, args: UpdateConfigArgs) => {

@@ -13,6 +13,13 @@ export const DATABASE_PATH = {
   [EnvEnum.prod]: 'database.db'
 } as const
 
+export const APOLLO_GRAPHQL_ENABLE = {
+  [EnvEnum.dev]: true,
+  [EnvEnum.prod]: false
+} as const
+
+export const APOLLO_GRAPHQL_PORT = 8090
+
 export type EnvConfig<T> = {
   [K in Values<typeof EnvEnum>]: T
 }
@@ -25,5 +32,7 @@ export default {
   REQUEST_RETRY_DELAY: 5000,
   DATABASE_PATH: DATABASE_PATH,
   DATABASE_SCHEMA_VERSION: 1,
+  APOLLO_GRAPHQL_ENABLE,
+  APOLLO_GRAPHQL_PORT,
   LOG_LEVEL: 'debug' // none, debug, warn, error
 } as const

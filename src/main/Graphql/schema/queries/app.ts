@@ -1,8 +1,17 @@
 import { app } from 'electron'
-import { AppGraphQLSchema } from '../types/app'
+import { GraphQLObjectType, GraphQLString } from 'graphql'
+
+const AppQuerySchema = new GraphQLObjectType({
+  name: 'AppQuery',
+  fields: {
+    version: {
+      type: GraphQLString
+    }
+  }
+})
 
 export const appField = {
-  type: AppGraphQLSchema,
+  type: AppQuerySchema,
   resolve: () => ({
     version: app.getVersion()
   })

@@ -1,9 +1,10 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql'
+import { GraphQLObjectType } from 'graphql'
+import { configField } from './config'
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    config: { type: GraphQLString }
+    config: configField
   }
 })
 

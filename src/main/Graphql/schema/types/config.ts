@@ -20,6 +20,9 @@ export const GraphQLConfigValueType = new GraphQLScalarType({
     if (typeof value === 'boolean' || typeof value === 'number') {
       return value
     }
+    if (value instanceof Date) {
+      return value
+    }
     if (typeof value != 'string') {
       throw new TypeError(
         `Value is not an instance of Date or boolean or number or string: ${value}`

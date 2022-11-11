@@ -1,4 +1,4 @@
-import { GraphQLFieldConfig, GraphQLObjectType, GraphQLResolveInfo, GraphQLString } from 'graphql'
+import { GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from 'graphql'
 import { updateConfig, UpdateConfigArgs } from '../servers/config'
 import { GraphQLConfigValueType } from '../types/config'
 import { MutationResultSchema } from './mutation-result'
@@ -27,7 +27,7 @@ const ConfigMutationSchema = new GraphQLObjectType({
 
 export const configField = {
   type: ConfigMutationSchema,
-  resolve(source: any, args: any, context: any, info: GraphQLResolveInfo) {
-    return info
+  resolve() {
+    return {}
   }
 }

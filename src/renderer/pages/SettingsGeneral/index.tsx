@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ThemeMode, ThemeOptionsName } from '~/constant/app'
+import { ConfigKeys } from '~/constant/config'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
+import { getConfig, updateConfig } from '~/utils/GraphqlString/config'
 import { container, paramGroup } from './styles'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
@@ -10,8 +12,22 @@ const SettingsGeneral: React.FC = () => {
   const appTheme = useTheme()
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
+  const get = async () => {
+    const getConfigQuery = getConfig()
+    const config = await window.service.graphql(getConfigQuery)
+    const { AppearanceTheme } = config.data?.config as {
+      AppearanceTheme: Values<typeof ThemeMode>
+    }
+    return AppearanceTheme
+  }
+
+  const set = async (themeMode: Values<typeof ThemeMode>) => {
+    const updateConfigQuery = updateConfig(ConfigKeys.AppearanceTheme, themeMode)
+    await window.service.graphql(updateConfigQuery)
+  }
+
   useEffect(() => {
-    window.service.Theme.get().then(result => {
+    get().then(result => {
       setChoose(ThemeOptionsName[result])
     })
   }, [])
@@ -22,7 +38,7 @@ const SettingsGeneral: React.FC = () => {
       key => ThemeOptionsName[key as Values<typeof ThemeMode>] === value
     )
     if (mode) {
-      window.service.Theme.set(mode as Values<typeof ThemeMode>)
+      set(mode as Values<typeof ThemeMode>)
     }
   }, [])
 

@@ -5,7 +5,7 @@ export const ConfigScope = {
   Account: 1
 } as const
 
-const ConfigKeys = {
+export const ConfigKeys = {
   AppearanceTheme: 'AppearanceTheme',
   MaxmumConcurrentRequests: 'MaxmumConcurrentRequests',
   DelayBetweenRequests: 'DelayBetweenRequests'

@@ -1,6 +1,5 @@
 import { ipcRenderer } from 'electron'
 import {
-  RendererSendEventName,
   RendererInvokeEventName,
   MainSendEventName,
   EventParams,
@@ -8,13 +7,6 @@ import {
 } from '~/constant/event'
 
 export default class IPC {
-  static send = <E extends Values<typeof RendererSendEventName>>(
-    eventName: E,
-    params: EventParams[E]
-  ) => {
-    ipcRenderer.send(eventName, params)
-  }
-
   static invoke = <E extends Values<typeof RendererInvokeEventName>>(
     eventName: E,
     params: EventParams[E]

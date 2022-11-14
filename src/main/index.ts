@@ -1,6 +1,5 @@
 import { app } from 'electron'
 import Application from './Application'
-import BrowserWindowManagement from './BrowserWindowManagement'
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
@@ -26,6 +25,4 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', () => {
-  BrowserWindowManagement.onAppActivate()
-})
+app.on('activate', Application.onActivate)

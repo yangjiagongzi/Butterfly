@@ -1,10 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Theme } from '~/constant/app'
+import { Theme, ThemeMode } from '~/constant/app'
 import { AppTheme } from '~/renderer/styles/theme'
+import { getAppInfo } from '~/utils/GraphqlString/app'
 
 let themeInit: Values<typeof Theme> = Theme.LIGHT
 
-window.service.Theme.isDarkMode().then(result => {
+const isDarkMode = async () => {
+  const getAppInfoQuery = getAppInfo()
+  const appInfo = await window.service.graphql(getAppInfoQuery)
+  const { isDarkMode } = appInfo.data?.app as {
+    version: string
+    themeMode: Values<typeof ThemeMode>
+    isDarkMode: boolean
+  }
+  return isDarkMode
+}
+
+isDarkMode().then(result => {
   if (result) {
     themeInit = Theme.DARK
   } else {
@@ -24,9 +36,9 @@ export function useTheme() {
     }
   }
   useEffect(() => {
-    window.service.Theme.addListener(onDarkModeUpdate)
+    window.service.ThemeEvent.addListener(onDarkModeUpdate)
     return () => {
-      window.service.Theme.removeListener(onDarkModeUpdate)
+      window.service.ThemeEvent.removeListener(onDarkModeUpdate)
     }
   }, [])
 

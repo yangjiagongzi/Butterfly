@@ -12,8 +12,8 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   const appTheme = useTheme()
 
   const copy = () => {
-    const str = data.join('\n')
-    window.service.Clipboard.writeText(str)
+    // const str = data.join('\n')
+    // window.service.Clipboard.writeText(str)
     Notification.show('复制成功!')
   }
 

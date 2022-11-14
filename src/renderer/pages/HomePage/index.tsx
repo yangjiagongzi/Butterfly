@@ -1,36 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const HomePage: React.FC = () => {
-  useEffect(() => {
-    window.service
-      .graphql({
-        source:
-          '{ config { AppearanceTheme MaxmumConcurrentRequests DelayBetweenRequests } dictType { id typeName files { id fileName list } }}'
-      })
-      .then(response => {
-        console.log(response)
-      })
-    window.service
-      .graphql({
-        source: `
-          mutation UpdateConfig($key: String!, $value:ConfigValue!) {
-            config {
-              updateConfig(key: $key, value: $value) {
-                successful
-                message
-              }
-            }
-          }
-          `,
-        variableValues: {
-          key: 'asdfasdfasdf',
-          value: new Date()
-        }
-      })
-      .then(response => {
-        console.log(response)
-      })
-  }, [])
   return <div>HomePage</div>
 }
 

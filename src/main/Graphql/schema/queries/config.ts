@@ -8,7 +8,7 @@ import {
 } from 'graphql'
 import { ConfigSchema, ConfigValueType } from '~/constant/config'
 import { Config } from '~/type'
-import { getConfig } from '../servers/config'
+import { getConfig } from '~/main/Servers/config'
 import { GraphQLDate } from '../types/date'
 
 function generateConfigFieldsType(type: Config['valueType']) {

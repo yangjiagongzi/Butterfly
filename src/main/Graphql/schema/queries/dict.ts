@@ -1,5 +1,5 @@
 import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql'
-import { getAllDictType, getDictFilesByTypeId, getDictListByFileId } from '../servers/dict'
+import { getAllDictType, getDictFilesByTypeId, getDictListByFileId } from '~/main/Servers/dict'
 
 const DictFileQuerySchema = new GraphQLObjectType<{ id: number; fileName: string }>({
   name: 'DictFileQuery',

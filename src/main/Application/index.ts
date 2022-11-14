@@ -1,5 +1,6 @@
 import { nativeTheme } from 'electron'
 import { ThemeMode } from '~/constant/app'
+import { ConfigKey, ConfigKeys, ConfigValue } from '~/constant/config'
 import { getConfig } from '~/utils/GraphqlString/config'
 import BrowserWindowManagement from '../BrowserWindowManagement'
 import { handleGraphql } from '../Graphql'
@@ -27,6 +28,12 @@ class Application {
       DelayBetweenRequests: number
     }
     nativeTheme.themeSource = AppearanceTheme
+  }
+
+  upsertConfig = async <K extends ConfigKey>(key: K, value: ConfigValue<K>) => {
+    if (key === ConfigKeys.AppearanceTheme) {
+      nativeTheme.themeSource = value as Values<typeof ThemeMode>
+    }
   }
 }
 

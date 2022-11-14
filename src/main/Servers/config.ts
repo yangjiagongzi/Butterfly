@@ -1,7 +1,7 @@
-import { nativeTheme } from 'electron'
 import { ConfigKey, ConfigValue } from '~/constant/config'
 import { getAllConfig, upsertConfig } from '~/main/Database/models/config'
 import { formatConfigWithDefaultValue } from '~/utils/Config'
+import Application from '../Application'
 
 export const getConfig = async () => {
   const allConfig = await getAllConfig()
@@ -15,9 +15,7 @@ export type UpdateConfigArgs<K extends ConfigKey = ConfigKey> = {
 
 export const updateConfig = async ({ key, value }: UpdateConfigArgs<any>) => {
   await upsertConfig(key, value)
-  if (key === 'AppearanceTheme') {
-    nativeTheme.themeSource = value
-  }
+  Application.upsertConfig(key, value)
   return {
     successful: true,
     message: 'success'

@@ -1,5 +1,5 @@
 import { GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from 'graphql'
-import { showMessageBox, clipboardWriteText } from '../servers/app'
+import { showMessageBox, clipboardWriteText } from '~/main/Servers/app'
 import { MutationResultSchema } from './mutation-result'
 
 const showMessageBoxField: GraphQLFieldConfig<any, any, { message: string }> = {

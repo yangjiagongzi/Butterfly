@@ -1,5 +1,5 @@
 import { GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from 'graphql'
-import { updateConfig, UpdateConfigArgs } from '../servers/config'
+import { updateConfig, UpdateConfigArgs } from '~/main/Servers/config'
 import { GraphQLConfigValueType } from '../types/config'
 import { MutationResultSchema } from './mutation-result'
 

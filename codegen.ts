@@ -5,7 +5,16 @@ const config: CodegenConfig = {
   schema: 'http://localhost:8090/',
   generates: {
     'src/type/graphql/index.ts': {
-      plugins: ['typescript', 'typescript-resolvers']
+      plugins: [
+        {
+          add: {
+            content:
+              '/* eslint-disable semi */\n/* eslint-disable @typescript-eslint/ban-types */\n/* eslint-disable prettier/prettier */'
+          }
+        },
+        'typescript',
+        'typescript-resolvers'
+      ]
     }
   }
 }

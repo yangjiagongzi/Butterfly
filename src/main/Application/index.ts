@@ -3,7 +3,7 @@ import { ThemeMode } from '~/constant/app'
 import { ConfigKey, ConfigKeys, ConfigValue } from '~/constant/config'
 import { getConfig } from '~/utils/GraphqlString/config'
 import BrowserWindowManagement from '../BrowserWindowManagement'
-import { handleGraphql } from '../Graphql'
+import { handleGraphqlQuery } from '../Graphql'
 import { startApolloServer } from '../Graphql/apollo-server'
 import { registListener } from '../IPC/listener'
 
@@ -21,13 +21,11 @@ class Application {
 
   initConfig = async () => {
     const configParams = getConfig()
-    const configData = await handleGraphql(configParams)
-    const { AppearanceTheme } = configData.data?.config as {
-      AppearanceTheme: Values<typeof ThemeMode>
-      MaxmumConcurrentRequests: number
-      DelayBetweenRequests: number
+    const configData = await handleGraphqlQuery(configParams)
+    const AppearanceTheme = configData.data?.config?.AppearanceTheme
+    if (AppearanceTheme) {
+      nativeTheme.themeSource = AppearanceTheme as Values<typeof ThemeMode>
     }
-    nativeTheme.themeSource = AppearanceTheme
   }
 
   upsertConfig = async <K extends ConfigKey>(key: K, value: ConfigValue<K>) => {

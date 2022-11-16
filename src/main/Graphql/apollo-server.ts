@@ -1,5 +1,5 @@
-import { schema } from './schema'
 import Config from '~/config'
+import schema from './schema'
 
 export async function startApolloServer() {
   const serverEnable = Config.get('APOLLO_GRAPHQL_ENABLE')

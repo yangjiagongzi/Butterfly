@@ -1,10 +1,10 @@
 import { contextBridge } from 'electron'
 import ThemeEvent from './service/ThemeEvent'
-import graphql from './service/Graphql'
+import Graphql from './service/Graphql'
 
 const service = {
   ThemeEvent: new ThemeEvent(),
-  graphql
+  Graphql: new Graphql()
 }
 
 contextBridge.exposeInMainWorld('service', service)

@@ -1,10 +1,12 @@
 import { GraphQLSchema } from 'graphql'
-import Mutation from './mutations'
+import RootMutation from './mutations'
 import RootQuery from './queries'
 import Types from './types'
 
-export const schema = new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: RootQuery,
-  mutation: Mutation,
+  mutation: RootMutation,
   types: Types
 })
+
+export default schema

@@ -14,21 +14,21 @@ const SettingsGeneral: React.FC = () => {
 
   const get = async () => {
     const getConfigQuery = getConfig()
-    const config = await window.service.graphql(getConfigQuery)
-    const { AppearanceTheme } = config.data?.config as {
-      AppearanceTheme: Values<typeof ThemeMode>
-    }
+    const config = await window.service.Graphql.query(getConfigQuery)
+    const AppearanceTheme = config.data?.config?.AppearanceTheme
     return AppearanceTheme
   }
 
   const set = async (themeMode: Values<typeof ThemeMode>) => {
     const updateConfigQuery = updateConfig(ConfigKeys.AppearanceTheme, themeMode)
-    await window.service.graphql(updateConfigQuery)
+    await window.service.Graphql.mutation(updateConfigQuery)
   }
 
   useEffect(() => {
     get().then(result => {
-      setChoose(ThemeOptionsName[result])
+      if (result) {
+        setChoose(ThemeOptionsName[result as Values<typeof ThemeMode>])
+      }
     })
   }, [])
 

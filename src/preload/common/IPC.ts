@@ -1,16 +1,11 @@
 import { ipcRenderer } from 'electron'
-import {
-  RendererInvokeEventName,
-  MainSendEventName,
-  EventParams,
-  EventResponse
-} from '~/constant/event'
+import { RendererInvokeEventName, MainSendEventName, EventParams } from '~/constant/event'
 
 export default class IPC {
   static invoke = <E extends Values<typeof RendererInvokeEventName>>(
     eventName: E,
     params: EventParams[E]
-  ): Promise<EventResponse[E]> => {
+  ) => {
     return ipcRenderer.invoke(eventName, params)
   }
 

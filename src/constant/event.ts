@@ -1,4 +1,4 @@
-import { GraphQLArgs, ExecutionResult } from 'graphql'
+import { GraphQLArgs } from 'graphql'
 
 export const RendererInvokeEventName = {
   Graphql: 'graphql'
@@ -11,8 +11,4 @@ export const MainSendEventName = {
 export type EventParams = {
   [RendererInvokeEventName.Graphql]: Pick<GraphQLArgs, 'source' | 'variableValues'>
   [MainSendEventName.OnDarkModeUpdate]: boolean
-}
-
-export type EventResponse = {
-  [RendererInvokeEventName.Graphql]: Promise<ExecutionResult>
 }

@@ -23,6 +23,7 @@ const config: CodegenConfig = {
       ],
       config: {
         documentMode: 'string',
+        strictScalars: true,
         scalars: {
           Date: 'Date',
           ConfigKey: ConfigKeysTypeForCodegenScalars,

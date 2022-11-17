@@ -15,8 +15,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  ConfigValue: any;
-  Date: any;
+  ConfigKey: 'AppearanceTheme' | 'MaxmumConcurrentRequests' | 'DelayBetweenRequests';
+  ConfigValue: string | number | boolean | Date;
+  Date: Date;
 };
 
 export type AppMutation = {
@@ -49,7 +50,7 @@ export type ConfigMutation = {
 
 
 export type ConfigMutationUpdateConfigArgs = {
-  key?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['ConfigKey']>;
   value?: InputMaybe<Scalars['ConfigValue']>;
 };
 
@@ -119,8 +120,8 @@ export type GetConfigQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetConfigQuery = { __typename?: 'RootQueryType', config?: { __typename?: 'ConfigQuery', AppearanceTheme?: string | null, MaxmumConcurrentRequests?: number | null, DelayBetweenRequests?: number | null } | null };
 
 export type UpdateConfigMutationVariables = Exact<{
-  key?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['ConfigValue']>;
+  key: Scalars['ConfigKey'];
+  value: Scalars['ConfigValue'];
 }>;
 
 
@@ -166,7 +167,7 @@ export const GetConfigDocument = `
 }
     `;
 export const UpdateConfigDocument = `
-    mutation UpdateConfig($key: String, $value: ConfigValue) {
+    mutation UpdateConfig($key: ConfigKey!, $value: ConfigValue!) {
   config {
     updateConfig(key: $key, value: $value) {
       successful
@@ -190,7 +191,7 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     GetConfig(variables?: GetConfigQueryVariables, options?: C): Promise<GetConfigQuery> {
       return requester<GetConfigQuery, GetConfigQueryVariables>(GetConfigDocument, variables, options) as Promise<GetConfigQuery>;
     },
-    UpdateConfig(variables?: UpdateConfigMutationVariables, options?: C): Promise<UpdateConfigMutation> {
+    UpdateConfig(variables: UpdateConfigMutationVariables, options?: C): Promise<UpdateConfigMutation> {
       return requester<UpdateConfigMutation, UpdateConfigMutationVariables>(UpdateConfigDocument, variables, options) as Promise<UpdateConfigMutation>;
     }
   };

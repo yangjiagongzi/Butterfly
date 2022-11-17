@@ -1,4 +1,8 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
+import { ConfigKeys } from './src/constant/config'
+
+// eslint-disable-next-line quotes
+const ConfigKeysTypeForCodegenScalars = `'${Object.values(ConfigKeys).join("' | '")}'`
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -18,7 +22,12 @@ const config: CodegenConfig = {
         'typescript-generic-sdk'
       ],
       config: {
-        documentMode: 'string'
+        documentMode: 'string',
+        scalars: {
+          Date: 'Date',
+          ConfigKey: ConfigKeysTypeForCodegenScalars,
+          ConfigValue: 'string | number | boolean | Date'
+        }
       }
     }
   }

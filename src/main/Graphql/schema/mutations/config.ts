@@ -1,13 +1,13 @@
-import { GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from 'graphql'
+import { GraphQLFieldConfig, GraphQLObjectType } from 'graphql'
 import { updateConfig, UpdateConfigArgs } from '~/main/Servers/config'
-import { GraphQLConfigValueType } from '../types/config'
+import { GraphQLConfigKeyType, GraphQLConfigValueType } from '../types/config'
 import { MutationResultSchema } from './mutation-result'
 
 const updateConfigFields: GraphQLFieldConfig<any, any, UpdateConfigArgs> = {
   type: MutationResultSchema,
   args: {
     key: {
-      type: GraphQLString
+      type: GraphQLConfigKeyType
     },
     value: {
       type: GraphQLConfigValueType

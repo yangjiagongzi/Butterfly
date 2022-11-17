@@ -1,6 +1,6 @@
-import { GraphQLConfigValueType } from './config'
+import { GraphQLConfigKeyType, GraphQLConfigValueType } from './config'
 import { GraphQLDate } from './date'
 
-const Types = [GraphQLDate, GraphQLConfigValueType]
+const Types = [GraphQLDate, GraphQLConfigKeyType, GraphQLConfigValueType]
 
 export default Types

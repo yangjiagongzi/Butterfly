@@ -6,7 +6,7 @@ query GetConfig {
   }
 }
 
-mutation UpdateConfig($key: String, $value: ConfigValue) {
+mutation UpdateConfig($key: ConfigKey!, $value: ConfigValue!) {
   config {
     updateConfig(key: $key,value: $value) {
       successful

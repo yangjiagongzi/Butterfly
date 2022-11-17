@@ -4,7 +4,7 @@ import Graphql from './service/Graphql'
 
 const service = {
   ThemeEvent: new ThemeEvent(),
-  Graphql: new Graphql()
+  Graphql: Graphql
 }
 
 contextBridge.exposeInMainWorld('service', service)

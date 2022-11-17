@@ -1,0 +1,25 @@
+query GetAppInfo {
+  app {
+    version
+    themeMode
+    isDarkMode
+  }
+}
+
+mutation ClipboardWriteText($text: String!) {
+  app {
+    clipboardWriteText(text: $text) {
+      successful
+      message
+    }
+  }
+}
+
+mutation ShowMessageBox($message: String!) {
+  app {
+    showMessageBox(message: $message) {
+      successful
+      message
+    }
+  }
+}

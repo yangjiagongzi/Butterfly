@@ -1,0 +1,16 @@
+query GetConfig {
+  config {
+    AppearanceTheme
+    MaxmumConcurrentRequests
+    DelayBetweenRequests
+  }
+}
+
+mutation UpdateConfig($key: String, $value: ConfigValue) {
+  config {
+    updateConfig(key: $key,value: $value) {
+      successful
+      message
+    }
+  }
+}

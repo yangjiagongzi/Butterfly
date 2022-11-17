@@ -3,7 +3,6 @@ import { ThemeMode, ThemeOptionsName } from '~/constant/app'
 import { ConfigKeys } from '~/constant/config'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { getConfig, updateConfig } from '~/utils/GraphqlString/config'
 import { container, paramGroup } from './styles'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
@@ -13,15 +12,13 @@ const SettingsGeneral: React.FC = () => {
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   const get = async () => {
-    const getConfigQuery = getConfig()
-    const config = await window.service.Graphql.query(getConfigQuery)
-    const AppearanceTheme = config.data?.config?.AppearanceTheme
+    const config = await window.service.Graphql.GetConfig()
+    const AppearanceTheme = config?.config?.AppearanceTheme
     return AppearanceTheme
   }
 
   const set = async (themeMode: Values<typeof ThemeMode>) => {
-    const updateConfigQuery = updateConfig(ConfigKeys.AppearanceTheme, themeMode)
-    await window.service.Graphql.mutation(updateConfigQuery)
+    await window.service.Graphql.UpdateConfig({ key: ConfigKeys.AppearanceTheme, value: themeMode })
   }
 
   useEffect(() => {

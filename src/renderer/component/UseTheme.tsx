@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Theme } from '~/constant/app'
 import { AppTheme } from '~/renderer/styles/theme'
-import { getAppInfo } from '~/utils/GraphqlString/app'
 
 let themeInit: Values<typeof Theme> = Theme.LIGHT
 
 const isDarkMode = async () => {
-  const getAppInfoQuery = getAppInfo()
-  const appInfo = await window.service.Graphql.query(getAppInfoQuery)
-  const isDarkMode = appInfo.data?.app?.isDarkMode
+  const appInfo = await window.service.Graphql.GetAppInfo()
+  const isDarkMode = appInfo?.app?.isDarkMode
   return isDarkMode
 }
 

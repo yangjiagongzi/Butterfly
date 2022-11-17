@@ -1,20 +1,18 @@
-import { ExecutionResult, graphql, GraphQLArgs } from 'graphql'
-import { RootMutationType, RootQueryType } from '~/type/graphql'
+import { graphql, GraphQLArgs } from 'graphql'
+import { getSdk } from '~/utils/Graphql'
 import schema from './schema'
 
-export const handleGraphql = <TData extends Record<string, unknown>>(
-  params: Pick<GraphQLArgs, 'source' | 'variableValues'>
-): Promise<ExecutionResult<TData>> => {
+export const handleGraphql = (params: Pick<GraphQLArgs, 'source' | 'variableValues'>) => {
   return graphql({
     schema,
     ...params
-  }) as Promise<ExecutionResult<TData>>
+  })
 }
 
-export const handleGraphqlQuery = (params: Pick<GraphQLArgs, 'source' | 'variableValues'>) => {
-  return handleGraphql<RootQueryType>(params)
-}
-
-export const handleGraphqlMutation = (params: Pick<GraphQLArgs, 'source' | 'variableValues'>) => {
-  return handleGraphql<RootMutationType>(params)
-}
+export const graphqlRequester = getSdk(async (doc: string, vars?: any) => {
+  const result = await handleGraphql({
+    source: doc,
+    variableValues: vars
+  })
+  return result.data as any
+})

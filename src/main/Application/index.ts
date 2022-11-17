@@ -1,9 +1,8 @@
 import { nativeTheme } from 'electron'
 import { ThemeMode } from '~/constant/app'
 import { ConfigKey, ConfigKeys, ConfigValue } from '~/constant/config'
-import { getConfig } from '~/utils/GraphqlString/config'
 import BrowserWindowManagement from '../BrowserWindowManagement'
-import { handleGraphqlQuery } from '../Graphql'
+import { graphqlRequester } from '../Graphql'
 import { startApolloServer } from '../Graphql/apollo-server'
 import { registListener } from '../IPC/listener'
 
@@ -20,9 +19,8 @@ class Application {
   }
 
   initConfig = async () => {
-    const configParams = getConfig()
-    const configData = await handleGraphqlQuery(configParams)
-    const AppearanceTheme = configData.data?.config?.AppearanceTheme
+    const configData = await graphqlRequester.GetConfig()
+    const AppearanceTheme = configData?.config?.AppearanceTheme
     if (AppearanceTheme) {
       nativeTheme.themeSource = AppearanceTheme as Values<typeof ThemeMode>
     }

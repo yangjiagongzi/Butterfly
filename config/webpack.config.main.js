@@ -9,6 +9,15 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '~': `${setting.srcPath}`
+    },
+    fallback: {
+      tedious: false,
+      mysql: false,
+      mysql2: false,
+      oracledb: false,
+      pg: false,
+      'pg-query-stream': false,
+      sqlite3: false
     }
   },
   externals: ['better-sqlite3'],

@@ -10,6 +10,12 @@ const AppQuerySchema = new GraphQLObjectType({
     themeMode: {
       type: GraphQLString
     },
+    nodeVersion: {
+      type: GraphQLString
+    },
+    electronVersion: {
+      type: GraphQLString
+    },
     isDarkMode: {
       type: GraphQLBoolean
     }
@@ -20,6 +26,8 @@ export const appField = {
   type: AppQuerySchema,
   resolve: () => ({
     version: app.getVersion(),
+    nodeVersion: process.versions.node,
+    electronVersion: process.versions.electron,
     themeMode: nativeTheme.themeSource,
     isDarkMode: nativeTheme.shouldUseDarkColors
   })

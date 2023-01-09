@@ -1,6 +1,8 @@
 query GetAppInfo {
   app {
     version
+    nodeVersion
+    electronVersion
     themeMode
     isDarkMode
   }

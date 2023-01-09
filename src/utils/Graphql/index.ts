@@ -38,7 +38,9 @@ export type AppMutationShowMessageBoxArgs = {
 
 export type AppQuery = {
   __typename?: 'AppQuery';
+  electronVersion?: Maybe<Scalars['String']>;
   isDarkMode?: Maybe<Scalars['Boolean']>;
+  nodeVersion?: Maybe<Scalars['String']>;
   themeMode?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
 };
@@ -98,7 +100,7 @@ export type RootQueryType = {
 export type GetAppInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAppInfoQuery = { __typename?: 'RootQueryType', app?: { __typename?: 'AppQuery', version?: string | null, themeMode?: string | null, isDarkMode?: boolean | null } | null };
+export type GetAppInfoQuery = { __typename?: 'RootQueryType', app?: { __typename?: 'AppQuery', version?: string | null, nodeVersion?: string | null, electronVersion?: string | null, themeMode?: string | null, isDarkMode?: boolean | null } | null };
 
 export type ClipboardWriteTextMutationVariables = Exact<{
   text: Scalars['String'];
@@ -132,6 +134,8 @@ export const GetAppInfoDocument = `
     query GetAppInfo {
   app {
     version
+    nodeVersion
+    electronVersion
     themeMode
     isDarkMode
   }

@@ -9,6 +9,7 @@ import Notification from '../Notification'
 const SettingsNotePath: React.FC = () => {
   const appTheme = useTheme()
   const [notePath, setNotePath] = useState<string>('')
+  const [notePathSaved, setNotePathSaved] = useState<string>('')
 
   const get = async () => {
     const config = await window.service.Graphql.GetConfig()
@@ -24,13 +25,22 @@ const SettingsNotePath: React.FC = () => {
     get().then(result => {
       if (result) {
         setNotePath(result)
+        setNotePathSaved(result)
       }
     })
   }, [])
 
-  const onSave = () => {
-    set(notePath)
-    Notification.show({ message: '保存成功!' })
+  const onSave = async () => {
+    const { fs } = await window.service.Graphql.IsDir({ dirPath: notePath })
+    const { exists, errorMsg } = fs?.isDir || { exists: false }
+    if (exists) {
+      set(notePath)
+      setNotePathSaved(notePath)
+      Notification.show({ message: '保存成功!' })
+      return
+    }
+    setNotePath(notePathSaved)
+    Notification.show({ message: errorMsg || '保存失败!', error: true })
   }
 
   return (

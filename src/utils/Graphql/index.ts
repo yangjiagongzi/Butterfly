@@ -79,6 +79,22 @@ export type DictTypeQuery = {
   typeName?: Maybe<Scalars['String']>;
 };
 
+export type FsIsDirQuery = {
+  __typename?: 'FsIsDirQuery';
+  errorMsg?: Maybe<Scalars['String']>;
+  exists?: Maybe<Scalars['Boolean']>;
+};
+
+export type FsQuery = {
+  __typename?: 'FsQuery';
+  isDir?: Maybe<FsIsDirQuery>;
+};
+
+
+export type FsQueryIsDirArgs = {
+  dirPath?: InputMaybe<Scalars['String']>;
+};
+
 export type MutationResult = {
   __typename?: 'MutationResult';
   message?: Maybe<Scalars['String']>;
@@ -96,6 +112,7 @@ export type RootQueryType = {
   app?: Maybe<AppQuery>;
   config?: Maybe<ConfigQuery>;
   dictType?: Maybe<Array<Maybe<DictTypeQuery>>>;
+  fs?: Maybe<FsQuery>;
 };
 
 export type GetAppInfoQueryVariables = Exact<{ [key: string]: never; }>;
@@ -129,6 +146,13 @@ export type UpdateConfigMutationVariables = Exact<{
 
 
 export type UpdateConfigMutation = { __typename?: 'RootMutationType', config?: { __typename?: 'ConfigMutation', updateConfig?: { __typename?: 'MutationResult', successful?: boolean | null, message?: string | null } | null } | null };
+
+export type IsDirQueryVariables = Exact<{
+  dirPath: Scalars['String'];
+}>;
+
+
+export type IsDirQuery = { __typename?: 'RootQueryType', fs?: { __typename?: 'FsQuery', isDir?: { __typename?: 'FsIsDirQuery', exists?: boolean | null, errorMsg?: string | null } | null } | null };
 
 
 export const GetAppInfoDocument = `
@@ -182,6 +206,16 @@ export const UpdateConfigDocument = `
   }
 }
     `;
+export const IsDirDocument = `
+    query IsDir($dirPath: String!) {
+  fs {
+    isDir(dirPath: $dirPath) {
+      exists
+      errorMsg
+    }
+  }
+}
+    `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: string, vars?: V, options?: C) => Promise<R> | AsyncIterable<R>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
@@ -199,6 +233,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     UpdateConfig(variables: UpdateConfigMutationVariables, options?: C): Promise<UpdateConfigMutation> {
       return requester<UpdateConfigMutation, UpdateConfigMutationVariables>(UpdateConfigDocument, variables, options) as Promise<UpdateConfigMutation>;
+    },
+    IsDir(variables: IsDirQueryVariables, options?: C): Promise<IsDirQuery> {
+      return requester<IsDirQuery, IsDirQueryVariables>(IsDirDocument, variables, options) as Promise<IsDirQuery>;
     }
   };
 }

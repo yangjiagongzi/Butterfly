@@ -1,0 +1,8 @@
+query IsDir($dirPath: String!) {
+  fs {
+    isDir(dirPath: $dirPath) {
+      exists
+      errorMsg
+    }
+  }
+}

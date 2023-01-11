@@ -84,9 +84,11 @@
     "knex": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.4",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "remark-gfm": "^3.0.1"
   },
   "config": {
     "forge": "./forge.config.js"

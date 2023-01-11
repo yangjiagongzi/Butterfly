@@ -1,3 +1,8 @@
+export const SettingPath = {
+  GENERAL: 'general',
+  NOTE: 'note'
+} as const
+
 export const RoutePath = {
   HOME: { path: '/' },
   INTRUDER: { path: '/intruder' },
@@ -18,6 +23,9 @@ export const RoutePath = {
   },
   SETTINGS: {
     path: '/settings/*',
-    childs: [{ title: '通用', path: 'general' }]
+    childs: [
+      { title: '通用', path: SettingPath.GENERAL },
+      { title: '笔记', path: SettingPath.NOTE }
+    ]
   }
 } as const

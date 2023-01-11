@@ -2,13 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { ThemeMode, ThemeOptionsName } from '~/constant/app'
 import { ConfigKeys } from '~/constant/config'
 import Select from '~/renderer/component/Select'
-import { useTheme } from '~/renderer/component/UseTheme'
-import { container, paramGroup } from './styles'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
 
-const SettingsGeneral: React.FC = () => {
-  const appTheme = useTheme()
+const SettingsAppearance: React.FC = () => {
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   const get = async () => {
@@ -40,19 +37,12 @@ const SettingsGeneral: React.FC = () => {
   }, [])
 
   return (
-    <div className={container(appTheme)}>
-      <div className={paramGroup(appTheme)}>
-        <div className="title">外观:</div>
-        <div className="items">
-          <Select
-            data={ThemeOptionList.map(item => item)}
-            value={choose}
-            onChange={value => update(value)}
-          />
-        </div>
-      </div>
-    </div>
+    <Select
+      data={ThemeOptionList.map(item => item)}
+      value={choose}
+      onChange={value => update(value)}
+    />
   )
 }
 
-export default SettingsGeneral
+export default SettingsAppearance

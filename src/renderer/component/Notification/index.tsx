@@ -9,6 +9,7 @@ type Props = {
 
 type State = {
   text: string
+  error: boolean
 }
 
 const notificationRef = React.createRef<Notification>()
@@ -18,14 +19,16 @@ class Notification extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      text: ''
+      text: '',
+      error: false
     }
   }
 
-  show = (message: string, duration = 2000) => {
+  show = (option: NotificationOption) => {
     if (this.timer) {
       clearTimeout(this.timer)
     }
+    const { message, duration = 2000, error = false } = option
     this.setState(
       {
         text: ''
@@ -33,7 +36,8 @@ class Notification extends React.Component<Props, State> {
       () => {
         this.setState(
           {
-            text: message
+            text: message,
+            error
           },
           () => {
             this.timer = setTimeout(() => {
@@ -47,11 +51,11 @@ class Notification extends React.Component<Props, State> {
 
   render() {
     const { appTheme } = this.props
-    const { text } = this.state
+    const { text, error } = this.state
     if (!text) {
       return null
     }
-    return <div className={notification(appTheme)}>{text}</div>
+    return <div className={notification(appTheme, error)}>{text}</div>
   }
 }
 
@@ -59,8 +63,10 @@ const WithThemeNotification = withTheme(Notification)
 
 export { WithThemeNotification, notificationRef }
 
+type NotificationOption = { message: string; duration?: number; error?: boolean }
+
 export default {
-  show: (message: string, duration?: number) => {
-    notificationRef.current?.show(message, duration)
+  show: (option: NotificationOption) => {
+    notificationRef.current?.show(option)
   }
 }

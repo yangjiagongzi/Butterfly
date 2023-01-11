@@ -8,7 +8,8 @@ export const ConfigScope = {
 export const ConfigKeys = {
   AppearanceTheme: 'AppearanceTheme',
   MaxmumConcurrentRequests: 'MaxmumConcurrentRequests',
-  DelayBetweenRequests: 'DelayBetweenRequests'
+  DelayBetweenRequests: 'DelayBetweenRequests',
+  NotePath: 'NotePath'
 } as const
 
 export const ConfigValueType = {
@@ -35,6 +36,12 @@ export const ConfigSchema = {
     key: 'DelayBetweenRequests',
     type: ConfigValueType.Number,
     defaultValue: 500,
+    scope: ConfigScope.Global
+  },
+  [ConfigKeys.NotePath]: {
+    key: 'NotePath',
+    type: ConfigValueType.String,
+    defaultValue: '',
     scope: ConfigScope.Global
   }
 } as const

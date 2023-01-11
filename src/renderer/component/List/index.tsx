@@ -14,7 +14,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   const copy = () => {
     // const str = data.join('\n')
     // window.service.Clipboard.writeText(str)
-    Notification.show('复制成功!')
+    Notification.show({ message: '复制成功!' })
   }
 
   const start = () => {

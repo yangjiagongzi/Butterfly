@@ -3,6 +3,7 @@ query GetConfig {
     AppearanceTheme
     MaxmumConcurrentRequests
     DelayBetweenRequests
+    NotePath
   }
 }
 

@@ -4,6 +4,7 @@ import { Theme as AppTheme } from '~/renderer/styles/theme'
 export const radio = (appTheme: AppTheme, active: boolean) => css`
   display: flex;
   align-items: center;
+  color: ${appTheme.colors.textDark};
   line-height: ${appTheme.spacing.large}px;
   font-size: ${appTheme.fontSizes.extraSmall}px;
   padding: 0 ${appTheme.spacing.xsmall}px;

@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from 'react'
+import React, { InputHTMLAttributes, useRef, useState } from 'react'
 import { useTheme } from '../UseTheme'
 import { input } from './styles'
 
@@ -14,15 +14,21 @@ type Props = Pick<
 const Input: React.FC<Props> = ({ title, error = false, className = '', ...otherProps }: Props) => {
   const appTheme = useTheme()
   const [active, setActive] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
     <div
       className={`${input(appTheme, error, active)} ${className}`}
-      onClick={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      onClick={() => {
+        inputRef?.current?.focus()
+        setActive(true)
+      }}
+      onBlur={() => {
+        setActive(false)
+      }}
       tabIndex={1}
     >
-      <input {...otherProps} />
+      <input ref={inputRef} {...otherProps} />
       {title ? <div className="layout-placehold">{title}</div> : null}
       {title ? <div className="title">{title}</div> : null}
     </div>

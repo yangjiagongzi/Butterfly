@@ -19,7 +19,7 @@ const SettingTemplate: React.FC<Props> = ({ settingItems }) => {
           <div key={key} className={paramGroup(appTheme)}>
             <div className="title">{title}</div>
             <div className="items">
-              <ItemRender />
+              <ItemRender configKey={key} />
             </div>
           </div>
         )

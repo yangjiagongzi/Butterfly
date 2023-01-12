@@ -15,7 +15,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  ConfigKey: 'AppearanceTheme' | 'MaxmumConcurrentRequests' | 'DelayBetweenRequests' | 'NotePath';
+  ConfigKey: 'AppearanceTheme' | 'MaxmumConcurrentRequests' | 'DelayBetweenRequests' | 'NotePath' | 'NoteFilter';
   ConfigValue: string | number | boolean | Date;
   Date: Date;
 };
@@ -61,6 +61,7 @@ export type ConfigQuery = {
   AppearanceTheme?: Maybe<Scalars['String']>;
   DelayBetweenRequests?: Maybe<Scalars['Float']>;
   MaxmumConcurrentRequests?: Maybe<Scalars['Float']>;
+  NoteFilter?: Maybe<Scalars['String']>;
   NotePath?: Maybe<Scalars['String']>;
 };
 
@@ -137,7 +138,7 @@ export type ShowMessageBoxMutation = { __typename?: 'RootMutationType', app?: { 
 export type GetConfigQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetConfigQuery = { __typename?: 'RootQueryType', config?: { __typename?: 'ConfigQuery', AppearanceTheme?: string | null, MaxmumConcurrentRequests?: number | null, DelayBetweenRequests?: number | null, NotePath?: string | null } | null };
+export type GetConfigQuery = { __typename?: 'RootQueryType', config?: { __typename?: 'ConfigQuery', AppearanceTheme?: string | null, MaxmumConcurrentRequests?: number | null, DelayBetweenRequests?: number | null, NotePath?: string | null, NoteFilter?: string | null } | null };
 
 export type UpdateConfigMutationVariables = Exact<{
   key: Scalars['ConfigKey'];
@@ -193,6 +194,7 @@ export const GetConfigDocument = `
     MaxmumConcurrentRequests
     DelayBetweenRequests
     NotePath
+    NoteFilter
   }
 }
     `;

@@ -9,7 +9,8 @@ export const ConfigKeys = {
   AppearanceTheme: 'AppearanceTheme',
   MaxmumConcurrentRequests: 'MaxmumConcurrentRequests',
   DelayBetweenRequests: 'DelayBetweenRequests',
-  NotePath: 'NotePath'
+  NotePath: 'NotePath',
+  NoteFilter: 'NoteFilter'
 } as const
 
 export const ConfigValueType = {
@@ -42,6 +43,12 @@ export const ConfigSchema = {
     key: 'NotePath',
     type: ConfigValueType.String,
     defaultValue: '',
+    scope: ConfigScope.Global
+  },
+  [ConfigKeys.NoteFilter]: {
+    key: 'NoteFilter',
+    type: ConfigValueType.String,
+    defaultValue: '[]',
     scope: ConfigScope.Global
   }
 } as const

@@ -5,7 +5,11 @@ import Select from '~/renderer/component/Select'
 
 const ThemeOptionList = Object.values(ThemeOptionsName)
 
-const SettingsAppearance: React.FC = () => {
+type Props = {
+  configKey: Values<typeof ConfigKeys>
+}
+
+const SettingsAppearance: React.FC<Props> = ({ configKey }: Props) => {
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   const get = async () => {
@@ -15,7 +19,7 @@ const SettingsAppearance: React.FC = () => {
   }
 
   const set = async (themeMode: Values<typeof ThemeMode>) => {
-    await window.service.Graphql.UpdateConfig({ key: ConfigKeys.AppearanceTheme, value: themeMode })
+    await window.service.Graphql.UpdateConfig({ key: configKey, value: themeMode })
   }
 
   useEffect(() => {

@@ -5,10 +5,10 @@ import SettingsComponent from '~/renderer/component/Settings'
 export type SettingTemplateData = {
   key: Values<typeof ConfigKeys>
   title: string
-  itemElementRender: React.FC
+  itemElementRender: React.FC<{ configKey: Values<typeof ConfigKeys> }>
 }
 
-const { SettingsAppearance, SettingsNotePath } = SettingsComponent
+const { SettingsAppearance, SettingsNotePath, SettingsNoteFilter } = SettingsComponent
 
 export const settingTemplateData: { [key in Values<typeof SettingPath>]: SettingTemplateData[] } = {
   [SettingPath.GENERAL]: [
@@ -23,6 +23,11 @@ export const settingTemplateData: { [key in Values<typeof SettingPath>]: Setting
       key: ConfigKeys.AppearanceTheme,
       title: '笔记路径',
       itemElementRender: SettingsNotePath
+    },
+    {
+      key: ConfigKeys.NoteFilter,
+      title: '文件类型',
+      itemElementRender: SettingsNoteFilter
     }
   ]
 }

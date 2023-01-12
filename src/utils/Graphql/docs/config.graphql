@@ -4,6 +4,7 @@ query GetConfig {
     MaxmumConcurrentRequests
     DelayBetweenRequests
     NotePath
+    NoteFilter
   }
 }
 

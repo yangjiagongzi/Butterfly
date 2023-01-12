@@ -6,7 +6,11 @@ import { useTheme } from '../UseTheme'
 import { settingNotePathBox } from './styles'
 import Notification from '../Notification'
 
-const SettingsNotePath: React.FC = () => {
+type Props = {
+  configKey: Values<typeof ConfigKeys>
+}
+
+const SettingsNotePath: React.FC<Props> = ({ configKey }: Props) => {
   const appTheme = useTheme()
   const [notePath, setNotePath] = useState<string>('')
   const [notePathSaved, setNotePathSaved] = useState<string>('')
@@ -18,7 +22,7 @@ const SettingsNotePath: React.FC = () => {
   }
 
   const set = async (notePath: string) => {
-    await window.service.Graphql.UpdateConfig({ key: ConfigKeys.NotePath, value: notePath })
+    await window.service.Graphql.UpdateConfig({ key: configKey, value: notePath })
   }
 
   useEffect(() => {

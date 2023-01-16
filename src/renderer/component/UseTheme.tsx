@@ -5,7 +5,7 @@ import { AppTheme } from '~/renderer/styles/theme'
 let themeInit: Values<typeof Theme> = Theme.LIGHT
 
 const isDarkMode = async () => {
-  const appInfo = await window.service.Graphql.GetAppInfo()
+  const appInfo = await window.Graphql.GetAppInfo()
   const isDarkMode = appInfo?.app?.isDarkMode
   return isDarkMode
 }
@@ -30,9 +30,9 @@ export function useTheme() {
     }
   }
   useEffect(() => {
-    window.service.ThemeEvent.addListener(onDarkModeUpdate)
+    window.ThemeEvent.addListener(onDarkModeUpdate)
     return () => {
-      window.service.ThemeEvent.removeListener(onDarkModeUpdate)
+      window.ThemeEvent.removeListener(onDarkModeUpdate)
     }
   }, [])
 

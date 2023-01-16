@@ -16,13 +16,13 @@ const SettingsNotePath: React.FC<Props> = ({ configKey }: Props) => {
   const [notePathSaved, setNotePathSaved] = useState<string>('')
 
   const get = async () => {
-    const config = await window.service.Graphql.GetConfig()
+    const config = await window.Graphql.GetConfig()
     const notePath = config?.config?.NotePath
     return notePath
   }
 
   const set = async (notePath: string) => {
-    await window.service.Graphql.UpdateConfig({ key: configKey, value: notePath })
+    await window.Graphql.UpdateConfig({ key: configKey, value: notePath })
   }
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const SettingsNotePath: React.FC<Props> = ({ configKey }: Props) => {
   }, [])
 
   const onSave = async () => {
-    const { fs } = await window.service.Graphql.IsDir({ dirPath: notePath })
+    const { fs } = await window.Graphql.IsDir({ dirPath: notePath })
     const { exists, errorMsg } = fs?.isDir || { exists: false }
     if (exists) {
       set(notePath)

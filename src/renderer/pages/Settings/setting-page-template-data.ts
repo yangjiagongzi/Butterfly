@@ -20,7 +20,7 @@ export const settingTemplateData: { [key in Values<typeof SettingPath>]: Setting
   ],
   [SettingPath.NOTE]: [
     {
-      key: ConfigKeys.AppearanceTheme,
+      key: ConfigKeys.NotePath,
       title: '笔记路径',
       itemElementRender: SettingsNotePath
     },

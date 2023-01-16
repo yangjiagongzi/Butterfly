@@ -1,16 +1,16 @@
 import { contextBridge } from 'electron'
-import ThemeEvent from './service/ThemeEvent'
-import Graphql from './service/Graphql'
+import ConfigEvent from './api/ConfigEvent'
+import Graphql from './api/Graphql'
+import ThemeEvent from './api/ThemeEvent'
 
-const service = {
-  ThemeEvent: new ThemeEvent(),
-  Graphql: Graphql
-}
-
-contextBridge.exposeInMainWorld('service', service)
+contextBridge.exposeInMainWorld('ConfigEvent', ConfigEvent)
+contextBridge.exposeInMainWorld('ThemeEvent', ThemeEvent)
+contextBridge.exposeInMainWorld('Graphql', Graphql)
 
 declare global {
   interface Window {
-    service: typeof service
+    ConfigEvent: typeof ConfigEvent
+    ThemeEvent: typeof ThemeEvent
+    Graphql: typeof Graphql
   }
 }

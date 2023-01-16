@@ -13,13 +13,13 @@ const SettingsAppearance: React.FC<Props> = ({ configKey }: Props) => {
   const [choose, setChoose] = useState<string>(ThemeOptionList[0])
 
   const get = async () => {
-    const config = await window.service.Graphql.GetConfig()
+    const config = await window.Graphql.GetConfig()
     const AppearanceTheme = config?.config?.AppearanceTheme
     return AppearanceTheme
   }
 
   const set = async (themeMode: Values<typeof ThemeMode>) => {
-    await window.service.Graphql.UpdateConfig({ key: configKey, value: themeMode })
+    await window.Graphql.UpdateConfig({ key: configKey, value: themeMode })
   }
 
   useEffect(() => {

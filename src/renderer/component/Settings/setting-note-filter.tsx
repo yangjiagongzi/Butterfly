@@ -14,13 +14,13 @@ const SettingsNoteFilter: React.FC<Props> = ({ configKey }: Props) => {
   const [noteFilter, setNoteFilter] = useState<string[]>([])
 
   const get = async () => {
-    const config = await window.service.Graphql.GetConfig()
+    const config = await window.Graphql.GetConfig()
     const noteFilter = config?.config?.NoteFilter
     return noteFilter
   }
 
   const set = async (noteFilter: string) => {
-    await window.service.Graphql.UpdateConfig({ key: configKey, value: noteFilter })
+    await window.Graphql.UpdateConfig({ key: configKey, value: noteFilter })
   }
 
   useEffect(() => {

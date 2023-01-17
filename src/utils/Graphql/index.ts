@@ -83,12 +83,13 @@ export type DictTypeQuery = {
 export type FsIsDirQuery = {
   __typename?: 'FsIsDirQuery';
   errorMsg?: Maybe<Scalars['String']>;
-  exists?: Maybe<Scalars['Boolean']>;
+  isDir?: Maybe<Scalars['Boolean']>;
 };
 
 export type FsQuery = {
   __typename?: 'FsQuery';
   isDir?: Maybe<FsIsDirQuery>;
+  readDir?: Maybe<Array<Maybe<ReadDirFileQuery>>>;
 };
 
 
@@ -96,10 +97,22 @@ export type FsQueryIsDirArgs = {
   dirPath?: InputMaybe<Scalars['String']>;
 };
 
+
+export type FsQueryReadDirArgs = {
+  dirPath?: InputMaybe<Scalars['String']>;
+};
+
 export type MutationResult = {
   __typename?: 'MutationResult';
   message?: Maybe<Scalars['String']>;
   successful?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReadDirFileQuery = {
+  __typename?: 'ReadDirFileQuery';
+  isDir?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
 };
 
 export type RootMutationType = {
@@ -153,7 +166,14 @@ export type IsDirQueryVariables = Exact<{
 }>;
 
 
-export type IsDirQuery = { __typename?: 'RootQueryType', fs?: { __typename?: 'FsQuery', isDir?: { __typename?: 'FsIsDirQuery', exists?: boolean | null, errorMsg?: string | null } | null } | null };
+export type IsDirQuery = { __typename?: 'RootQueryType', fs?: { __typename?: 'FsQuery', isDir?: { __typename?: 'FsIsDirQuery', isDir?: boolean | null, errorMsg?: string | null } | null } | null };
+
+export type ReadDirQueryVariables = Exact<{
+  dirPath?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type ReadDirQuery = { __typename?: 'RootQueryType', fs?: { __typename?: 'FsQuery', readDir?: Array<{ __typename?: 'ReadDirFileQuery', isDir?: boolean | null, name?: string | null, path?: string | null } | null> | null } | null };
 
 
 export const GetAppInfoDocument = `
@@ -212,8 +232,19 @@ export const IsDirDocument = `
     query IsDir($dirPath: String!) {
   fs {
     isDir(dirPath: $dirPath) {
-      exists
+      isDir
       errorMsg
+    }
+  }
+}
+    `;
+export const ReadDirDocument = `
+    query ReadDir($dirPath: String) {
+  fs {
+    readDir(dirPath: $dirPath) {
+      isDir
+      name
+      path
     }
   }
 }
@@ -238,6 +269,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     IsDir(variables: IsDirQueryVariables, options?: C): Promise<IsDirQuery> {
       return requester<IsDirQuery, IsDirQueryVariables>(IsDirDocument, variables, options) as Promise<IsDirQuery>;
+    },
+    ReadDir(variables?: ReadDirQueryVariables, options?: C): Promise<ReadDirQuery> {
+      return requester<ReadDirQuery, ReadDirQueryVariables>(ReadDirDocument, variables, options) as Promise<ReadDirQuery>;
     }
   };
 }

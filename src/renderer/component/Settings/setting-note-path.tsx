@@ -36,8 +36,8 @@ const SettingsNotePath: React.FC<Props> = ({ configKey }: Props) => {
 
   const onSave = async () => {
     const { fs } = await window.Graphql.IsDir({ dirPath: notePath })
-    const { exists, errorMsg } = fs?.isDir || { exists: false }
-    if (exists) {
+    const { isDir, errorMsg } = fs?.isDir || { isDir: false }
+    if (isDir) {
       set(notePath)
       setNotePathSaved(notePath)
       Notification.show({ message: '保存成功!' })

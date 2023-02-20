@@ -9594,6 +9594,11 @@ shell-quote@^1.7.3:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.4.tgz#33fe15dee71ab2a81fcbd3a52106c5cfb9fb75d8"
   integrity sha512-8o/QEhSSRb1a5i7TFR0iM4G16Z0vYB2OQVs4G3aAFXjn3T6yEx8AZxy1PgDF7I00LZHYA3WxaSYIf5e5sAX8Rw==
 
+shellwords@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-1.0.1.tgz#c00c509665368b249382121d9eb257cbe3af123e"
+  integrity sha512-Fd5KAbmR0kf6GL4bYJTeHdSKW1mCu6rMxdZcZ4l/hD9wRpBB6RxA01TdmegXWzIhJARyYDFs8EAdnpAsRaDGWw==
+
 side-channel@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/side-channel/-/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"

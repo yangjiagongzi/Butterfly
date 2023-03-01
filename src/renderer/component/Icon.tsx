@@ -2,6 +2,7 @@ import React from 'react'
 import close from '~/assets/svg/close.svg'
 import comparer from '~/assets/svg/comparer.svg'
 import decoder from '~/assets/svg/decoder.svg'
+import dict from '~/assets/svg/dict.svg'
 import home from '~/assets/svg/home.svg'
 import intruder from '~/assets/svg/intruder.svg'
 import note from '~/assets/svg/note.svg'
@@ -14,6 +15,7 @@ const IconMap = {
   Close: close,
   Comparer: comparer,
   Decoder: decoder,
+  Dictionary: dict,
   Home: home,
   Intruder: intruder,
   Note: note,

@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
       <NavBarItem routePath={RoutePath.HOME.path} icon="Home" title="主页" />
       <NavBarItem routePath={RoutePath.INTRUDER.path} icon="Intruder" title="入侵" />
       <NavBarItem routePath={RoutePath.OUTPUT.path} icon="Output" title="输出" />
-      <NavBarItem routePath={RoutePath.DICTIONARY.path} icon="Note" title="字典" />
+      <NavBarItem routePath={RoutePath.DICTIONARY.path} icon="Dictionary" title="字典" />
       <NavBarItem routePath={RoutePath.DECODER.path} icon="Decoder" title="加解密" />
       <NavBarItem routePath={RoutePath.OTHERTOOLS.path} icon="Tool" title="其他工具" />
       <div style={{ width: '100%', height: '100%', flex: 1 }}></div>

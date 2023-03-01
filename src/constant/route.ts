@@ -7,7 +7,40 @@ export const RoutePath = {
   HOME: { path: '/' },
   INTRUDER: { path: '/intruder' },
   OUTPUT: { path: '/output' },
-  NOTE: { path: '/note' },
+  DICTIONARY: {
+    path: '/Dictionary/*',
+    childs: [
+      {
+        title: '字符生成器',
+        path: 'codeGenerate'
+      }
+    ]
+  },
+  DECODER: {
+    path: '/decoder/*',
+    childs: [
+      {
+        title: 'URL',
+        path: 'URL'
+      },
+      {
+        title: 'HTML',
+        path: 'HTML'
+      },
+      {
+        title: 'Base64',
+        path: 'Base64'
+      },
+      {
+        title: 'ASCII hex',
+        path: 'ASCII'
+      },
+      {
+        title: '凯撒变换',
+        path: 'Caesar'
+      }
+    ]
+  },
   OTHERTOOLS: {
     path: '/otherTools/*',
     childs: [

@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
 import SubRouteList from '~/renderer/component/SubRouteList'
 import { useTheme } from '~/renderer/component/UseTheme'
-import ColorConvert from '~/renderer/pages/ColorConvert'
-import HexConvert from '~/renderer/pages/HexConvert'
+import ColorConvert from './ColorConvert'
+import HexConvert from './HexConvert'
 import { container } from './styles'
 
 const OtherTools: React.FC = () => {

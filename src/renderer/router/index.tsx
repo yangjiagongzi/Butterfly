@@ -2,9 +2,10 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
+import Decoder from '~/renderer/pages/Decoder'
+import Dictionary from '~/renderer/pages/Dictionary'
 import HomePage from '~/renderer/pages/HomePage'
 import Intruder from '~/renderer/pages/Intruder'
-import Note from '~/renderer/pages/Note'
 import OtherTools from '~/renderer/pages/OtherTools'
 import Output from '~/renderer/pages/Output'
 import Settings from '~/renderer/pages/Settings'
@@ -27,7 +28,8 @@ const Root: React.FC = () => {
               <Route path={RoutePath.HOME.path} element={<HomePage />} />
               <Route path={RoutePath.INTRUDER.path} element={<Intruder />} />
               <Route path={RoutePath.OUTPUT.path} element={<Output />} />
-              <Route path={RoutePath.NOTE.path} element={<Note />} />
+              <Route path={RoutePath.DICTIONARY.path} element={<Dictionary />} />
+              <Route path={RoutePath.DECODER.path} element={<Decoder />} />
               <Route path={RoutePath.OTHERTOOLS.path} element={<OtherTools />} />
               <Route path={RoutePath.SETTINGS.path} element={<Settings />} />
             </Routes>

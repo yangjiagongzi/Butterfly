@@ -13,6 +13,10 @@ export const RoutePath = {
       {
         title: '字符生成器',
         path: 'codeGenerate'
+      },
+      {
+        title: '目录生成器',
+        path: 'directoryTraversal'
       }
     ]
   },

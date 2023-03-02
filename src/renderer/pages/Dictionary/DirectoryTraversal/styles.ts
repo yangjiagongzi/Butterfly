@@ -17,7 +17,7 @@ export const paramGroup = (appTheme: AppTheme) => css`
   padding: ${appTheme.spacing.xsmall}px 0;
 
   .title {
-    width: 100px;
+    width: 140px;
     flex: 0 0 auto;
     color: ${appTheme.colors.textDark};
   }

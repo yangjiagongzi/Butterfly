@@ -2,15 +2,36 @@ import React, { useState } from 'react'
 import Button from '~/renderer/component/Button'
 import Input from '~/renderer/component/Input'
 import List from '~/renderer/component/List'
+import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { generateDirectoryTraversalKeys } from '~/utils/DirectoryTraversal'
+import { generateDirectoryTraversalKeys } from '~/utils/Tools/DirectoryTraversal'
 import { container, paramGroup, resultListContainer } from './styles'
+
+const nonStandardEncode2byte = {
+  '/': '%c0%af',
+  '\\': '%c1%9c'
+} as const
+
+const nonStandardEncode3byte = {
+  '/': '%ef%bc%8f',
+  '\\': '%ef%bc%bc'
+} as const
 
 const DirectoryTraversal: React.FC = () => {
   const appTheme = useTheme()
   const [fileName, setFileName] = useState('')
   const [extName, setExtName] = useState('')
   const [maxLevel, setMaxLevel] = useState(3)
+  const [params, setParams] = useState({
+    skipExtensionCheck: false,
+    encodeURI: true,
+    doubleEncodeURI: true,
+    doubleWrite: true,
+    isLinux: true,
+    nonStandardEncode1: true,
+    nonStandardEncode2: true,
+    nonStandardEncode3: true
+  })
   const [fileNameError, setFileNameError] = useState(false)
   const [resultList, setResultList] = useState<string[]>([])
   const [submitKey, setSubmitKey] = useState(Date.now())
@@ -22,7 +43,7 @@ const DirectoryTraversal: React.FC = () => {
       setResultList([])
       return
     }
-    const result = generateDirectoryTraversalKeys(fileName, maxLevel, extName)
+    const result = generateDirectoryTraversalKeys({ fileName, maxLevel, extName, ...params })
     setResultList(result)
   }
 
@@ -62,6 +83,116 @@ const DirectoryTraversal: React.FC = () => {
             max={10}
             value={maxLevel}
             onChange={e => setMaxLevel(Number(e.target.value))}
+          />
+        </div>
+      </div>
+      <div className={paramGroup(appTheme)}>
+        <div className="title">字符规则:</div>
+        <div className="items">
+          <Radio
+            title={'空字节绕过扩展名验证'}
+            checked={params.skipExtensionCheck}
+            onChange={() => {
+              setParams({ ...params, skipExtensionCheck: !params.skipExtensionCheck })
+            }}
+          />
+          <Radio
+            title={'URL编码'}
+            checked={params.encodeURI}
+            onChange={() => {
+              const newValue = !params.encodeURI
+              setParams({
+                ...params,
+                encodeURI: newValue,
+                doubleEncodeURI: newValue && params.doubleEncodeURI
+              })
+            }}
+          />
+          <Radio
+            title={'双重URL编码'}
+            checked={params.doubleEncodeURI}
+            onChange={() => {
+              const newValue = !params.doubleEncodeURI
+              setParams({
+                ...params,
+                encodeURI: params.encodeURI || newValue,
+                doubleEncodeURI: newValue
+              })
+            }}
+          />
+          <Radio
+            title={'双写'}
+            checked={params.doubleWrite}
+            onChange={() => {
+              setParams({
+                ...params,
+                doubleWrite: !params.doubleWrite
+              })
+            }}
+          />
+        </div>
+      </div>
+      <div className={paramGroup(appTheme)}>
+        <div className="title">文件路径分隔符:</div>
+        <div className="items">
+          <Radio
+            title={'/ (linux)'}
+            checked={params.isLinux}
+            onChange={() => {
+              setParams({
+                ...params,
+                isLinux: true
+              })
+            }}
+          />
+          <Radio
+            title={'\\ (windows)'}
+            checked={!params.isLinux}
+            onChange={() => {
+              setParams({
+                ...params,
+                isLinux: false
+              })
+            }}
+          />
+        </div>
+      </div>
+      <div className={paramGroup(appTheme)}>
+        <div className="title">非法字符替换:</div>
+        <div className="items">
+          <Radio
+            title={`2字节非法字符替换: ${params.isLinux ? '/' : '\\'} => ${
+              nonStandardEncode2byte[params.isLinux ? '/' : '\\']
+            }`}
+            checked={params.nonStandardEncode1}
+            onChange={() => {
+              setParams({
+                ...params,
+                nonStandardEncode1: !params.nonStandardEncode1
+              })
+            }}
+          />
+          <Radio
+            title={`3字节非法字符替换: ${params.isLinux ? '/' : '\\'} => ${
+              nonStandardEncode3byte[params.isLinux ? '/' : '\\']
+            }`}
+            checked={params.nonStandardEncode2}
+            onChange={() => {
+              setParams({
+                ...params,
+                nonStandardEncode2: !params.nonStandardEncode2
+              })
+            }}
+          />
+          <Radio
+            title={'JAVA非法字符替换: . => %c0%ae'}
+            checked={params.nonStandardEncode3}
+            onChange={() => {
+              setParams({
+                ...params,
+                nonStandardEncode3: !params.nonStandardEncode3
+              })
+            }}
           />
         </div>
       </div>

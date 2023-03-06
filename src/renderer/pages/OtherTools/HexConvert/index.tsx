@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react'
+import { LowercaseLetter, NumberCode } from '~/constant/dictionary'
 import Input from '~/renderer/component/Input'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { container, hexGroup } from './styles'
 
 const CommonHex = [2, 4, 8, 10, 16, 32]
-const HexStr = '0123456789abcdefghijklmnopqrstuvwxyz'
+const HexStr = NumberCode + LowercaseLetter
 
 const HexConvert: React.FC = () => {
   const appTheme = useTheme()

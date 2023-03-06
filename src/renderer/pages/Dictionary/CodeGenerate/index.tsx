@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { CapitalLetter, LowercaseLetter, NumberCode } from '~/constant/dictionary'
 import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
@@ -16,12 +17,12 @@ const CodeGenerate: React.FC = () => {
   useEffect(() => {
     let str = ''
     if (characterOption.number) {
-      str = str + '0123456789'
+      str = str + NumberCode
     }
     if (characterOption.letter) {
-      str = str + 'abcdefghijklmnopqrstuvwxyz'
+      str = str + LowercaseLetter
       if (characterOption.caseSensitive) {
-        str = str + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        str = str + CapitalLetter
       }
     }
     setResultList([...new Set(str.split(''))])

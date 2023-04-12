@@ -5,7 +5,7 @@ import Log from '~/utils/Log'
 class DatabaseHelp {
   private generateCreateTableSql = (tableSchema: SchemaType) => {
     return `
-CREATE TABLE ${tableSchema.tableName} (
+CREATE TABLE IF NOT EXISTS ${tableSchema.tableName} (
 ${tableSchema.properties
   .map(column => {
     const type = column.length ? `${column.type} (${column.length})` : column.type

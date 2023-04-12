@@ -35,7 +35,12 @@ function configParse<K extends ConfigKey>(val: Config): ConfigObject<K> {
     default:
       break
   }
-  return { key: val.key, value, createAt: val.createAt, updateAt: val.updateAt } as ConfigObject<K>
+  return {
+    key: val.key,
+    value,
+    createAt: new Date(val.createAt),
+    updateAt: new Date(val.updateAt)
+  } as ConfigObject<K>
 }
 
 export function formatConfigWithDefaultValue(configList: Config[]) {

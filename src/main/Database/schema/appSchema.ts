@@ -36,7 +36,7 @@ export type PropertiesType = {
   id: number
   key: string
   value: string
-  updateAt: Date
-  createAt: Date
-  isDeleted: boolean
+  updateAt: number
+  createAt: number
+  isDeleted: 0 | 1
 }

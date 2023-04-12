@@ -4,23 +4,23 @@ export const TableClass = {
 } as const
 
 export const BaseValuesTypeEnum = {
+  INTEGER: 'INTEGER',
   BIGINT: 'BIGINT',
   BLOB: 'BLOB',
   BOOLEAN: 'BOOLEAN',
-  // CHAR: 'CHAR',
-  DATE: 'DATE',
-  DATETIME: 'DATETIME',
-  // DECIMAL: 'DECIMAL',
-  // DOUBLE: 'DOUBLE',
-  INTEGER: 'INTEGER',
-  // INT: 'INT',
-  // NONE: 'NONE',
-  // NUMERIC: 'NUMERIC',
-  REAL: 'REAL',
   STRING: 'STRING',
   TEXT: 'TEXT',
+  DATE: 'DATE',
+  DATETIME: 'DATETIME',
   TIME: 'TIME',
-  VARCHAR: 'VARCHAR'
+  REAL: 'REAL'
+  // CHAR: 'CHAR',
+  // VARCHAR: 'VARCHAR',
+  // INT: 'INT',
+  // DOUBLE: 'DOUBLE',
+  // DECIMAL: 'DECIMAL',
+  // NUMERIC: 'NUMERIC',
+  // NONE: 'NONE',
 } as const
 
 export type SchemaType = {

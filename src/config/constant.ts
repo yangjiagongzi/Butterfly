@@ -20,6 +20,11 @@ export const APOLLO_GRAPHQL_ENABLE = {
 
 export const APOLLO_GRAPHQL_PORT = 8090
 
+export const LOG_LEVEL = {
+  [EnvEnum.dev]: 'debug',
+  [EnvEnum.prod]: 'error'
+} as const
+
 export type EnvConfig<T> = {
   [K in Values<typeof EnvEnum>]: T
 }
@@ -34,5 +39,5 @@ export default {
   DATABASE_SCHEMA_VERSION: 1,
   APOLLO_GRAPHQL_ENABLE,
   APOLLO_GRAPHQL_PORT,
-  LOG_LEVEL: 'debug' // none, debug, warn, error
+  LOG_LEVEL: LOG_LEVEL
 } as const

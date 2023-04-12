@@ -14,8 +14,17 @@ export type UpdateConfigArgs<K extends ConfigKey = ConfigKey> = {
 }
 
 export const updateConfig = async ({ key, value }: UpdateConfigArgs<any>) => {
-  await upsertConfig(key, value)
+  const result = await upsertConfig(key, value)
+
+  if (!result) {
+    return {
+      successful: false,
+      message: 'upsertConfig in Database Error'
+    }
+  }
+
   Config.onChange(key, value)
+
   return {
     successful: true,
     message: 'success'

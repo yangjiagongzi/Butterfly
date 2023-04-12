@@ -42,7 +42,7 @@ export type PropertiesType = {
   key: string
   value: string
   valueType: Values<typeof ConfigValueType>
-  updateAt: Date
-  createAt: Date
-  isDeleted: boolean
+  updateAt: number
+  createAt: number
+  isDeleted: 0 | 1
 }

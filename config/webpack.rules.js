@@ -39,8 +39,19 @@ const jsRule = {
   ]
 }
 
+const relocatorRule = {
+  test: /\.(js|node)$/u,
+  parser: { amd: false },
+  use: {
+    loader: '@vercel/webpack-asset-relocator-loader',
+    options: {
+      outputAssetBase: 'native_modules'
+    }
+  }
+}
+
 module.exports = {
-  main: [tsRule, jsRule],
+  main: [relocatorRule, tsRule, jsRule],
   renderer: [
     tsRule,
     jsRule,

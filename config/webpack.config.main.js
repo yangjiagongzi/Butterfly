@@ -11,6 +11,7 @@ module.exports = {
       '~': `${setting.srcPath}`
     }
   },
+  // externals: ['better-sqlite3'],
   module: {
     rules: rules.main
   },

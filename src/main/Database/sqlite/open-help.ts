@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3'
 import Config from '~/config'
-import { SchemaType, TableClass } from '~/constant/database'
+import { TableClass } from '~/constant/database'
 import Log from '~/utils/Log'
 import DatabaseHelp from '../help'
 import { AllTableSchemas, PropertiesType } from '../schema'
@@ -9,9 +9,9 @@ const TableName = TableClass.APP
 type App = PropertiesType[typeof TableName]
 
 class DatabaseOpenHelp {
-  private shouldUpdataDb = async (db: Database.Database, nowVersion: number) => {
+  private shouldUpdataDb = (db: Database.Database, nowVersion: number) => {
     try {
-      const hasAppTable = await DatabaseHelp.hasTable(db, TableClass.APP)
+      const hasAppTable = DatabaseHelp.hasTable(db, TableClass.APP)
       if (!hasAppTable) {
         return true
       }
@@ -39,7 +39,7 @@ class DatabaseOpenHelp {
     }
   }
 
-  private flagVersionn = async (db: Database.Database, version: number) => {
+  private flagVersionn = (db: Database.Database, version: number) => {
     try {
       const stmt = db.prepare<{ key: string; isDeleted: 0 | 1 }>(
         `SELECT * FROM ${TableClass.APP} WHERE key = $key AND isDeleted = $isDeleted`
@@ -73,23 +73,15 @@ class DatabaseOpenHelp {
     }
   }
 
-  private initTable = async (db: Database.Database, tableSchema: SchemaType) => {
-    try {
-      await DatabaseHelp.createTable(db, tableSchema)
-    } catch (err: any) {
-      Log.error(`DatabaseOpenHelp => initTable: ${err.message}`)
-    }
-  }
-
   initAllTables = async (db: Database.Database) => {
     const nowVersion = Config.get('DATABASE_SCHEMA_VERSION')
-    const update = await this.shouldUpdataDb(db, nowVersion)
+    const update = this.shouldUpdataDb(db, nowVersion)
     if (update) {
       for (const schema of AllTableSchemas) {
-        await this.initTable(db, schema)
+        DatabaseHelp.initTable(db, schema)
       }
     }
-    await this.flagVersionn(db, nowVersion)
+    this.flagVersionn(db, nowVersion)
   }
 }
 

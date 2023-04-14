@@ -5,6 +5,7 @@ module.exports = {
       name: '@electron-forge/maker-dmg',
       config: {
         name: 'Butterfly',
+        icon: './src/assets/icon/icon_circle.icns',
         overwrite: true
       }
     }

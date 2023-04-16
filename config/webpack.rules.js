@@ -50,7 +50,7 @@ const relocatorRule = {
   use: {
     loader: '@vercel/webpack-asset-relocator-loader',
     options: {
-      outputAssetBase: 'native_modules'
+      outputAssetBase: setting.outputAssetBase
     }
   }
 }

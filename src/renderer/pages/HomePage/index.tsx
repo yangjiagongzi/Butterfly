@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useResizeDetector } from 'react-resize-detector'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { useInterval } from '~/renderer/hooks/useInterval'
 import { box, container, label } from './styles'
 
 const HomePage: React.FC = () => {
@@ -61,7 +60,7 @@ const HomePage: React.FC = () => {
   )
   const run = useCallback(() => {
     const now = new Date()
-    setActiveIndex([
+    setActiveIndex(activeIndex => [
       calcActiveIndex({ now: activeIndex[0], next: now.getMonth(), max: allText[0].length }),
       calcActiveIndex({ now: activeIndex[1], next: now.getDate() - 1, max: allText[1].length }),
       calcActiveIndex({ now: activeIndex[2], next: now.getDay(), max: allText[2].length }),
@@ -69,15 +68,25 @@ const HomePage: React.FC = () => {
       calcActiveIndex({ now: activeIndex[4], next: now.getMinutes(), max: allText[4].length }),
       calcActiveIndex({ now: activeIndex[5], next: now.getSeconds(), max: allText[5].length })
     ])
-  }, [activeIndex])
+  }, [])
 
   useEffect(() => {
     run()
+    let timerRun: NodeJS.Timer | null = null
+    const timerStart = setTimeout(() => {
+      timerRun = setInterval(() => {
+        run()
+      }, 100)
+    }, 1200)
+    return () => {
+      if (timerRun) {
+        clearInterval(timerRun)
+      }
+      if (timerStart) {
+        clearTimeout(timerStart)
+      }
+    }
   }, [])
-
-  useInterval(() => {
-    run()
-  }, 100)
 
   return (
     <div ref={boxRef} className={container(appTheme)}>

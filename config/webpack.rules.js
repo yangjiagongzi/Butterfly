@@ -97,6 +97,10 @@ module.exports = {
           }
         }
       ]
+    },
+    {
+      test: /\.(gif|png|jpe?g)$/i,
+      use: ['file-loader', 'image-webpack-loader']
     }
   ]
 }

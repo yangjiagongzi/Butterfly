@@ -55,6 +55,10 @@ export const RoutePath = {
       {
         title: '颜色转换',
         path: 'colorConvert'
+      },
+      {
+        title: 'IP地址计算器',
+        path: 'subnetmask'
       }
     ]
   },

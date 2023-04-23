@@ -4,7 +4,7 @@ import { input } from './styles'
 
 type Props = Pick<
   InputHTMLAttributes<HTMLInputElement>,
-  'value' | 'onChange' | 'disabled' | 'type' | 'min' | 'max' | 'placeholder'
+  'value' | 'onChange' | 'disabled' | 'type' | 'min' | 'max' | 'placeholder' | 'readOnly'
 > & {
   title?: string
   error?: boolean

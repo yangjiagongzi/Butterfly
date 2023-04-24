@@ -8,9 +8,9 @@ import Button from '~/renderer/component/Button'
 const Mask: React.FC = () => {
   const appTheme = useTheme()
   const defaultValue = resolveSubnetMask(24)
-  const [binary, setBinary] = useState(defaultValue.binary)
-  const [dec, setDec] = useState(defaultValue.dec)
-  const [hex, setHex] = useState(defaultValue.hex)
+  const [binary, setBinary] = useState<string[]>(defaultValue.binary)
+  const [dec, setDec] = useState<number[]>(defaultValue.dec)
+  const [hex, setHex] = useState<string[]>(defaultValue.hex)
   const [cidr, setCidr] = useState(defaultValue.cidr)
   const [canUse, setCanUse] = useState(defaultValue.canUse)
   const [canUseAll, setCanUseAll] = useState(defaultValue.canUseAll)

@@ -1,5 +1,7 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: './src/assets/icon/icon_circle.icns'
+  },
   makers: [
     {
       name: '@electron-forge/maker-dmg',

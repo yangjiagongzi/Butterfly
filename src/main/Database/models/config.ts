@@ -14,9 +14,9 @@ export const getAllConfig = async () => {
     const stmt = db.prepare<{ isDeleted: 0 | 1 }>(
       `SELECT * FROM ${TableName} WHERE isDeleted = $isDeleted`
     )
-    const result: Config[] = stmt.all({
+    const result = stmt.all({
       isDeleted: 0
-    })
+    }) as Config[]
     return result || []
   } catch (err: any) {
     Log.error(`ConfigModel => getAllConfig: ${err.message}`)
@@ -31,10 +31,10 @@ export const upsertConfig = async <K extends ConfigKey>(key: K, value: ConfigVal
     const stmt = db.prepare<{ key: string; isDeleted: 0 | 1 }>(
       `SELECT id FROM ${TableName} WHERE key = $key AND isDeleted = $isDeleted`
     )
-    const rowId: Pick<Config, 'id'> = stmt.get({
+    const rowId = stmt.get({
       key: key,
       isDeleted: 0
-    })
+    }) as Pick<Config, 'id'>
     if (rowId) {
       const updateStmt = db.prepare<
         {

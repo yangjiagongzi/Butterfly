@@ -44,7 +44,7 @@ function configParse<K extends ConfigKey>(val: Config): ConfigObject<K> {
 }
 
 export function formatConfigWithDefaultValue(configList: Config[]) {
-  const configMap: Partial<Record<typeof ConfigSchema[ConfigKey]['key'], ConfigValues>> = {}
+  const configMap: Partial<Record<(typeof ConfigSchema)[ConfigKey]['key'], ConfigValues>> = {}
   Object.keys(ConfigSchema).forEach(key => {
     const schemaObj = ConfigSchema[key as ConfigKey]
     configMap[schemaObj.key] = schemaObj.defaultValue
@@ -55,5 +55,5 @@ export function formatConfigWithDefaultValue(configList: Config[]) {
     configMap[configFormat.key] = configFormat.value
   }
 
-  return configMap as Record<typeof ConfigSchema[ConfigKey]['key'], ConfigValues>
+  return configMap as Record<(typeof ConfigSchema)[ConfigKey]['key'], ConfigValues>
 }

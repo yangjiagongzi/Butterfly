@@ -19,10 +19,10 @@ class DatabaseOpenHelp {
       const stmt = db.prepare<{ key: string; isDeleted: 0 | 1 }>(
         `SELECT * FROM ${TableClass.APP} WHERE key = $key AND isDeleted = $isDeleted`
       )
-      const result: App = stmt.get({
+      const result = stmt.get({
         key: 'schemaVersion',
         isDeleted: 0
-      })
+      }) as App
 
       if (!result) {
         return true
@@ -44,10 +44,10 @@ class DatabaseOpenHelp {
       const stmt = db.prepare<{ key: string; isDeleted: 0 | 1 }>(
         `SELECT * FROM ${TableClass.APP} WHERE key = $key AND isDeleted = $isDeleted`
       )
-      const result: App = stmt.get({
+      const result = stmt.get({
         key: 'schemaVersion',
         isDeleted: 0
-      })
+      }) as App
       const upsertData = {
         key: 'schemaVersion',
         value: `${version}`,

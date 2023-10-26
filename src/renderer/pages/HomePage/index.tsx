@@ -72,7 +72,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     run()
-    let timerRun: NodeJS.Timer | null = null
+    let timerRun: NodeJS.Timeout | null = null
     const timerStart = setTimeout(() => {
       timerRun = setInterval(() => {
         run()

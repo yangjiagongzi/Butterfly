@@ -71,7 +71,7 @@ ${tableSchema.properties
       const insertMany = db.transaction(() => {
         const hasTable = hasTableStmt.get()
         if (hasTable) {
-          const tableInfo: DatabaseColumn[] = db.pragma(`table_info(${tableSchema.tableName})`)
+          const tableInfo = db.pragma(`table_info(${tableSchema.tableName})`) as DatabaseColumn[]
           const updateSqls = this.generateUpdateTableSql(tableSchema, tableInfo)
 
           db.pragma('foreign_keys = 0')

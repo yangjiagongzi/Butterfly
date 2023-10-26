@@ -61,10 +61,10 @@ type BaseTypeEnum = {
 }
 
 export type ConfigKey = Values<typeof ConfigKeys>
-export type ConfigValue<C extends ConfigKey> = BaseTypeEnum[typeof ConfigSchema[C]['type']]
+export type ConfigValue<C extends ConfigKey> = BaseTypeEnum[(typeof ConfigSchema)[C]['type']]
 export type ConfigValues = Values<BaseTypeEnum>
 export type ConfigObject<K extends ConfigKey> = {
-  key: typeof ConfigSchema[K]['key']
+  key: (typeof ConfigSchema)[K]['key']
   value: ConfigValue<K>
   updateAt: Date
   createAt: Date

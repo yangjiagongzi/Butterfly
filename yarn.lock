@@ -2645,6 +2645,11 @@
     "@types/mime" "*"
     "@types/node" "*"
 
+"@types/shell-quote@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@types/shell-quote/-/shell-quote-1.7.3.tgz#12d1c1342b6a8ad926596c2e2a7d660c0b87f45c"
+  integrity sha512-CeYcQaOnluyKPHJTuJmaH9RDJEQSVxGMVf2EZab3chpA8sI65FB19t0x3JlS37NbxL+TUottk9pMypMJQcfhIw==
+
 "@types/sockjs@^0.3.33":
   version "0.3.35"
   resolved "https://registry.yarnpkg.com/@types/sockjs/-/sockjs-0.3.35.tgz#f4a568c73d2a8071944bd6ffdca0d4e66810cd21"
@@ -10811,11 +10816,6 @@ shell-quote@^1.7.3, shell-quote@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.1.tgz#6dbf4db75515ad5bac63b4f1894c3a154c766680"
   integrity sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==
-
-shellwords@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-1.0.1.tgz#c00c509665368b249382121d9eb257cbe3af123e"
-  integrity sha512-Fd5KAbmR0kf6GL4bYJTeHdSKW1mCu6rMxdZcZ4l/hD9wRpBB6RxA01TdmegXWzIhJARyYDFs8EAdnpAsRaDGWw==
 
 side-channel@^1.0.4:
   version "1.0.4"

@@ -59,6 +59,10 @@ export const RoutePath = {
       {
         title: 'IP地址计算器',
         path: 'subnetmask'
+      },
+      {
+        title: 'Curl解析',
+        path: 'curlParse'
       }
     ]
   },

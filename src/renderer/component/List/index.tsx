@@ -11,9 +11,9 @@ type Props = HTMLAttributes<HTMLUListElement> & {
 const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   const appTheme = useTheme()
 
-  const copy = () => {
-    // const str = data.join('\n')
-    // window.Clipboard.writeText(str)
+  const copy = async () => {
+    const str = data.join('\n')
+    await window.Graphql.ClipboardWriteText({ text: str })
     Notification.show({ message: '复制成功!' })
   }
 

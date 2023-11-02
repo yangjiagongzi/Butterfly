@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useTheme } from '~/renderer/component/UseTheme'
-import { container, configGroup } from './styles'
-import Input from '~/renderer/component/Input'
+import React, { Fragment, useState } from 'react'
 import Button from '~/renderer/component/Button'
+import Input from '~/renderer/component/Input'
+import { useTheme } from '~/renderer/component/UseTheme'
 import { resolveBroadcastAddress, resolveNetId, resolveSubnetMask } from '~/utils/IP'
+import { configGroup, container } from './styles'
 
 type IpList = [number, number, number, number]
 const IP: React.FC = () => {
@@ -66,14 +66,14 @@ const IP: React.FC = () => {
         <div className="title">IP:</div>
         <div className="items">
           {ip.map((item, index) => (
-            <>
+            <Fragment key={index}>
               {index !== 0 ? '  .  ' : ''}
               <Input
                 className="fix-width"
                 value={item}
                 onChange={e => onChangeIp(e.target.value, index)}
               />
-            </>
+            </Fragment>
           ))}
         </div>
       </div>
@@ -110,10 +110,10 @@ const IP: React.FC = () => {
             <div className="title">掩码:</div>
             <div className="items">
               {result.mask.map((item, index) => (
-                <>
+                <Fragment key={index}>
                   {index !== 0 ? '  .  ' : ''}
                   <Input className="fix-width" value={item} readOnly />
-                </>
+                </Fragment>
               ))}
             </div>
           </div>
@@ -122,10 +122,10 @@ const IP: React.FC = () => {
               <div className="title">网络地址:</div>
               <div className="items">
                 {result.netAddress.map((item, index) => (
-                  <>
+                  <Fragment key={index}>
                     {index !== 0 ? '  .  ' : ''}
                     <Input className="fix-width" value={item} readOnly />
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>
@@ -134,10 +134,10 @@ const IP: React.FC = () => {
             <div className="title">第一可用地址:</div>
             <div className="items">
               {result.firstAddress.map((item, index) => (
-                <>
+                <Fragment key={index}>
                   {index !== 0 ? '  .  ' : ''}
                   <Input className="fix-width" value={item} readOnly />
-                </>
+                </Fragment>
               ))}
             </div>
           </div>
@@ -146,10 +146,10 @@ const IP: React.FC = () => {
               <div className="title">最后可用地址:</div>
               <div className="items">
                 {result.lastAddress.map((item, index) => (
-                  <>
+                  <Fragment key={index}>
                     {index !== 0 ? '  .  ' : ''}
                     <Input className="fix-width" value={item} readOnly />
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>
@@ -159,10 +159,10 @@ const IP: React.FC = () => {
               <div className="title">广播地址:</div>
               <div className="items">
                 {result.broadcastAddress.map((item, index) => (
-                  <>
+                  <Fragment key={index}>
                     {index !== 0 ? '  .  ' : ''}
                     <Input className="fix-width" value={item} readOnly />
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>

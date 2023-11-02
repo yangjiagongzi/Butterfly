@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useTheme } from '~/renderer/component/UseTheme'
-import { container, configGroup } from './styles'
-import Input from '~/renderer/component/Input'
-import { resolveSubnetMask } from '~/utils/IP'
+import React, { Fragment, useState } from 'react'
 import Button from '~/renderer/component/Button'
+import Input from '~/renderer/component/Input'
+import { useTheme } from '~/renderer/component/UseTheme'
+import { resolveSubnetMask } from '~/utils/IP'
+import { configGroup, container } from './styles'
 
 const Mask: React.FC = () => {
   const appTheme = useTheme()
@@ -70,14 +70,14 @@ const Mask: React.FC = () => {
         <div className="title">二进制掩码:</div>
         <div className="items">
           {binary.map((item, index) => (
-            <>
+            <Fragment key={index}>
               {index !== 0 ? '  .  ' : ''}
               <Input
                 className="fix-width"
                 value={item}
                 onChange={e => onChangeBinary(e.target.value, index)}
               />
-            </>
+            </Fragment>
           ))}
           <Button onClick={() => onChange(binary)} title="计算" />
         </div>
@@ -86,14 +86,14 @@ const Mask: React.FC = () => {
         <div className="title">十进制掩码:</div>
         <div className="items">
           {dec.map((item, index) => (
-            <>
+            <Fragment key={index}>
               {index !== 0 ? '  .  ' : ''}
               <Input
                 className="fix-width"
                 value={item}
                 onChange={e => onChangeDec(e.target.value, index)}
               />
-            </>
+            </Fragment>
           ))}
           <Button onClick={() => onChange(dec)} title="计算" />
         </div>
@@ -102,14 +102,14 @@ const Mask: React.FC = () => {
         <div className="title">十六进制掩码:</div>
         <div className="items">
           {hex.map((item, index) => (
-            <>
+            <Fragment key={index}>
               {index !== 0 ? '  .  ' : ''}
               <Input
                 className="fix-width"
                 value={item}
                 onChange={e => onChangeHex(e.target.value, index)}
               />
-            </>
+            </Fragment>
           ))}
           <Button onClick={() => onChange(hex.map(item => parseInt(item, 16)))} title="计算" />
         </div>

@@ -28,16 +28,8 @@ export const RoutePath = {
         path: 'URL'
       },
       {
-        title: 'HTML',
-        path: 'HTML'
-      },
-      {
         title: 'Base64',
         path: 'Base64'
-      },
-      {
-        title: 'ASCII hex',
-        path: 'ASCII'
       },
       {
         title: '凯撒变换',

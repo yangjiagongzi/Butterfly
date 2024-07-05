@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import Button from '~/renderer/component/Button'
@@ -11,11 +11,18 @@ import Request from './request'
 import Settings from './settings'
 import { container, content, startBtn } from './styles'
 
+const TabTypes = {
+  type: { id: 'type', name: '攻击类型' },
+  request: { id: 'request', name: '请求' },
+  payload: { id: 'payload', name: '载荷' },
+  options: { id: 'options', name: '设置' }
+} as const
 type PropsForRedux = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 const Intruder: React.FC<PropsForRedux> = ({ intruderOptions }: PropsForRedux) => {
   const appTheme = useTheme()
-  const [choose, setChoose] = useState('攻击类型')
+  const [choose, setChoose] = useState<Values<typeof TabTypes>['id']>(TabTypes.type.id)
+  const tabs = useMemo(() => Object.values(TabTypes), [])
   return (
     <div className={container(appTheme)}>
       <Button
@@ -25,14 +32,14 @@ const Intruder: React.FC<PropsForRedux> = ({ intruderOptions }: PropsForRedux) =
       />
       <Tab
         size="large"
-        data={['攻击类型', '请求', '载荷', '设置']}
-        onChange={value => setChoose(value)}
+        data={tabs}
+        onChange={value => setChoose(value.id as Values<typeof TabTypes>['id'])}
       />
       <div className={content(appTheme)}>
-        {choose === '攻击类型' ? <AttachType /> : null}
-        {choose === '请求' ? <Request /> : null}
-        {choose === '载荷' ? <Payload /> : null}
-        {choose === '设置' ? <Settings /> : null}
+        {choose === TabTypes.type.id ? <AttachType /> : null}
+        {choose === TabTypes.request.id ? <Request /> : null}
+        {choose === TabTypes.payload.id ? <Payload /> : null}
+        {choose === TabTypes.options.id ? <Settings /> : null}
       </div>
     </div>
   )

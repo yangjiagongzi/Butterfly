@@ -14,7 +14,7 @@ export type HeaderParamsItem = {
 }
 
 export type IntruderOptions = {
-  attackType: Values<typeof AttackType>
+  attackType: Values<typeof AttackType>['id']
   method: Values<typeof RequestMeth>
   headers: HeaderParamsItem[]
   params: HeaderParamsItem[]
@@ -22,7 +22,7 @@ export type IntruderOptions = {
 
 export interface ATTACK_TYPE_UPDATE {
   type: typeof ATTACK_TYPE_UPDATE_KEY
-  attackType: Values<typeof AttackType>
+  attackType: Values<typeof AttackType>['id']
 }
 
 export interface METHOD_UPDATE {

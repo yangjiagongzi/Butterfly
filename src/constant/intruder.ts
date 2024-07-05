@@ -1,10 +1,10 @@
 import { IntruderOptions } from '~/type/redux/intruder'
 
 export const AttackType = {
-  Sniper: '狙击',
-  BatteringRam: '横推',
-  Pitchfork: '多路并进',
-  ClusterBomb: '饱和攻击'
+  Sniper: { id: 'Sniper', name: '狙击' },
+  BatteringRam: { id: 'BatteringRam', name: '横推' },
+  Pitchfork: { id: 'Pitchfork', name: '多路并进' },
+  ClusterBomb: { id: 'ClusterBomb', name: '饱和攻击' }
 } as const
 
 export const RequestMeth = {
@@ -18,7 +18,7 @@ export const RequestMeth = {
 } as const
 
 export const IntruderOptionsDefaultValue: IntruderOptions = {
-  attackType: AttackType.Sniper,
+  attackType: AttackType.Sniper.id,
   method: RequestMeth.get,
   headers: [{ id: 'default-empty', key: '', value: '', enable: true }],
   params: [{ id: 'default-empty', key: '', value: '', enable: true }]

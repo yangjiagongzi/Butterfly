@@ -14,7 +14,7 @@ export const METHOD_UPDATE_KEY = 'METHOD/UPDATE'
 export const HEADERS_UPDATE_KEY = 'HEADERS/UPDATE'
 export const PARAMS_UPDATE_KEY = 'PARAMS/UPDATE'
 
-function updateAttackType(type: Values<typeof AttackType>): ATTACK_TYPE_UPDATE {
+function updateAttackType(type: Values<typeof AttackType>['id']): ATTACK_TYPE_UPDATE {
   return {
     type: ATTACK_TYPE_UPDATE_KEY,
     attackType: type
@@ -43,7 +43,7 @@ function updateParams(params: HeaderParamsItem[]): PARAMS_UPDATE {
 }
 
 class IntruderReduxAction {
-  updateAttackType = (type: Values<typeof AttackType>) => {
+  updateAttackType = (type: Values<typeof AttackType>['id']) => {
     return (dispatch: Dispatch, getState: GetState) => {
       dispatch(updateAttackType(type))
     }

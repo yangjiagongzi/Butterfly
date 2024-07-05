@@ -10,7 +10,7 @@ export const ThemeMode = {
 } as const
 
 export const ThemeOptionsName = {
-  [ThemeMode.DARK]: '深色',
-  [ThemeMode.LIGHT]: '浅色',
-  [ThemeMode.AUTO]: '跟随系统'
+  [ThemeMode.DARK]: { id: ThemeMode.DARK, name: '深色' },
+  [ThemeMode.LIGHT]: { id: ThemeMode.LIGHT, name: '浅色' },
+  [ThemeMode.AUTO]: { id: ThemeMode.AUTO, name: '跟随系统' }
 } as const

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { AttackType } from '~/constant/intruder'
@@ -18,20 +18,24 @@ const AttachType: React.FC<PropsForRedux> = ({
   updateAttackType
 }: PropsForRedux) => {
   const appTheme = useTheme()
+  const typeList = useMemo(() => Object.values(AttackType), [])
   return (
     <div className={content(appTheme)}>
       <div className={inputBox(appTheme)}>
         <Select
           title={'攻击类型'}
-          data={Object.values(AttackType)}
-          value={intruderOptions.attackType}
-          onChange={(value: string) => {
-            updateAttackType(value as Values<typeof AttackType>)
+          data={typeList}
+          value={{
+            id: intruderOptions.attackType,
+            name: typeList.find(item => item.id === intruderOptions.attackType)?.name || ''
+          }}
+          onChange={value => {
+            updateAttackType(value.id as Values<typeof AttackType>['id'])
           }}
         />
       </div>
       <div className={introduce(appTheme)}>
-        {intruderOptions.attackType === AttackType.Sniper ? (
+        {intruderOptions.attackType === AttackType.Sniper.id ? (
           <div>
             <div className="text">
               只能使用一组<span>payload</span>集合, 每次只替换一个<span>payload 标记位置</span>
@@ -79,7 +83,7 @@ const AttachType: React.FC<PropsForRedux> = ({
             </table>
           </div>
         ) : null}
-        {intruderOptions.attackType === AttackType.BatteringRam ? (
+        {intruderOptions.attackType === AttackType.BatteringRam.id ? (
           <div>
             <div className="text">
               只能使用一组<span>payload</span>集合, 每次替换所有的<span>payload 标记位置</span>
@@ -119,7 +123,7 @@ const AttachType: React.FC<PropsForRedux> = ({
             </table>
           </div>
         ) : null}
-        {intruderOptions.attackType === AttackType.Pitchfork ? (
+        {intruderOptions.attackType === AttackType.Pitchfork.id ? (
           <div>
             <div className="text">
               需要为每个<span>payload 标记位置</span>配置不同的<span>payload</span>集合,
@@ -164,7 +168,7 @@ const AttachType: React.FC<PropsForRedux> = ({
             </table>
           </div>
         ) : null}
-        {intruderOptions.attackType === AttackType.ClusterBomb ? (
+        {intruderOptions.attackType === AttackType.ClusterBomb.id ? (
           <div>
             <div className="text">
               需要为每个<span>payload 标记位置</span>配置不同的<span>payload</span>集合, 攻击会测试

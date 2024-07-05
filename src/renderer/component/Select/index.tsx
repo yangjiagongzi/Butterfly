@@ -3,12 +3,13 @@ import Triangle from '../Triangle'
 import { useTheme } from '../UseTheme'
 import { selectBox, icon, selectList } from './styles'
 
+type Item = { id: string; name: string }
 type Props = {
   title?: string
-  data: string[]
-  value: string
+  data: Item[]
+  value: Item
   className?: string
-  onChange: (value: string) => void
+  onChange: (select: Item) => void
 }
 
 const Select: React.FC<Props> = ({ title, data, value, className = '', onChange }: Props) => {
@@ -35,11 +36,11 @@ const Select: React.FC<Props> = ({ title, data, value, className = '', onChange 
       tabIndex={0}
     >
       <div>
-        {choose}
+        {choose.name}
         {title ? <div className="layout-placehold">{title}</div> : null}
-        {data.map(str => (
-          <div key={str} className="layout-placehold">
-            {str}
+        {data.map(({ id, name }) => (
+          <div key={id} className="layout-placehold">
+            {name}
           </div>
         ))}
       </div>
@@ -51,16 +52,16 @@ const Select: React.FC<Props> = ({ title, data, value, className = '', onChange 
       {title ? <div className="title">{title}</div> : null}
       {active ? (
         <div className={selectList(appTheme, boxSize)}>
-          {data.map(str => (
+          {data.map(item => (
             <div
-              key={str}
-              className={`selectItem ${choose === str ? 'active' : ''}`}
+              key={item.id}
+              className={`selectItem ${choose.id === item.id ? 'active' : ''}`}
               onClick={() => {
-                setChoose(str)
-                onChange(str)
+                setChoose(item)
+                onChange(item)
               }}
             >
-              {str}
+              {item.name}
             </div>
           ))}
         </div>

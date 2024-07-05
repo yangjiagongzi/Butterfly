@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { useTheme } from '../UseTheme'
 import { tabList, tabItem, activeBar } from './styles'
 
+type Item = { id: string; name: string }
 type Props = {
-  data: string[]
+  data: Item[]
   size?: 'small' | 'large'
-  onChange: (value: string) => void
+  onChange: (value: Item) => void
 }
 
 const Tab: React.FC<Props> = ({ data, size = 'small', onChange }: Props) => {
@@ -25,7 +26,7 @@ const Tab: React.FC<Props> = ({ data, size = 'small', onChange }: Props) => {
   }, [])
 
   const onClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: string, idx: number) => {
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Item, idx: number) => {
       setActive(idx)
       onChange(item)
       const target = e.currentTarget
@@ -42,7 +43,7 @@ const Tab: React.FC<Props> = ({ data, size = 'small', onChange }: Props) => {
           className={tabItem(appTheme, size === 'small', active === idx)}
           onClick={e => onClick(e, item, idx)}
         >
-          <div className="text">{item}</div>
+          <div className="text">{item.name}</div>
           <div className="click-style" />
         </div>
       ))}

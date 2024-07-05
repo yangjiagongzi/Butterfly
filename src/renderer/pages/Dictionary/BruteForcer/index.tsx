@@ -5,7 +5,7 @@ import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
 import { container, paramGroup, resultListContainer } from './styles'
 
-const CodeGenerate: React.FC = () => {
+const BruteForcer: React.FC = () => {
   const appTheme = useTheme()
   const [resultList, setResultList] = useState<string[]>([])
   const [characterOption, setCharacterOption] = useState<{
@@ -68,4 +68,4 @@ const CodeGenerate: React.FC = () => {
   )
 }
 
-export default CodeGenerate
+export default BruteForcer

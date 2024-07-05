@@ -19,6 +19,10 @@ export const RoutePath = {
         path: 'dates'
       },
       {
+        title: '暴力字典',
+        path: 'bruteForcer'
+      },
+      {
         title: '目录生成器',
         path: 'directoryTraversal'
       }

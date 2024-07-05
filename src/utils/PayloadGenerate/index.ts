@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export type NumberGenerateOption = {
   isRandom: boolean
   from: string
@@ -64,4 +66,53 @@ export const payloadGenerateForNumber = (options: NumberGenerateOption) => {
   })
 
   return dedup
+}
+
+export const DateStep = {
+  days: {
+    id: 'days',
+    name: '天'
+  },
+  weeks: {
+    id: 'weeks',
+    name: '周'
+  },
+  months: {
+    id: 'months',
+    name: '月'
+  },
+  years: {
+    id: 'years',
+    name: '年'
+  }
+} as const
+
+export type DateGenerateOption = {
+  fromYear: number
+  fromMonth: number
+  fromDay: number
+  toYear: number
+  toMonth: number
+  toDay: number
+  step: number
+  stepType: Values<typeof DateStep>['id']
+  format: string
+}
+
+export const payloadGenerateForDate = (options: DateGenerateOption) => {
+  const from = moment(`${options.fromYear}/${options.fromMonth}/${options.fromDay}`, 'YYYY/M/D')
+  const to = moment(`${options.toYear}/${options.toMonth}/${options.toDay}`, 'YYYY/M/D')
+
+  const result: string[] = []
+
+  let start = from
+  while (start.isSameOrBefore(to)) {
+    const formatStr = start.format(options.format)
+    if (!result.includes(formatStr)) {
+      result.push(formatStr)
+    }
+    start = start.add(options.step, options.stepType)
+  }
+
+  return result
 }

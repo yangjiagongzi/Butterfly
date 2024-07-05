@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RoutePath } from '~/constant/route'
 import SubRouteList from '~/renderer/component/SubRouteList'
 import { useTheme } from '~/renderer/component/UseTheme'
+import DateGenerate from './Date'
 import DirectoryTraversal from './DirectoryTraversal'
 import NumberGenerate from './Number'
 import { container } from './styles'
@@ -16,7 +17,7 @@ const Dictionary: React.FC = () => {
       <Routes>
         <Route path="*" />
         <Route path={RoutePath.DICTIONARY.childs[0].path} element={<NumberGenerate />} />
-        <Route path={RoutePath.DICTIONARY.childs[1].path} element={<NumberGenerate />} />
+        <Route path={RoutePath.DICTIONARY.childs[1].path} element={<DateGenerate />} />
         <Route path={RoutePath.DICTIONARY.childs[2].path} element={<DirectoryTraversal />} />
       </Routes>
     </div>

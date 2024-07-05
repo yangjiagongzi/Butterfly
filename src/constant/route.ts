@@ -11,8 +11,12 @@ export const RoutePath = {
     path: '/Dictionary/*',
     childs: [
       {
-        title: '字符生成器',
-        path: 'codeGenerate'
+        title: '数字',
+        path: 'numbers'
+      },
+      {
+        title: '日期',
+        path: 'dates'
       },
       {
         title: '目录生成器',

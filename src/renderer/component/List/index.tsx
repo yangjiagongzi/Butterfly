@@ -24,8 +24,8 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   return (
     <div className={resultContainer(appTheme)}>
       <ul {...otherProps}>
-        {data.map(key => (
-          <li className={resultItem(appTheme)} key={key}>
+        {data.map((key, idx) => (
+          <li className={resultItem(appTheme)} key={`${idx}${key}`}>
             {key}
           </li>
         ))}

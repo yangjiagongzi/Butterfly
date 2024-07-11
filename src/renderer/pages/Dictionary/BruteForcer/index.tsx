@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { CapitalLetter, LowercaseLetter, NumberCode } from '~/constant/dictionary'
+import DictionaryList from '~/renderer/component/DictionaryList'
 import Input from '~/renderer/component/Input'
-import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { payloadGenerateForCharacter } from '~/utils/PayloadGenerate'
+import { BaseGenerator, payloadGenerateForCharacter } from '~/utils/PayloadGenerate'
 import { container, paramGroup, resultListContainer } from './styles'
 
 const BruteForcer: React.FC = () => {
   const appTheme = useTheme()
-  const [resultList, setResultList] = useState<string[]>([])
+  const [generator, setGenerator] = useState<BaseGenerator | null>(null)
   const [characterOption, setCharacterOption] = useState<{
     number: boolean
     letter: boolean
@@ -29,7 +29,7 @@ const BruteForcer: React.FC = () => {
       }
     }
     const generator = payloadGenerateForCharacter({ character: str, length })
-    setResultList(generator.showList)
+    setGenerator(generator)
   }, [characterOption, length])
 
   return (
@@ -77,9 +77,9 @@ const BruteForcer: React.FC = () => {
           />
         </div>
       </div>
-      {resultList.length ? (
+      {generator ? (
         <div className={resultListContainer(appTheme)}>
-          <List data={resultList} />
+          <DictionaryList generator={generator} />
         </div>
       ) : null}
     </div>

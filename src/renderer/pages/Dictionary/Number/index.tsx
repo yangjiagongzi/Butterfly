@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import List from '~/renderer/component/List'
+import DictionaryList from '~/renderer/component/DictionaryList'
+import Input from '~/renderer/component/Input'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { NumberGenerateOption, payloadGenerateForNumber } from '~/utils/PayloadGenerate'
-import { container, paramGroup, optionContainer, resultListContainer } from './styles'
-import Input from '~/renderer/component/Input'
+import {
+  BaseGenerator,
+  NumberGenerateOption,
+  payloadGenerateForNumber
+} from '~/utils/PayloadGenerate'
+import { container, optionContainer, paramGroup, resultListContainer } from './styles'
 
 const NumberGenerate: React.FC = () => {
   const appTheme = useTheme()
-  const [resultList, setResultList] = useState<string[]>([])
+  const [generator, setGenerator] = useState<BaseGenerator | null>(null)
   const [characterOption, setCharacterOption] = useState<NumberGenerateOption>({
     isRandom: false,
     from: '0',
@@ -24,7 +28,7 @@ const NumberGenerate: React.FC = () => {
 
   useEffect(() => {
     const generator = payloadGenerateForNumber(characterOption)
-    setResultList(generator.showList)
+    setGenerator(generator)
   }, [characterOption])
 
   return (
@@ -185,9 +189,9 @@ const NumberGenerate: React.FC = () => {
           </div>
         </div>
       </div>
-      {resultList.length ? (
+      {generator ? (
         <div className={resultListContainer(appTheme)}>
-          <List data={resultList} />
+          <DictionaryList generator={generator} />
         </div>
       ) : null}
     </div>

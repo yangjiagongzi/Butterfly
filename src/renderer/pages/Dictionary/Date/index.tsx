@@ -1,15 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import DictionaryList from '~/renderer/component/DictionaryList'
 import Input from '~/renderer/component/Input'
-import List from '~/renderer/component/List'
 import Select from '~/renderer/component/Select'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { DateGenerateOption, DateStep, payloadGenerateForDate } from '~/utils/PayloadGenerate'
+import {
+  BaseGenerator,
+  DateGenerateOption,
+  DateStep,
+  payloadGenerateForDate
+} from '~/utils/PayloadGenerate'
 import { container, paramGroup, resultListContainer } from './styles'
 
 const DateGenerate: React.FC = () => {
   const appTheme = useTheme()
   const dateStepList = useMemo(() => Object.values(DateStep), [])
-  const [resultList, setResultList] = useState<string[]>([])
+  const [generator, setGenerator] = useState<BaseGenerator | null>(null)
   const [characterOption, setCharacterOption] = useState<DateGenerateOption>({
     fromYear: new Date().getFullYear(),
     fromMonth: new Date().getMonth() + 1,
@@ -24,7 +29,7 @@ const DateGenerate: React.FC = () => {
 
   useEffect(() => {
     const generator = payloadGenerateForDate(characterOption)
-    setResultList(generator.showList)
+    setGenerator(generator)
   }, [characterOption])
 
   return (
@@ -155,9 +160,9 @@ const DateGenerate: React.FC = () => {
         </div>
       </div>
 
-      {resultList.length ? (
+      {generator ? (
         <div className={resultListContainer(appTheme)}>
-          <List data={resultList} />
+          <DictionaryList generator={generator} />
         </div>
       ) : null}
     </div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { nonStandardEncode2byte, nonStandardEncode3byte } from '~/constant/dictionary'
 import Button from '~/renderer/component/Button'
+import DictionaryList from '~/renderer/component/DictionaryList'
 import Input from '~/renderer/component/Input'
-import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { payloadGenerateForDirectoryTraversal } from '~/utils/PayloadGenerate'
+import { BaseGenerator, payloadGenerateForDirectoryTraversal } from '~/utils/PayloadGenerate'
 import { container, paramGroup, resultListContainer } from './styles'
 
 const DirectoryTraversal: React.FC = () => {
@@ -24,14 +24,14 @@ const DirectoryTraversal: React.FC = () => {
     nonStandardEncode3: true
   })
   const [fileNameError, setFileNameError] = useState(false)
-  const [resultList, setResultList] = useState<string[]>([])
+  const [generator, setGenerator] = useState<BaseGenerator | null>(null)
   const [submitKey, setSubmitKey] = useState(Date.now())
 
   const start = () => {
     setSubmitKey(Date.now())
     if (!fileName) {
       setFileNameError(true)
-      setResultList([])
+      setGenerator(null)
       return
     }
     const generator = payloadGenerateForDirectoryTraversal({
@@ -40,7 +40,7 @@ const DirectoryTraversal: React.FC = () => {
       extName,
       ...params
     })
-    setResultList(generator.showList)
+    setGenerator(generator)
   }
 
   return (
@@ -195,9 +195,9 @@ const DirectoryTraversal: React.FC = () => {
       <div className={paramGroup(appTheme)}>
         <Button onClick={start} title="枚举" />
       </div>
-      {resultList.length ? (
+      {generator ? (
         <div className={resultListContainer(appTheme)}>
-          <List data={resultList} />
+          <DictionaryList generator={generator} />
         </div>
       ) : null}
     </div>

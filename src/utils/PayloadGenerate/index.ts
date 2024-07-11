@@ -49,7 +49,7 @@ export const payloadGenerateForNumber = (options: NumberGenerateOption) => {
   const result: string[] = []
 
   if (options.isRandom) {
-    while (result.length < options.howMany && result.length < maxShow) {
+    while (min < max && result.length < options.howMany && result.length < maxShow) {
       const format = formatNumber(Math.random() * (max - min) + min, options)
       if (!result.includes(format)) {
         result.push(format)

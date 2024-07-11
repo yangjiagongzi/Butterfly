@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { maxShow } from '~/constant/dictionary'
 
 export type NumberGenerateOption = {
   isRandom: boolean
@@ -13,59 +14,63 @@ export type NumberGenerateOption = {
   maxFractionDigits: number
 }
 
+const formatNumber = (item: number, options: NumberGenerateOption) => {
+  const value = Number(item.toFixed(options.isHex ? undefined : options.maxFractionDigits))
+  const [integer = '0', fraction = ''] = `${value}`.split('.')
+  let integerFormat = Number(integer).toString(options.isHex ? 16 : 10)
+  if (integerFormat.length > options.maxIntegerDigits) {
+    integerFormat = integerFormat.slice(integerFormat.length - options.maxIntegerDigits)
+  }
+  if (integerFormat.length < Math.max(options.minIntegerDigits, 1)) {
+    integerFormat = `0000000000${integerFormat}`.slice(
+      10 + integerFormat.length - Math.max(options.minIntegerDigits, 1)
+    )
+  }
+
+  if (options.isHex) {
+    return integerFormat
+  }
+
+  let fractionFormat = fraction
+  if (fractionFormat.length > options.maxFractionDigits) {
+    fractionFormat = fractionFormat.slice(0, options.maxFractionDigits)
+  }
+  if (fractionFormat.length < options.minFractionDigits) {
+    fractionFormat = `${fractionFormat}0000000000`.slice(0, options.minFractionDigits)
+  }
+  const fullFormat = `${integerFormat}${fractionFormat.length ? `.${fractionFormat}` : ''}`
+
+  return fullFormat
+}
+
 export const payloadGenerateForNumber = (options: NumberGenerateOption) => {
   const min = Math.min(Number(options.to), Number(options.from))
   const max = Math.max(Number(options.to), Number(options.from))
-  let result: number[]
+  const result: string[] = []
+
   if (options.isRandom) {
-    result = new Array(options.howMany)
-      .fill('')
-      .map((item, idx) => Math.random() * (max - min) + min)
+    while (result.length < options.howMany && result.length < maxShow) {
+      const format = formatNumber(Math.random() * (max - min) + min, options)
+      if (!result.includes(format)) {
+        result.push(format)
+      }
+    }
   } else {
     const step = Number(options.step)
     if (Number.isNaN(step) || step <= 0) {
       return []
     }
-    result = new Array(Math.floor((max - min) / step) + 1)
-      .fill('')
-      .map((item, idx) => min + idx * step)
+    let start = min
+    while (start <= max && result.length < maxShow) {
+      const format = formatNumber(start, options)
+      if (!result.includes(format)) {
+        result.push(format)
+      }
+      start = start + step
+    }
   }
 
-  const dedup: string[] = []
-
-  result.forEach(item => {
-    const value = Number(item.toFixed(options.isHex ? undefined : options.maxFractionDigits))
-    const [integer = '0', fraction = ''] = `${value}`.split('.')
-    let integerFormat = Number(integer).toString(options.isHex ? 16 : 10)
-    if (integerFormat.length > options.maxIntegerDigits) {
-      integerFormat = integerFormat.slice(integerFormat.length - options.maxIntegerDigits)
-    }
-    if (integerFormat.length < Math.max(options.minIntegerDigits, 1)) {
-      integerFormat = `0000000000${integerFormat}`.slice(
-        10 + integerFormat.length - Math.max(options.minIntegerDigits, 1)
-      )
-    }
-    if (options.isHex) {
-      if (!dedup.includes(integerFormat)) {
-        dedup.push(integerFormat)
-      }
-      return
-    }
-    let fractionFormat = fraction
-    if (fractionFormat.length > options.maxFractionDigits) {
-      fractionFormat = fractionFormat.slice(0, options.maxFractionDigits)
-    }
-    if (fractionFormat.length < options.minFractionDigits) {
-      fractionFormat = `${fractionFormat}0000000000`.slice(0, options.minFractionDigits)
-    }
-    const string = `${integerFormat}${fractionFormat.length ? `.${fractionFormat}` : ''}`
-    if (!dedup.includes(string)) {
-      dedup.push(string)
-    }
-    return
-  })
-
-  return dedup
+  return result
 }
 
 export const DateStep = {
@@ -106,7 +111,7 @@ export const payloadGenerateForDate = (options: DateGenerateOption) => {
   const result: string[] = []
 
   let start = from
-  while (start.isSameOrBefore(to)) {
+  while (start.isSameOrBefore(to) && result.length < maxShow) {
     const formatStr = start.format(options.format)
     if (!result.includes(formatStr)) {
       result.push(formatStr)
@@ -118,20 +123,11 @@ export const payloadGenerateForDate = (options: DateGenerateOption) => {
 }
 
 export const payloadGenerateForCharacter = (character: string, length: number) => {
-  if (length > 10 || length <= 0) {
-    return []
-  }
-
   const characterLength = character.length
-
-  if (Math.pow(characterLength, length) > 1000000) {
-    return []
-  }
-
   const result: string[] = []
   const point: number[] = new Array(length).fill(0)
 
-  while (point.every(item => item < characterLength)) {
+  while (point.every(item => item < characterLength) && result.length < maxShow) {
     const str = point.map(item => character[item]).join('')
     result.push(str)
 

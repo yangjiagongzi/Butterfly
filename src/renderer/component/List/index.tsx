@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useMemo } from 'react'
 import Button from '../Button'
-import Notification from '../Notification'
+// import Notification from '../Notification'
 import { useTheme } from '../UseTheme'
 import { resultContainer, resultItem } from './styles'
 
@@ -17,11 +17,11 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
     return [...data.slice(0, 500), ...data.slice(data.length - 500)]
   }, [data])
 
-  const copy = async () => {
-    const str = data.join('\n')
-    await window.Graphql.ClipboardWriteText({ text: str })
-    Notification.show({ message: '复制成功!' })
-  }
+  // const copy = async () => {
+  //   const str = data.join('\n')
+  //   await window.Graphql.ClipboardWriteText({ text: str })
+  //   Notification.show({ message: '复制成功!' })
+  // }
 
   const start = () => {
     console.log(data.join('\n'))
@@ -37,7 +37,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
         ))}
       </ul>
       <div className="button-container">
-        <Button onClick={copy} title="复制" />
+        {/* <Button onClick={copy} title="复制" /> */}
         <Button onClick={start} title="开始爆破" />
       </div>
     </div>

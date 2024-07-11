@@ -70,7 +70,7 @@ const BruteForcer: React.FC = () => {
             value={length}
             onChange={e => {
               const num = Number(e.target.value)
-              if (!Number.isNaN(num) && num >= 0) {
+              if (!Number.isNaN(num) && num >= 0 && num <= 20) {
                 setLength(num)
               }
             }}

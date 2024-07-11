@@ -1,21 +1,12 @@
 import React, { useState } from 'react'
+import { nonStandardEncode2byte, nonStandardEncode3byte } from '~/constant/dictionary'
 import Button from '~/renderer/component/Button'
 import Input from '~/renderer/component/Input'
 import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
-import { generateDirectoryTraversalKeys } from '~/utils/Tools/DirectoryTraversal'
+import { payloadGenerateForDirectoryTraversal } from '~/utils/PayloadGenerate'
 import { container, paramGroup, resultListContainer } from './styles'
-
-const nonStandardEncode2byte = {
-  '/': '%c0%af',
-  '\\': '%c1%9c'
-} as const
-
-const nonStandardEncode3byte = {
-  '/': '%ef%bc%8f',
-  '\\': '%ef%bc%bc'
-} as const
 
 const DirectoryTraversal: React.FC = () => {
   const appTheme = useTheme()
@@ -43,8 +34,13 @@ const DirectoryTraversal: React.FC = () => {
       setResultList([])
       return
     }
-    const result = generateDirectoryTraversalKeys({ fileName, maxLevel, extName, ...params })
-    setResultList(result)
+    const generator = payloadGenerateForDirectoryTraversal({
+      fileName,
+      maxLevel,
+      extName,
+      ...params
+    })
+    setResultList(generator.showList)
   }
 
   return (

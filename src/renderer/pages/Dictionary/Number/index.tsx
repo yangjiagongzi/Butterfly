@@ -23,7 +23,8 @@ const NumberGenerate: React.FC = () => {
   })
 
   useEffect(() => {
-    setResultList(payloadGenerateForNumber(characterOption))
+    const generator = payloadGenerateForNumber(characterOption)
+    setResultList(generator.showList)
   }, [characterOption])
 
   return (

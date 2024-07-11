@@ -23,7 +23,8 @@ const DateGenerate: React.FC = () => {
   })
 
   useEffect(() => {
-    setResultList(payloadGenerateForDate(characterOption))
+    const generator = payloadGenerateForDate(characterOption)
+    setResultList(generator.showList)
   }, [characterOption])
 
   return (

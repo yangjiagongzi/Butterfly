@@ -28,8 +28,8 @@ const BruteForcer: React.FC = () => {
         str = str + CapitalLetter
       }
     }
-
-    setResultList(payloadGenerateForCharacter(str, length))
+    const generator = payloadGenerateForCharacter({ character: str, length })
+    setResultList(generator.showList)
   }, [characterOption, length])
 
   return (

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import React, { HTMLAttributes, useMemo } from 'react'
 import Button from '../Button'
 import Notification from '../Notification'
 import { useTheme } from '../UseTheme'
@@ -10,6 +10,12 @@ type Props = HTMLAttributes<HTMLUListElement> & {
 
 const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   const appTheme = useTheme()
+  const formatList = useMemo(() => {
+    if (data.length < 1001) {
+      return data
+    }
+    return [...data.slice(0, 500), ...data.slice(data.length - 500)]
+  }, [data])
 
   const copy = async () => {
     const str = data.join('\n')
@@ -24,7 +30,7 @@ const List: React.FC<Props> = ({ data, ...otherProps }: Props) => {
   return (
     <div className={resultContainer(appTheme)}>
       <ul {...otherProps}>
-        {data.map((key, idx) => (
+        {formatList.map((key, idx) => (
           <li className={resultItem(appTheme)} key={`${idx}${key}`}>
             {key}
           </li>

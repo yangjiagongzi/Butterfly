@@ -116,3 +116,36 @@ export const payloadGenerateForDate = (options: DateGenerateOption) => {
 
   return result
 }
+
+export const payloadGenerateForCharacter = (character: string, length: number) => {
+  if (length > 10 || length <= 0) {
+    return []
+  }
+
+  const characterLength = character.length
+
+  if (Math.pow(characterLength, length) > 1000000) {
+    return []
+  }
+
+  const result: string[] = []
+  const point: number[] = new Array(length).fill(0)
+
+  while (point.every(item => item < characterLength)) {
+    const str = point.map(item => character[item]).join('')
+    result.push(str)
+
+    let pointIdx = length - 1
+    while (pointIdx >= 0) {
+      const pointValue = point[pointIdx]
+      if (pointValue + 1 < characterLength || pointIdx === 0) {
+        point[pointIdx] = pointValue + 1
+        pointIdx = -1
+      } else {
+        point[pointIdx] = 0
+        pointIdx = pointIdx - 1
+      }
+    }
+  }
+  return result
+}

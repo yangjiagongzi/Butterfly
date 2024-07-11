@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { CapitalLetter, LowercaseLetter, NumberCode } from '~/constant/dictionary'
+import Input from '~/renderer/component/Input'
 import List from '~/renderer/component/List'
 import Radio from '~/renderer/component/Radio'
 import { useTheme } from '~/renderer/component/UseTheme'
+import { payloadGenerateForCharacter } from '~/utils/PayloadGenerate'
 import { container, paramGroup, resultListContainer } from './styles'
 
 const BruteForcer: React.FC = () => {
@@ -13,6 +15,7 @@ const BruteForcer: React.FC = () => {
     letter: boolean
     caseSensitive: boolean
   }>({ number: false, letter: false, caseSensitive: false })
+  const [length, setLength] = useState(4)
 
   useEffect(() => {
     let str = ''
@@ -25,8 +28,9 @@ const BruteForcer: React.FC = () => {
         str = str + CapitalLetter
       }
     }
-    setResultList([...new Set(str.split(''))])
-  }, [characterOption])
+
+    setResultList(payloadGenerateForCharacter(str, length))
+  }, [characterOption, length])
 
   return (
     <div className={container(appTheme)}>
@@ -55,6 +59,20 @@ const BruteForcer: React.FC = () => {
                 ...characterOption,
                 caseSensitive: !characterOption.caseSensitive
               })
+            }}
+          />
+        </div>
+      </div>
+      <div className={paramGroup(appTheme)}>
+        <div className="title">长度:</div>
+        <div className="items">
+          <Input
+            value={length}
+            onChange={e => {
+              const num = Number(e.target.value)
+              if (!Number.isNaN(num) && num >= 0) {
+                setLength(num)
+              }
             }}
           />
         </div>

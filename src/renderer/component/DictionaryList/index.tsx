@@ -22,7 +22,7 @@ const DictionaryList: React.FC<Props> = ({ generator, ...otherProps }: Props) =>
   const totalLength = useMemo(() => generator.length, [generator.length])
 
   const start = () => {
-    console.log('start')
+    console.log(generator.next())
   }
 
   return (

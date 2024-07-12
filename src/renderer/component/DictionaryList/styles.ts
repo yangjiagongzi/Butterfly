@@ -25,6 +25,16 @@ export const resultContainer = (appTheme: AppTheme) => css`
       margin: 0 ${appTheme.spacing.xxsmall}px;
     }
   }
+
+  .total-length {
+    position: absolute;
+    bottom: ${appTheme.spacing.small}px;
+    right: ${appTheme.spacing.small}px;
+    padding: ${appTheme.spacing.xxsmall}px ${appTheme.spacing.small}px;
+    background: ${appTheme.colors.secondaryBackground};
+    border-radius: 5px;
+    border: none;
+  }
 `
 
 export const resultItem = (appTheme: AppTheme) => css`

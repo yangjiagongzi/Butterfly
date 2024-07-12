@@ -1,9 +1,10 @@
-import { AttackType, RequestMeth } from '~/constant/intruder'
+import { AttackType, IntruderOptionsDelayBetweenReqType, RequestMeth } from '~/constant/intruder'
 import {
   ATTACK_TYPE_UPDATE_KEY,
-  METHOD_UPDATE_KEY,
   HEADERS_UPDATE_KEY,
-  PARAMS_UPDATE_KEY
+  METHOD_UPDATE_KEY,
+  PARAMS_UPDATE_KEY,
+  SETTINGS_UPDATE_KEY
 } from '~/renderer/action/intruder'
 
 export type HeaderParamsItem = {
@@ -13,11 +14,22 @@ export type HeaderParamsItem = {
   enable: boolean
 }
 
+export type SettingsParams = {
+  maximumConcurrentReq: number
+  delayBetweenRes: {
+    type: Values<typeof IntruderOptionsDelayBetweenReqType>['id']
+    fixedValue: number
+    randomValue: [number, number]
+    increaseValue: number
+  }
+}
+
 export type IntruderOptions = {
   attackType: Values<typeof AttackType>['id']
   method: Values<typeof RequestMeth>
   headers: HeaderParamsItem[]
   params: HeaderParamsItem[]
+  settings: SettingsParams
 }
 
 export interface ATTACK_TYPE_UPDATE {
@@ -40,4 +52,14 @@ export interface PARAMS_UPDATE {
   params: HeaderParamsItem[]
 }
 
-export type IntruderAction = ATTACK_TYPE_UPDATE | METHOD_UPDATE | HEADERS_UPDATE | PARAMS_UPDATE
+export interface SETTINGS_UPDATE {
+  type: typeof SETTINGS_UPDATE_KEY
+  params: SettingsParams
+}
+
+export type IntruderAction =
+  | ATTACK_TYPE_UPDATE
+  | METHOD_UPDATE
+  | HEADERS_UPDATE
+  | PARAMS_UPDATE
+  | SETTINGS_UPDATE

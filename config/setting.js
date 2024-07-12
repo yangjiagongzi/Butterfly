@@ -10,7 +10,7 @@ const rendererPath = path.join(srcPath, 'renderer')
 const assetsPath = path.join(srcPath, 'assets')
 const tsconfigPath = path.join(appPath, 'tsconfig.json')
 const outputAssetBase = 'native_modules'
-const port = 8080
+const port = 8091
 const host = '0.0.0.0'
 const cpuSize = os.cpus().length
 

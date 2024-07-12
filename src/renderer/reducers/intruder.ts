@@ -3,9 +3,10 @@ import { Action } from '~/type/redux'
 import { IntruderOptions } from '~/type/redux/intruder'
 import {
   ATTACK_TYPE_UPDATE_KEY,
-  METHOD_UPDATE_KEY,
   HEADERS_UPDATE_KEY,
-  PARAMS_UPDATE_KEY
+  METHOD_UPDATE_KEY,
+  PARAMS_UPDATE_KEY,
+  SETTINGS_UPDATE_KEY
 } from '../action/intruder'
 
 export function intruderOptions(
@@ -21,6 +22,8 @@ export function intruderOptions(
       return { ...state, headers: action.headers }
     case PARAMS_UPDATE_KEY:
       return { ...state, params: action.params }
+    case SETTINGS_UPDATE_KEY:
+      return { ...state, settings: action.params }
     default:
       return state
   }

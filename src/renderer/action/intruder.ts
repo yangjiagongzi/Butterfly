@@ -1,11 +1,13 @@
 import { AttackType, RequestMeth } from '~/constant/intruder'
 import { Dispatch, GetState } from '~/type/redux'
 import {
-  HeaderParamsItem,
   ATTACK_TYPE_UPDATE,
-  METHOD_UPDATE,
+  HeaderParamsItem,
   HEADERS_UPDATE,
-  PARAMS_UPDATE
+  METHOD_UPDATE,
+  PARAMS_UPDATE,
+  SETTINGS_UPDATE,
+  SettingsParams
 } from '~/type/redux/intruder'
 import uuid from '~/utils/UuidUtil'
 
@@ -13,6 +15,7 @@ export const ATTACK_TYPE_UPDATE_KEY = 'ATTACKTYPE/UPDATE'
 export const METHOD_UPDATE_KEY = 'METHOD/UPDATE'
 export const HEADERS_UPDATE_KEY = 'HEADERS/UPDATE'
 export const PARAMS_UPDATE_KEY = 'PARAMS/UPDATE'
+export const SETTINGS_UPDATE_KEY = 'SETTINGS/UPDATE'
 
 function updateAttackType(type: Values<typeof AttackType>['id']): ATTACK_TYPE_UPDATE {
   return {
@@ -39,6 +42,13 @@ function updateParams(params: HeaderParamsItem[]): PARAMS_UPDATE {
   return {
     type: PARAMS_UPDATE_KEY,
     params: params
+  }
+}
+
+function updateSettings(settings: SettingsParams): SETTINGS_UPDATE {
+  return {
+    type: SETTINGS_UPDATE_KEY,
+    params: settings
   }
 }
 
@@ -96,6 +106,12 @@ class IntruderReduxAction {
       const params = intruderOptions.params
       const newParams = params.filter(item => item.id != id)
       dispatch(updateParams(newParams))
+    }
+  }
+
+  updateSettings = (settings: SettingsParams) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      dispatch(updateSettings(settings))
     }
   }
 }

@@ -128,3 +128,40 @@ export const requestContent = ({ colors, fontSizes, spacing }: AppTheme) => css`
     overflow: hidden;
   }
 `
+
+export const settingParamGroup = ({ colors, fontSizes, spacing }: AppTheme) => css`
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    font-size: ${fontSizes.medium}px;
+    padding: ${spacing.xsmall}px 0;
+  }
+
+  .items,
+  .sub-items {
+    display: flex;
+    align-items: center;
+    padding: ${spacing.xsmall}px 0;
+
+    .sub-title {
+      width: ${spacing.guttersmall + spacing.gutter}px;
+    }
+
+    .margin-left {
+      margin-left: ${spacing.small}px;
+    }
+
+    .margin-right {
+      margin-right: ${spacing.small}px;
+    }
+  }
+
+  .sub-items {
+    padding-left: ${spacing.guttersmall + spacing.gutter}px;
+  }
+`

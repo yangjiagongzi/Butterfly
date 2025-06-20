@@ -1,17 +1,28 @@
 import React from "react";
+import Close from "~/svg/close.svg";
+import Comparer from "~/svg/comparer.svg";
+import Decoder from "~/svg/decoder.svg";
+import Dictionary from "~/svg/dict.svg";
+import Home from "~/svg/home.svg";
+import Intruder from "~/svg/intruder.svg";
+import Note from "~/svg/note.svg";
+import Output from "~/svg/output.svg";
+import Project from "~/svg/project.svg";
+import Settings from "~/svg/settings.svg";
+import Tool from "~/svg/tool.svg";
 
 const IconMap = {
-  Close: "/svg/close.svg",
-  Comparer: "/svg/comparer.svg",
-  Decoder: "/svg/decoder.svg",
-  Dictionary: "/svg/dict.svg",
-  Home: "/svg/home.svg",
-  Intruder: "/svg/intruder.svg",
-  Note: "/note.svg",
-  Output: "/svg/output.svg",
-  Project: "/svg/project.svg",
-  Settings: "/svg/settings.svg",
-  Tool: "/svg/tool.svg",
+  Close,
+  Comparer,
+  Decoder,
+  Dictionary,
+  Home,
+  Intruder,
+  Note,
+  Output,
+  Project,
+  Settings,
+  Tool,
 } as const;
 
 const SVGSizes = {

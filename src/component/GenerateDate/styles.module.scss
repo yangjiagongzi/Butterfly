@@ -1,0 +1,71 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.payloadContent {
+  @include common.fullSizeBox;
+  padding: variables.$spacingMedium;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.optionContainer {
+  @include common.fullSizeBox;
+  width: 380px;
+  margin-right: variables.$spacingMedium;
+}
+
+.paramGroup {
+  display: flex;
+  align-items: center;
+  padding: variables.$spacingXsmall 0;
+
+  :global {
+    .title {
+      width: 125px;
+      flex: 0 0 auto;
+      color: variables.$colorTextDark;
+    }
+
+    .items {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .fix-width {
+        width: variables.$spacingGutter;
+        margin: 0 variables.$spacingMedium;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.notices {
+  padding: variables.$spacingMedium 0;
+
+  :global {
+    .notice {
+      color: variables.$colorTextMedium;
+      font-weight: 700;
+      background-color: variables.$colorTextUltraLight;
+      padding: 1px 3px;
+      margin: 0 5px;
+      border-radius: 3px;
+
+      &:first-of-type {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.resultListContainer {
+  @include common.fullSizeBox;
+  padding: variables.$spacingMedium;
+  border-radius: 10px;
+  background: variables.$colorSecondaryBackground;
+}

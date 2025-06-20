@@ -1,0 +1,24 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.container {
+  @include common.fullSizeBox;
+  padding: variables.$spacingMedium;
+  position: relative;
+  color: variables.$colorTextDark;
+  user-select: none;
+}
+
+.startBtn {
+  position: absolute;
+  top: calc(variables.$spacingMedium * 2 - variables.$spacingSmall);
+  right: variables.$spacingMedium;
+  z-index: 10;
+}
+
+.content {
+  @include common.fullSizeBox;
+  padding: variables.$spacingMedium;
+  padding-top: variables.$spacingMedium * 2;
+  overflow: hidden;
+}

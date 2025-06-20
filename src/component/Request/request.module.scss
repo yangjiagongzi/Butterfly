@@ -1,0 +1,73 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.content {
+  @include common.fullSizeBox;
+}
+
+.inputBox {
+  display: flex;
+
+  :global {
+    .method-select {
+      border-radius: 5px 0 0 5px;
+    }
+
+    .url-input {
+      flex: 1;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .curl-parse-btn {
+      margin-left: variables.$spacingSmall;
+    }
+  }
+}
+
+.requestContent {
+  @include common.fullSizeBox;
+  padding-top: variables.$spacingMedium;
+  overflow: hidden;
+
+  :global {
+    .requestOptions {
+      @include common.fullSizeBox;
+      overflow: hidden;
+    }
+  }
+}
+
+.requestParse {
+  @include common.fullSizeBox;
+
+  :global {
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: variables.$spacingMedium;
+    }
+
+    .content {
+      height: 100%;
+      flex: 1;
+
+      textarea {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.requestBody {
+  @include common.fullSizeBox;
+  padding: variables.$spacingMedium;
+
+  :global {
+    textarea {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

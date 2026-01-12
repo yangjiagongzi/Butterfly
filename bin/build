@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# clean
+rm -rf ./rust/static/*
+rm -rf ./rust/target/*
+
+cd frontend 
+yarn build
+cp -rf out/* ../rust/static
+cd ../rust
+cargo build --release
+
+cp ./target/release/butterfly ../
+cd ../

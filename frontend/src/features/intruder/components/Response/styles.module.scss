@@ -1,0 +1,96 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.responseContainer {
+  @include common.fullSizeBox;
+  margin-top: variables.$spacingMedium * -1;
+  padding-top: variables.$spacingMedium;
+  flex-direction: row;
+
+  :global {
+    .responseList {
+      @include common.fullSizeBox;
+      padding: variables.$spacingMedium;
+      border-radius: 10px;
+      background: variables.$colorSecondaryBackground;
+      position: relative;
+
+      .filterSearch {
+        margin-bottom: variables.$spacingMedium;
+      }
+
+      ul {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin: 0;
+        padding: 0;
+      }
+
+      .resultItem {
+        width: 100%;
+        box-sizing: border-box;
+        flex: 1;
+        padding: variables.$spacingXsmall;
+        margin: 2px;
+        background: variables.$colorPrimaryBackground;
+        list-style: none;
+        color: variables.$colorTextDark;
+
+        &:hover {
+          background: variables.$colorSecondaryBackground;
+        }
+
+        &.active {
+          background: variables.$colorTextUltraLight;
+        }
+
+        span {
+          color: transparent !important;
+          font-weight: 600;
+          margin: 0 variables.$spacingXxsmall;
+          position: relative;
+
+          b {
+            color: variables.$colorTextDark !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+
+        &.error {
+          color: variables.$colorRed;
+        }
+
+        &.match {
+          background: variables.$colorYellow;
+        }
+      }
+
+      .totalLength {
+        position: absolute;
+        bottom: variables.$spacingSmall;
+        right: variables.$spacingSmall;
+        padding: variables.$spacingXxsmall variables.$spacingSmall;
+        background: variables.$colorSecondaryBackground;
+        border-radius: 5px;
+        border: none;
+      }
+    }
+
+    .responseDetail {
+      width: 70%;
+      height: 100%;
+      display: flex;
+      flex: 0 0 auto;
+
+      :global {
+        textarea {
+          margin-left: variables.$spacingMedium;
+        }
+      }
+    }
+  }
+}

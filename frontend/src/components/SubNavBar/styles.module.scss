@@ -1,0 +1,53 @@
+@use "~/styles/variables.module.scss" as variables;
+
+.subNavContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.subNavBar {
+  height: 100%;
+  width: variables.$spacingLWidth;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: variables.$colorPrimaryBackground;
+  border-left: 2px solid variables.$colorDivider;
+  border-right: 1px solid variables.$colorDivider;
+}
+
+.subNavBarItem {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 1px 0;
+  cursor: pointer;
+  border-bottom: 1px solid variables.$colorSecondaryBackground;
+
+  &:hover {
+    background: variables.$colorSecondaryBackground;
+  }
+}
+
+.active {
+  background: variables.$colorTextUltraLight;
+  &:hover {
+    background: variables.$colorTextUltraLight;
+  }
+}
+
+.subNavContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}

@@ -1,0 +1,41 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.requestContainer {
+  @include common.fullSizeBox;
+
+  :global {
+    .buttonGroup {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding-bottom: variables.$spacingSmall;
+
+      button {
+        margin-left: variables.$spacingSmall;
+      }
+    }
+
+    #requestContent {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      color: variables.$colorTextDark;
+      line-height: variables.$fontLarge;
+      position: relative;
+
+      textarea {
+        width: 100%;
+        height: 100%;
+      }
+
+      span {
+        // margin: 0 variables.$spacingXxsmall;
+        // padding: 0 variables.$spacingXxsmall;
+        color: variables.$colorActive;
+        background: variables.$colorTextUltraLight;
+        border-radius: variables.$spacingXxsmall;
+      }
+    }
+  }
+}

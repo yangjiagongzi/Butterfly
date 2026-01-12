@@ -1,0 +1,92 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.introduceContainer {
+  @include common.fullSizeBox;
+  padding-top: variables.$spacingMedium;
+
+  :global {
+    .inputBox {
+      display: flex;
+
+      :global {
+        .method-select {
+          border-radius: 5px 0 0 5px;
+        }
+
+        .url-input {
+          flex: 1;
+          border-radius: 0 5px 5px 0;
+        }
+
+        .curl-parse-btn {
+          margin-left: variables.$spacingSmall;
+        }
+      }
+    }
+
+    .introduce {
+      border-top: 1px solid variables.$colorDivider;
+      margin-top: variables.$spacingXlarge;
+      padding-top: variables.$spacingMedium;
+      font-size: variables.$fontSmall;
+      overflow-y: auto;
+
+      :global {
+        span {
+          color: variables.$colorActiveOpacity;
+          font-weight: 700;
+          padding: 0 variables.$spacingXxsmall;
+
+          &.normal {
+            color: variables.$colorTextDark;
+            font-weight: normal;
+            padding: 0;
+          }
+        }
+
+        .text {
+          font-size: variables.$fontMedium;
+          margin-bottom: variables.$spacingMedium;
+          white-space: pre-wrap;
+        }
+
+        .example-payload,
+        .example-flag {
+          font-size: variables.$fontSmall;
+          line-height: calc(variables.$fontSmall * 2);
+        }
+
+        table {
+          margin-top: variables.$spacingSmall;
+          width: variables.$spacingXxlWidth;
+          border-collapse: separate;
+          border-spacing: 0px;
+          border-bottom: 1px solid rgb(81, 81, 81);
+
+          tr {
+            color: inherit;
+            display: table-row;
+            vertical-align: middle;
+            outline: 0px;
+          }
+
+          th {
+            font-weight: 500;
+            border-bottom: 1px solid rgb(81, 81, 81);
+            text-align: left;
+            line-height: calc(variables.$fontSmall * 2);
+            padding: 0 variables.$spacingMedium;
+            background: variables.$colorSecondaryBackground;
+          }
+
+          td {
+            text-align: left;
+            line-height: calc(variables.$fontSmall * 2);
+            padding: 0 variables.$spacingMedium;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,0 @@
-@use "~/styles/variables.module.scss" as variables;
-@use "~/styles/common.module.scss" as common;
-
-.payload {
-  @include common.fullSizeBox;
-  overflow: hidden;
-  padding-top: variables.$spacingMedium;
-}

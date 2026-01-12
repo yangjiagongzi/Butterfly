@@ -1,0 +1,39 @@
+@use "~/styles/variables.module.scss" as variables;
+@use "~/styles/common.module.scss" as common;
+
+.settingParamGroup {
+  @include common.fullSizeBox;
+  padding-top: variables.$spacingMedium;
+
+  :global {
+    .title {
+      font-size: variables.$fontMedium;
+      padding: variables.$spacingXsmall 0;
+    }
+
+    .items,
+    .sub-items {
+      display: flex;
+      align-items: center;
+      padding: variables.$spacingXsmall 0;
+
+      .sub-title {
+        width: calc(variables.$spacingGuttersmall + variables.$spacingGutter);
+      }
+
+      .margin-left {
+        margin-left: variables.$spacingSmall;
+      }
+
+      .margin-right {
+        margin-right: variables.$spacingSmall;
+      }
+    }
+
+    .sub-items {
+      padding-left: calc(
+        variables.$spacingGuttersmall + variables.$spacingGutter
+      );
+    }
+  }
+}

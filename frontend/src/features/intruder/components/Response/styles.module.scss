@@ -15,8 +15,23 @@
       background: variables.$colorSecondaryBackground;
       position: relative;
 
-      .filterSearch {
+      .inputBox {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
         margin-bottom: variables.$spacingMedium;
+
+        .method-select {
+          border-radius: 5px 0 0 5px;
+
+          .title {
+            background: variables.$colorSecondaryBackground;
+          }
+        }
+
+        .filterSearch {
+          flex: 1;
+        }
       }
 
       ul {

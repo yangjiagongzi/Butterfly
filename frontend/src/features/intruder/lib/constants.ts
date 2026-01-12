@@ -5,3 +5,9 @@ export const TabTypes = {
   options: { id: "options", name: "设置" },
   response: { id: "response", name: "结果" },
 } as const;
+
+export const ComparisonId = { Equal: "equal", NoEqual: "no_equal" };
+export const Comparison = [
+  { id: ComparisonId.Equal, name: "等于" },
+  { id: ComparisonId.NoEqual, name: "不等于" },
+];

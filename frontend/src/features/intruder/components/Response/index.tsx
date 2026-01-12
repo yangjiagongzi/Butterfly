@@ -1,7 +1,9 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Input from "~/components/Input";
+import Select from "~/components/Select";
 import Textarea from "~/components/Textarea";
 import { ProgressItemType, ProgressStatus } from "~/utils/IntruderQueue";
+import { ComparisonId, Comparison } from "../../lib/constants";
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -10,6 +12,7 @@ type Props = {
 
 const Response = ({ progress }: Props) => {
   const [activeIdx, setActiveIdx] = useState<number | undefined>(undefined);
+  const [searchComparison, setSearchComparison] = useState(Comparison[0]);
   const [searchVal, setSearchVal] = useState("");
   const { totalLength, finishLength } = useMemo(() => {
     let finishLength = 0;
@@ -33,14 +36,40 @@ const Response = ({ progress }: Props) => {
     return progress[activeIdx] || null;
   }, [progress, activeIdx]);
 
+  const matchFunc = useCallback(
+    (item: ProgressItemType) => {
+      if (!searchVal || item.status != ProgressStatus.Success) {
+        return false;
+      }
+      const index = item.response
+        .toLocaleLowerCase()
+        .indexOf(searchVal.toLocaleLowerCase());
+
+      if (searchComparison.id === ComparisonId.Equal) {
+        return index >= 0;
+      }
+      return index < 0;
+    },
+    [searchVal, searchComparison]
+  );
+
   return (
     <div className={styles.responseContainer}>
       <div className="responseList">
-        <Input
-          className="filterSearch"
-          value={searchVal}
-          onChange={(e) => setSearchVal(e.target.value)}
-        />
+        <div className="inputBox">
+          <Select
+            className="method-select"
+            title={"条件"}
+            data={Comparison}
+            value={searchComparison}
+            onChange={setSearchComparison}
+          />
+          <Input
+            className="filterSearch"
+            value={searchVal}
+            onChange={(e) => setSearchVal(e.target.value)}
+          />
+        </div>
         <ul>
           {progress.map((item) => {
             const value =
@@ -50,12 +79,7 @@ const Response = ({ progress }: Props) => {
                 ? `${item.response.split("\n")[0]}`
                 : "";
 
-            const filterMatch =
-              !!searchVal &&
-              item.status === ProgressStatus.Success &&
-              item.response
-                .toLocaleLowerCase()
-                .indexOf(searchVal.toLocaleLowerCase()) >= 0;
+            const filterMatch = matchFunc(item);
 
             return (
               <li

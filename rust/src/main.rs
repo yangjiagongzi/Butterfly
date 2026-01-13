@@ -1,37 +1,35 @@
-use crate::request::{ProxyError, ProxyResponse, RequestData, send_request_from_json};
-use rocket::fs::{FileServer, relative};
-use rocket::serde::json::Json;
-use rocket::{post, routes};
+use rocket::{
+    Config,
+    fairing::AdHoc,
+    fs::{FileServer, relative},
+    routes, tokio,
+};
 
+mod config;
+mod proxy;
 mod request;
 
-// If we wanted or needed to serve files manually, we'd use `NamedFile`. Always
-// prefer to use `FileServer`!
-mod manual {
-    use rocket::fs::NamedFile;
-    use std::path::{Path, PathBuf};
-
-    #[rocket::get("/second/<path..>")]
-    pub async fn second(path: PathBuf) -> Option<NamedFile> {
-        let mut path = Path::new(super::relative!("static")).join(path);
-        if path.is_dir() {
-            path.push("index.html");
-        }
-
-        NamedFile::open(path).await.ok()
-    }
-}
-
-#[post("/api/fetch", data = "<json_data>")]
-async fn forward_request(json_data: Json<RequestData>) -> Result<Json<ProxyResponse>, ProxyError> {
-    let response_string = send_request_from_json(json_data).await?;
-    Ok(Json(ProxyResponse { response_string }))
-}
+use config::{PROXY_ADDR, SERVER_PORT};
+use proxy::run_proxy;
+use request::forward_request;
 
 #[rocket::launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", rocket::routes![manual::second])
+        .configure(Config {
+            address: "0.0.0.0".parse().unwrap(),
+            port: SERVER_PORT,
+            ..Config::debug_default()
+        })
         .mount("/", FileServer::from(relative!("static")))
         .mount("/", routes![forward_request])
+        .attach(AdHoc::on_liftoff("启动代理服务", |_rocket| {
+            Box::pin(async move {
+                tokio::spawn(async move {
+                    if let Err(e) = run_proxy(PROXY_ADDR).await {
+                        eprintln!("[代理服务] 运行出错: {}", e);
+                    }
+                });
+            })
+        }))
 }

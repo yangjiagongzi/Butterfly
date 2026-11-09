@@ -6,6 +6,7 @@ rm -rf ./rust/target/*
 
 cd frontend 
 yarn build
+mkdir ../rust/static
 cp -rf out/* ../rust/static
 cd ../rust
 cargo build --release
